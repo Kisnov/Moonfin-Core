@@ -93,7 +93,7 @@ import '../../../playback/media3_player_backend.dart';
 import '../../../util/system_ui.dart';
 import 'playback_takeover.dart';
 import 'osd_buttons.dart';
-import 'video_surface_inset.dart';
+import 'trickplay_housing_inset.dart';
 
 class VideoPlayerScreen extends StatefulWidget {
   const VideoPlayerScreen({super.key});
@@ -4116,7 +4116,10 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen>
     return Positioned.fill(
       // The preview stands in for the picture, so it sits where the picture is.
       child: Padding(
-        padding: _videoSurfaceInset(),
+        padding: trickplayHousingInset(
+          keepClear: _keepVideoClearOfHousing,
+          viewPadding: MediaQuery.viewPaddingOf(context),
+        ),
         child: Trickplay(
           fillFrame: true,
           content: (_) => FittedBox(
@@ -4132,22 +4135,17 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen>
     );
   }
 
-  EdgeInsets _videoSurfaceInset() => videoSurfaceInset(
-    enabled:
-        PlatformDetection.isIOS &&
-        _prefs.get(UserPreferences.keepVideoClearOfDynamicIsland),
-    viewPadding: MediaQuery.viewPaddingOf(context),
-  );
+  bool get _keepVideoClearOfHousing =>
+      PlatformDetection.isIOS &&
+      _prefs.get(UserPreferences.keepVideoClearOfDynamicIsland);
 
   Widget _buildVideoSurface() {
     if (PlatformDetection.isIOS || PlatformDetection.isMacOS) {
       return Positioned.fill(
-        child: Padding(
-          padding: _videoSurfaceInset(),
-          child: AetherVideoView(
-            key: _videoSurfaceKey,
-            zoomMode: _zoomMode.name,
-          ),
+        child: AetherVideoView(
+          key: _videoSurfaceKey,
+          zoomMode: _zoomMode.name,
+          keepClearOfHousing: _keepVideoClearOfHousing,
         ),
       );
     }
