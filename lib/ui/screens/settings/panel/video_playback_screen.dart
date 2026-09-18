@@ -34,6 +34,13 @@ class _VideoPlaybackScreen extends StatelessWidget {
                   ZoomMode.stretch => l10n.stretch,
                 },
               ),
+              if (PlatformDetection.isIOS)
+                SwitchPreferenceTile(
+                  preference: UserPreferences.keepVideoClearOfDynamicIsland,
+                  title: l10n.keepVideoClearOfDynamicIsland,
+                  subtitle: l10n.settingsKeepVideoClearOfDynamicIslandDescription,
+                  icon: Icons.crop_free,
+                ),
               if (letterboxCropSettingVisible())
                 SwitchPreferenceTile(
                   preference: UserPreferences.cropBlackBars,

@@ -1184,6 +1184,13 @@ List<_SettingsSearchEntry> _buildSettingsSearchIndex({
       'crop',
       'stretch',
     ]),
+    if (PlatformDetection.isIOS)
+      video.leaf(
+        'pref_video_clear_of_dynamic_island',
+        l10n.keepVideoClearOfDynamicIsland,
+        subtitle: l10n.settingsKeepVideoClearOfDynamicIslandDescription,
+        keywords: ['notch', 'dynamic island', 'camera', 'safe area'],
+      ),
     if (letterboxCropSettingVisible())
       video.leaf('crop_black_bars', l10n.cropBlackBars, keywords: [
         'letterbox',
