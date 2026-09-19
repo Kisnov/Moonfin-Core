@@ -40,6 +40,7 @@ import '../../widgets/local_search_field.dart';
 import '../../widgets/skeleton/skeleton_library_grid.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../util/error_message.dart';
+import '../../util/facet_search.dart';
 
 Color get _navyBackground => AppColorScheme.background;
 Color get _jellyfinBlue => AppColorScheme.accent;
@@ -2399,6 +2400,12 @@ class _FilterSortDialogState extends State<_FilterSortDialog> {
   /// closed and only the ones opened take up the dialog.
   final _expandedFacets = <String>{};
 
+  /// What has been typed into a long facet's box, keyed the same way. A list
+  /// short enough to read at a glance never gets one, so most stay absent.
+  final _facetQueries = <String, String>{};
+  final _facetSearchControllers = <String, TextEditingController>{};
+
+
   @override
   void initState() {
     super.initState();
@@ -2409,6 +2416,9 @@ class _FilterSortDialogState extends State<_FilterSortDialog> {
   @override
   void dispose() {
     widget.vm.removeListener(_rebuild);
+    for (final controller in _facetSearchControllers.values) {
+      controller.dispose();
+    }
     super.dispose();
   }
 
@@ -2752,6 +2762,12 @@ class _FilterSortDialogState extends State<_FilterSortDialog> {
     if (values.isEmpty) return const [];
     final expanded = _expandedFacets.contains(key);
     final chosen = values.where(selected.contains).length;
+    // Hundreds of tags are quicker to type at than to scroll through, but a
+    // handful are quicker to just read, so the box only turns up where it
+    // earns its space.
+    final searchable = facetIsSearchable(values);
+    final query = searchable ? (_facetQueries[key] ?? '') : '';
+    final shown = facetValuesMatching(values, query, labels: labels);
     return [
       Divider(color: dividerColor),
       _DialogExpanderTile(
@@ -2764,8 +2780,19 @@ class _FilterSortDialogState extends State<_FilterSortDialog> {
         sectionColor: sectionColor,
         accent: accent,
       ),
+      if (expanded && searchable)
+        _FacetSearchField(
+          controller: _facetSearchControllers.putIfAbsent(
+            key,
+            TextEditingController.new,
+          ),
+          hintText: AppLocalizations.of(context).searchFacetValues(title),
+          accent: accent,
+          onSurface: onSurface,
+          onChanged: (text) => setState(() => _facetQueries[key] = text),
+        ),
       if (expanded)
-        for (final value in values)
+        for (final value in shown)
           _DialogCheckboxTile(
             label: labels[value] ?? value,
             checked: selected.contains(value),
@@ -2773,6 +2800,15 @@ class _FilterSortDialogState extends State<_FilterSortDialog> {
             accent: accent,
             onSurface: onSurface,
           ),
+      // Without this the box looks broken rather than simply unmatched.
+      if (expanded && shown.isEmpty)
+        Padding(
+          padding: const EdgeInsets.fromLTRB(24, 8, 24, 16),
+          child: Text(
+            AppLocalizations.of(context).noLabelFound(title),
+            style: TextStyle(fontSize: 13, color: sectionColor),
+          ),
+        ),
     ];
   }
 
@@ -2790,6 +2826,66 @@ class _FilterSortDialogState extends State<_FilterSortDialog> {
     );
   }
 
+}
+
+/// Narrows a long facet list to what was typed. Stateless on purpose: the
+/// dialog owns both the text and the controller, so a rebuild from anywhere
+/// else in the sheet cannot drop what is half typed here.
+class _FacetSearchField extends StatelessWidget {
+  const _FacetSearchField({
+    required this.controller,
+    required this.hintText,
+    required this.accent,
+    required this.onSurface,
+    required this.onChanged,
+  });
+
+  final TextEditingController controller;
+  final String hintText;
+  final Color accent;
+  final Color onSurface;
+  final ValueChanged<String> onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    final hintColor = onSurface.withValues(alpha: 0.6);
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(24, 4, 24, 8),
+      child: TextField(
+        controller: controller,
+        onChanged: onChanged,
+        style: TextStyle(fontSize: 14, color: onSurface),
+        cursorColor: accent,
+        textInputAction: TextInputAction.search,
+        decoration: InputDecoration(
+          isDense: true,
+          hintText: hintText,
+          hintStyle: TextStyle(fontSize: 14, color: hintColor),
+          prefixIcon: Icon(Icons.search, size: 18, color: hintColor),
+          prefixIconConstraints: const BoxConstraints(minWidth: 32),
+          // Only offered once there is something to clear, so the row stays
+          // quiet until it is useful.
+          suffixIcon: controller.text.isEmpty
+              ? null
+              : IconButton(
+                  icon: Icon(Icons.close, size: 18, color: hintColor),
+                  splashRadius: 16,
+                  onPressed: () {
+                    controller.clear();
+                    onChanged('');
+                  },
+                ),
+          contentPadding: const EdgeInsets.symmetric(vertical: 10),
+          enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: onSurface.withValues(alpha: 0.2)),
+          ),
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: accent),
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 class _DialogRadioTile extends StatefulWidget {
