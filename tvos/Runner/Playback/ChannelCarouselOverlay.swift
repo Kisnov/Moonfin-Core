@@ -46,12 +46,12 @@ final class ChannelCarouselOverlayViewController: UIViewController {
     private let stripClip = UIView()
     private let stripContainer = UIView()
 
-    /// Live cards keyed by their slot in the infinite index space.
-    private var cards: [Int: ChannelCarouselCardView] = [:]
-    private var reusePool: [ChannelCarouselCardView] = []
+    /// One card per visible offset from the center, ordered leading to
+    /// trailing. Positions stay within the strip, so a long scroll cannot walk
+    /// the geometry out to coordinates CoreAnimation will not draw.
+    private var cards: [ChannelCarouselCardView] = []
 
-    private var rawIndex = 0
-    private var seedIndex = 0
+    private var centerIndex = 0
     private var pitch = ChannelCarouselMetrics.cardWidth + ChannelCarouselMetrics.cardSpacing
     private var cardWidth = ChannelCarouselMetrics.cardWidth
     private var visibleCards = 1
@@ -79,15 +79,14 @@ final class ChannelCarouselOverlayViewController: UIViewController {
 
     private var count: Int { entries.count }
     private var centeredIndex: Int {
-        CarouselIndex.channelIndex(for: rawIndex, count: count)
+        CarouselIndex.channelIndex(for: centerIndex, count: count)
     }
 
     init(entries: [ChannelCarouselEntry], startIndex: Int, theme: ChannelCarouselTheme) {
         self.entries = entries
         self.theme = theme
         super.init(nibName: nil, bundle: nil)
-        seedIndex = max(1, entries.count) * 500
-        rawIndex = seedIndex + min(max(0, startIndex), max(0, entries.count - 1))
+        centerIndex = min(max(0, startIndex), max(0, entries.count - 1))
     }
 
     required init?(coder: NSCoder) {
@@ -144,9 +143,12 @@ final class ChannelCarouselOverlayViewController: UIViewController {
             padding.top + headerHeight + Self.stripGap
             + ChannelCarouselMetrics.cardHeight + padding.bottom
 
-        scrim.frame = CGRect(
-            x: 0, y: view.bounds.height - scrimHeight,
-            width: view.bounds.width, height: scrimHeight)
+        // Set through bounds and center rather than frame, because the
+        // entrance leaves a transform on the scrim and a frame written under
+        // one lands somewhere undefined.
+        scrim.bounds = CGRect(x: 0, y: 0, width: view.bounds.width, height: scrimHeight)
+        scrim.center = CGPoint(
+            x: view.bounds.midX, y: view.bounds.height - scrimHeight / 2)
         gradient.frame = scrim.bounds
 
         headerContainer.frame = CGRect(
@@ -241,14 +243,11 @@ final class ChannelCarouselOverlayViewController: UIViewController {
         let countChanged = entries.count != self.entries.count
         self.entries = entries
         if countChanged {
-            seedIndex = max(1, entries.count) * 500
-            let restored = entries.firstIndex { $0.channelId == previousId } ?? 0
-            rawIndex = seedIndex + restored
-            releaseAllCards()
-        }
-        for (slot, card) in cards {
-            card.applyTheme(theme)
-            bind(card: card, slot: slot)
+            centerIndex = entries.firstIndex { $0.channelId == previousId } ?? 0
+            rebuildCards()
+        } else {
+            for card in cards { card.applyTheme(theme) }
+            bindCards()
         }
         updateHeader()
     }
@@ -260,98 +259,67 @@ final class ChannelCarouselOverlayViewController: UIViewController {
         visibleCards = layout.count
         pitch = layout.pitch
         cardWidth = layout.width
-        releaseAllCards()
         stripContainer.frame = CGRect(
             x: 0, y: Self.glowMargin,
             width: stripWidth, height: ChannelCarouselMetrics.cardHeight)
-        positionContainer(animated: false)
-        refreshCards()
+        rebuildCards()
     }
 
     private var centerOffset: CGFloat { (stripClip.bounds.width - cardWidth) / 2 }
 
-    private func positionContainer(animated: Bool) {
-        let target = centerOffset - CGFloat(rawIndex) * pitch
-        guard animated else {
-            stripContainer.layer.removeAllAnimations()
-            stripContainer.frame.origin.x = target
-            return
-        }
-        // Linear, and begun from the current position, so a repeat landing mid
-        // flight continues the same velocity instead of restarting the motion.
-        UIView.animate(
-            withDuration: scrollDuration, delay: 0,
-            options: [.curveLinear, .beginFromCurrentState, .allowUserInteraction]
-        ) {
-            self.stripContainer.frame.origin.x = target
-        }
-    }
+    /// Cards either side of the center, plus two beyond the viewport so a card
+    /// is never seen arriving.
+    private var halfSpan: Int { visibleCards / 2 + 2 }
 
-    /// Binds a card to every slot the viewport can reach and pools the ones
-    /// that fell outside it.
-    private func refreshCards() {
-        guard count > 0, pitch > 0 else { return }
-        let half = visibleCards / 2 + 2
-        let needed = Set((rawIndex - half)...(rawIndex + half))
-        for (slot, card) in cards where !needed.contains(slot) {
-            card.removeFromSuperview()
-            cards.removeValue(forKey: slot)
-            reusePool.append(card)
-        }
-        for slot in needed {
-            let card = cards[slot] ?? dequeueCard()
-            if cards[slot] == nil {
-                cards[slot] = card
-                stripContainer.addSubview(card)
-            }
-            card.frame = CGRect(
-                x: CGFloat(slot) * pitch, y: 0,
-                width: cardWidth, height: ChannelCarouselMetrics.cardHeight)
-            bind(card: card, slot: slot)
-        }
-    }
-
-    private func bind(card: ChannelCarouselCardView, slot: Int) {
-        guard count > 0 else { return }
-        let index = CarouselIndex.channelIndex(for: slot, count: count)
-        card.configure(entries[index], centered: slot == rawIndex)
-    }
-
-    private func dequeueCard() -> ChannelCarouselCardView {
-        if let card = reusePool.popLast() { return card }
-        return ChannelCarouselCardView(theme: theme)
-    }
-
-    private func releaseAllCards() {
-        for card in cards.values {
-            card.removeFromSuperview()
-            reusePool.append(card)
-        }
+    private func rebuildCards() {
+        for card in cards { card.removeFromSuperview() }
         cards.removeAll()
+        guard count > 0 else { return }
+        for offset in -halfSpan...halfSpan {
+            let card = ChannelCarouselCardView(theme: theme)
+            card.frame = CGRect(
+                x: centerOffset + CGFloat(offset) * pitch, y: 0,
+                width: cardWidth, height: ChannelCarouselMetrics.cardHeight)
+            stripContainer.addSubview(card)
+            cards.append(card)
+        }
+        stripContainer.frame.origin.x = 0
+        bindCards()
+    }
+
+    private func bindCards() {
+        guard count > 0 else { return }
+        for (slot, card) in cards.enumerated() {
+            let offset = slot - halfSpan
+            let index = CarouselIndex.channelIndex(for: centerIndex + offset, count: count)
+            card.configure(entries[index], centered: offset == 0)
+        }
     }
 
     // MARK: - Motion
 
+    /// Rebinding moves the lineup under the center instantly, so the strip is
+    /// first pushed back by the same distance and then animated home. A step
+    /// arriving mid flight measures from where the strip actually is, which is
+    /// what keeps a held press reading as one continuous run.
     private func move(by delta: Int) {
-        guard count > 1, delta != 0 else { return }
-        let before = centeredIndex
-        var target = rawIndex + delta
+        guard count > 1, delta != 0, !cards.isEmpty else { return }
+        let current =
+            stripContainer.layer.presentation()?.frame.origin.x
+            ?? stripContainer.frame.origin.x
+        stripContainer.layer.removeAllAnimations()
+        stripContainer.frame.origin.x = current + CGFloat(delta) * pitch
 
-        if CarouselIndex.needsRecenter(target, count: count, seed: seedIndex) {
-            let recenterd = CarouselIndex.recenter(target, count: count, seed: seedIndex)
-            // A whole multiple of the lineup, so the mapped channel is
-            // unchanged and shifting the live position cannot be seen.
-            let shift = recenterd - target
-            rawIndex += shift
-            releaseAllCards()
-            positionContainer(animated: false)
-            target = recenterd
+        centerIndex = CarouselIndex.channelIndex(for: centerIndex + delta, count: count)
+        bindCards()
+
+        UIView.animate(
+            withDuration: scrollDuration, delay: 0,
+            options: [.curveLinear, .allowUserInteraction]
+        ) {
+            self.stripContainer.frame.origin.x = 0
         }
-
-        rawIndex = target
-        refreshCards()
-        positionContainer(animated: true)
-        if centeredIndex != before { scheduleHeader() }
+        scheduleHeader()
     }
 
     // MARK: - Header

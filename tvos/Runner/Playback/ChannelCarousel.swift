@@ -3,27 +3,11 @@ import UIKit
 // Every measurement in this file is the Flutter carousel's value doubled,
 // which is the scale the native player is drawn at.
 
-/// Pure indexing math for the circular strip.
 enum CarouselIndex {
-    /// Recenter once the raw index drifts this many lineups from the seed.
-    private static let driftThresholdMultiplier = 200
-
-    /// Maps a raw slot onto a real channel index, wrapping both ways.
-    static func channelIndex(for rawIndex: Int, count: Int) -> Int {
+    /// Maps a position in the strip onto a real channel, wrapping both ways.
+    static func channelIndex(for position: Int, count: Int) -> Int {
         guard count > 0 else { return 0 }
-        return ((rawIndex % count) + count) % count
-    }
-
-    static func needsRecenter(_ rawIndex: Int, count: Int, seed: Int) -> Bool {
-        abs(rawIndex - seed) >= count * driftThresholdMultiplier
-    }
-
-    /// Shifts back near the seed by a whole multiple of the lineup, so the
-    /// mapped channel is unchanged and the jump cannot be seen.
-    static func recenter(_ rawIndex: Int, count: Int, seed: Int) -> Int {
-        guard count > 0 else { return rawIndex }
-        let lineups = Int((Double(rawIndex - seed) / Double(count)).rounded())
-        return rawIndex - lineups * count
+        return ((position % count) + count) % count
     }
 }
 
