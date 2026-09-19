@@ -2404,6 +2404,7 @@ class _FilterSortDialogState extends State<_FilterSortDialog> {
   /// short enough to read at a glance never gets one, so most stay absent.
   final _facetQueries = <String, String>{};
   final _facetSearchControllers = <String, TextEditingController>{};
+  final _facetSearchFocusNodes = <String, FocusNode>{};
 
 
   @override
@@ -2418,6 +2419,9 @@ class _FilterSortDialogState extends State<_FilterSortDialog> {
     widget.vm.removeListener(_rebuild);
     for (final controller in _facetSearchControllers.values) {
       controller.dispose();
+    }
+    for (final node in _facetSearchFocusNodes.values) {
+      node.dispose();
     }
     super.dispose();
   }
@@ -2780,16 +2784,21 @@ class _FilterSortDialogState extends State<_FilterSortDialog> {
         sectionColor: sectionColor,
         accent: accent,
       ),
+      // The same field the library header uses, which is the one that knows to
+      // put a CustomTVTextField up on a set so the remote can reach it and the
+      // on screen keyboard opens. A bare TextField cannot be typed into there.
       if (expanded && searchable)
-        _FacetSearchField(
-          controller: _facetSearchControllers.putIfAbsent(
-            key,
-            TextEditingController.new,
+        Padding(
+          padding: const EdgeInsets.fromLTRB(24, 4, 24, 8),
+          child: LocalSearchField(
+            controller: _facetSearchControllers.putIfAbsent(
+              key,
+              TextEditingController.new,
+            ),
+            focusNode: _facetSearchFocusNodes.putIfAbsent(key, FocusNode.new),
+            hint: AppLocalizations.of(context).searchFacetValues(title),
+            onChanged: (text) => setState(() => _facetQueries[key] = text),
           ),
-          hintText: AppLocalizations.of(context).searchFacetValues(title),
-          accent: accent,
-          onSurface: onSurface,
-          onChanged: (text) => setState(() => _facetQueries[key] = text),
         ),
       if (expanded)
         for (final value in shown)
@@ -2826,66 +2835,6 @@ class _FilterSortDialogState extends State<_FilterSortDialog> {
     );
   }
 
-}
-
-/// Narrows a long facet list to what was typed. Stateless on purpose: the
-/// dialog owns both the text and the controller, so a rebuild from anywhere
-/// else in the sheet cannot drop what is half typed here.
-class _FacetSearchField extends StatelessWidget {
-  const _FacetSearchField({
-    required this.controller,
-    required this.hintText,
-    required this.accent,
-    required this.onSurface,
-    required this.onChanged,
-  });
-
-  final TextEditingController controller;
-  final String hintText;
-  final Color accent;
-  final Color onSurface;
-  final ValueChanged<String> onChanged;
-
-  @override
-  Widget build(BuildContext context) {
-    final hintColor = onSurface.withValues(alpha: 0.6);
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(24, 4, 24, 8),
-      child: TextField(
-        controller: controller,
-        onChanged: onChanged,
-        style: TextStyle(fontSize: 14, color: onSurface),
-        cursorColor: accent,
-        textInputAction: TextInputAction.search,
-        decoration: InputDecoration(
-          isDense: true,
-          hintText: hintText,
-          hintStyle: TextStyle(fontSize: 14, color: hintColor),
-          prefixIcon: Icon(Icons.search, size: 18, color: hintColor),
-          prefixIconConstraints: const BoxConstraints(minWidth: 32),
-          // Only offered once there is something to clear, so the row stays
-          // quiet until it is useful.
-          suffixIcon: controller.text.isEmpty
-              ? null
-              : IconButton(
-                  icon: Icon(Icons.close, size: 18, color: hintColor),
-                  splashRadius: 16,
-                  onPressed: () {
-                    controller.clear();
-                    onChanged('');
-                  },
-                ),
-          contentPadding: const EdgeInsets.symmetric(vertical: 10),
-          enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: onSurface.withValues(alpha: 0.2)),
-          ),
-          focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: accent),
-          ),
-        ),
-      ),
-    );
-  }
 }
 
 class _DialogRadioTile extends StatefulWidget {
