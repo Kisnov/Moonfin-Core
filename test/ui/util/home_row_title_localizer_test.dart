@@ -39,4 +39,45 @@ void main() {
   test('the pinned wording covers every row type', () {
     expect(_englishTitles.keys.toSet(), SeerrRowType.values.toSet());
   });
+
+  group('localizeHomeSectionTitle', () {
+    // The two settings screens each carried their own copy of this switch, and
+    // they drifted: the per-row image type screen had audio playlists reading
+    // as plain Playlists. Spelled out rather than compared against the l10n
+    // getters, which would restate the implementation and pass either way.
+    test('tells audio playlists apart from playlists', () {
+      expect(
+        localizeHomeSectionTitle(HomeSectionType.audioPlaylists, _l10n),
+        'Audio Playlists',
+      );
+      expect(
+        localizeHomeSectionTitle(HomeSectionType.playlists, _l10n),
+        'Playlists',
+      );
+    });
+
+    test('names the sections it is asked about', () {
+      expect(
+        localizeHomeSectionTitle(HomeSectionType.mediaBar, _l10n),
+        'Media Bar',
+      );
+      expect(
+        localizeHomeSectionTitle(HomeSectionType.resume, _l10n),
+        'Continue Watching',
+      );
+      expect(localizeHomeSectionTitle(HomeSectionType.none, _l10n), 'None');
+    });
+
+    // A section added to the enum and forgotten here would throw rather than
+    // show a blank row, so this is the cheap guard against that.
+    test('has something to say about every section there is', () {
+      for (final type in HomeSectionType.values) {
+        expect(
+          localizeHomeSectionTitle(type, _l10n),
+          isNotEmpty,
+          reason: 'no title for $type',
+        );
+      }
+    });
+  });
 }
