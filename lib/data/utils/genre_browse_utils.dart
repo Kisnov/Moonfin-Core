@@ -245,3 +245,62 @@ resolveGenreFallbackArtwork({
 
   return (tileUrl, backdropUrl ?? tileUrl, selectedItem?['Id']?.toString());
 }
+
+/// Picks the tile and backdrop art a genre carries itself.
+///
+/// The counterpart to [resolveGenreFallbackArtwork]: only a genre that has no
+/// art of its own borrows a picture from the items inside it, so a caller asks
+/// this first and falls back when [hasOwnArtwork] comes back false.
+///
+/// A Thumb counts on its own. A Primary image only counts when it is portrait,
+/// which is the shape a genre poster is authored in; the landscape Primary a
+/// server derives from an item inside the genre is left to the fallback, which
+/// picks among all of them rather than taking whichever one came back first.
+(String? imageUrl, String? backdropUrl, bool hasOwnArtwork)
+resolveGenreOwnArtwork({
+  required Map<String, dynamic> genreData,
+  required ImageApi imageApi,
+  required int maxWidth,
+}) {
+  final primaryTag = genreData['PrimaryImageTag'] as String?;
+  final imageTags = genreData['ImageTags'] as Map?;
+  final primaryAr = genreData['PrimaryImageAspectRatio'] as num?;
+  final backdropTags = genreData['BackdropImageTags'] as List?;
+
+  final customThumb = imageTags?['Thumb'] as String?;
+  final hasOwnArtwork =
+      (primaryTag != null && primaryAr != null && primaryAr < 1.0) ||
+      (customThumb != null && customThumb.isNotEmpty);
+
+  if (!hasOwnArtwork) {
+    return (null, null, false);
+  }
+
+  final genreId = genreData['Id']?.toString() ?? '';
+
+  String? imageUrl;
+  if (customThumb != null && customThumb.isNotEmpty) {
+    imageUrl = imageApi.getThumbImageUrl(
+      genreId,
+      tag: customThumb,
+      maxWidth: maxWidth,
+    );
+  } else if (primaryTag != null) {
+    imageUrl = imageApi.getPrimaryImageUrl(
+      genreId,
+      tag: primaryTag,
+      maxWidth: maxWidth,
+    );
+  }
+
+  String? backdropUrl;
+  if (backdropTags != null && backdropTags.isNotEmpty) {
+    backdropUrl = imageApi.getBackdropImageUrl(
+      genreId,
+      tag: backdropTags.first.toString(),
+      maxWidth: 960,
+    );
+  }
+
+  return (imageUrl, backdropUrl, true);
+}
