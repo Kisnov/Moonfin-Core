@@ -54,9 +54,7 @@ void main() {
     });
   });
 
-  // Both genre screens read a genre's own art through this, so the shape it
-  // accepts is the difference between a tile with a picture and a tile that
-  // goes looking for one.
+  // Both genre screens read a genre's own art through this.
   group("a genre's own artwork", () {
     test('takes a Thumb ahead of a Primary', () {
       final genre = <String, dynamic>{
@@ -96,8 +94,7 @@ void main() {
       expect(backdropUrl, 'backdrop:g2');
     });
 
-    // A landscape Primary is the one a server derived from an item inside the
-    // genre. Letting it through here would pin the tile to that one item.
+    // A landscape Primary comes from an item inside the genre.
     test('leaves a landscape Primary to the fallback', () {
       final genre = <String, dynamic>{
         'Id': 'g3',

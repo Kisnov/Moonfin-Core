@@ -246,16 +246,10 @@ resolveGenreFallbackArtwork({
   return (tileUrl, backdropUrl ?? tileUrl, selectedItem?['Id']?.toString());
 }
 
-/// Picks the tile and backdrop art a genre carries itself.
+/// The tile and backdrop art a genre carries itself; callers fall back to
+/// [resolveGenreFallbackArtwork] when [hasOwnArtwork] is false.
 ///
-/// The counterpart to [resolveGenreFallbackArtwork]: only a genre that has no
-/// art of its own borrows a picture from the items inside it, so a caller asks
-/// this first and falls back when [hasOwnArtwork] comes back false.
-///
-/// A Thumb counts on its own. A Primary image only counts when it is portrait,
-/// which is the shape a genre poster is authored in; the landscape Primary a
-/// server derives from an item inside the genre is left to the fallback, which
-/// picks among all of them rather than taking whichever one came back first.
+/// A landscape Primary is one the server took from an item inside, so only a portrait one counts.
 (String? imageUrl, String? backdropUrl, bool hasOwnArtwork)
 resolveGenreOwnArtwork({
   required Map<String, dynamic> genreData,
