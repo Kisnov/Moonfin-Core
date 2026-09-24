@@ -119,10 +119,7 @@ String _localizeLatestRowTitle(String title, AppLocalizations l10n) {
   return l10n.latestLibraryName(libraryName);
 }
 
-/// What the settings screens call each home section. Both the section list and
-/// the per-row image type screen show the same names, and kept their own copy
-/// of this until the two drifted: one of them had audio playlists reading as
-/// plain Playlists.
+/// What the settings screens call each home section.
 String localizeHomeSectionTitle(HomeSectionType type, AppLocalizations l10n) =>
     switch (type) {
       HomeSectionType.mediaBar => l10n.mediaBar,

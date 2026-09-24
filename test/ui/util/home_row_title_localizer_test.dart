@@ -41,10 +41,7 @@ void main() {
   });
 
   group('localizeHomeSectionTitle', () {
-    // The two settings screens each carried their own copy of this switch, and
-    // they drifted: the per-row image type screen had audio playlists reading
-    // as plain Playlists. Spelled out rather than compared against the l10n
-    // getters, which would restate the implementation and pass either way.
+    // Spelled out rather than read from the l10n getters, which would pass either way.
     test('tells audio playlists apart from playlists', () {
       expect(
         localizeHomeSectionTitle(HomeSectionType.audioPlaylists, _l10n),
@@ -68,8 +65,7 @@ void main() {
       expect(localizeHomeSectionTitle(HomeSectionType.none, _l10n), 'None');
     });
 
-    // A section added to the enum and forgotten here would throw rather than
-    // show a blank row, so this is the cheap guard against that.
+    // A new section missing here would throw.
     test('has something to say about every section there is', () {
       for (final type in HomeSectionType.values) {
         expect(
