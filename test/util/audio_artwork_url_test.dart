@@ -28,8 +28,7 @@ AggregatedItem _item(Map<String, dynamic> raw) => AggregatedItem(
     );
 
 void main() {
-  // Every surface that draws the current track reads this, so the rule about
-  // which picture a track has lives here rather than in each of them.
+  // Every surface that draws the current track reads this.
   test('a music track shows its album cover, not its own picture', () {
     final url = audioArtUrl(
       _item({
@@ -64,8 +63,7 @@ void main() {
     expect(url, contains('300'));
   });
 
-  // The album cover belongs to music. Anything else in the queue shows itself,
-  // even when it carries an album id.
+  // Only music shows the album cover, even when other items carry an album id.
   test('a non-audio item shows its own picture', () {
     final url = audioArtUrl(
       _item({
