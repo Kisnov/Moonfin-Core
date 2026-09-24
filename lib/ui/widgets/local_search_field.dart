@@ -28,8 +28,7 @@ class LocalSearchField extends StatefulWidget {
   final FocusNode focusNode;
   final GlobalKey<CustomTVTextFieldState>? tvFieldKey;
 
-  /// What the empty box reads. Defaults to the library header's wording, so a
-  /// box narrowing something else says what it narrows.
+  /// Placeholder text; defaults to the library header's.
   final String? hint;
   final ValueChanged<String>? onChanged;
   final FocusOnKeyEventCallback? onTvKeyEvent;

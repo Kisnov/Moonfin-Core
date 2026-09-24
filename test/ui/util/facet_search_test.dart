@@ -51,8 +51,7 @@ void main() {
       expect(facetValuesMatching(tags, 'ADVE').length, 2);
     });
 
-    // A tag is whatever the library owner typed, so it may well carry accents
-    // the viewer does not reach for.
+    // Tags can carry accents the viewer doesn't type.
     test('folds accents on both sides', () {
       const accented = ['Cançó', 'Acció', 'Drama'];
 
