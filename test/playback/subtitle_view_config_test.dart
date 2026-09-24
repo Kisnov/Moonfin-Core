@@ -21,8 +21,7 @@ StreamResolutionResult _resolution(List<Map<String, dynamic>> streams) =>
       mediaStreams: streams,
     );
 
-/// Runs [body] against a real BuildContext, which the config needs for the
-/// screen height its bottom padding is measured against.
+/// Runs [body] with a real BuildContext, which the config needs for the screen height.
 Future<void> _withContext(
   WidgetTester tester,
   void Function(BuildContext context) body,
@@ -42,8 +41,7 @@ Future<void> _withContext(
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  // Both players draw their subtitles through this, so what it hides and shows
-  // is the difference between one set of subtitles on screen and two.
+  // Both players draw their subtitles through this.
   testWidgets('a text subtitle is drawn by the subtitle view', (tester) async {
     final prefs = await _prefs();
     await _withContext(tester, (context) {
@@ -59,8 +57,7 @@ void main() {
     });
   });
 
-  // ASS carries its own positioning and PGS is a bitmap, so the backend paints
-  // those itself. Leaving the text view on would draw them a second time.
+  // ASS and PGS paint themselves, so the text view would draw them twice.
   testWidgets('a self-rendering subtitle hides the subtitle view', (
     tester,
   ) async {
@@ -95,8 +92,7 @@ void main() {
     });
   });
 
-  // A live channel resolves without a stream list on its first tune, and the
-  // config still has to come back rather than throw at the player.
+  // A live channel's first tune has no stream list.
   testWidgets('an unresolved stream still yields a config', (tester) async {
     final prefs = await _prefs();
     await _withContext(tester, (context) {

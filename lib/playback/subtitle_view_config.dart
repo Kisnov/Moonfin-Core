@@ -8,16 +8,9 @@ import '../util/platform_detection.dart';
 import '../util/subtitle_track_logic.dart';
 import 'subtitle_style.dart';
 
-/// How media_kit should draw the subtitles it renders itself.
+/// How media_kit draws the subtitles it renders itself, for both the on-demand and live-TV players.
 ///
-/// Shared by the on-demand and live-TV players so a change to subtitle
-/// appearance reaches both. Everything it needs comes from [prefs] and the
-/// stream currently playing, so it takes those rather than a manager.
-///
-/// [subtitleStreamIndex] is the selected subtitle stream, used only to work
-/// out whether that stream draws itself. ASS and PGS carry their own
-/// positioning and bitmaps, so media_kit's text view stays hidden for them
-/// and the backend paints instead.
+/// ASS and PGS subtitles paint themselves, so the text view stays hidden for them.
 SubtitleViewConfiguration buildSubtitleViewConfiguration({
   required BuildContext context,
   required UserPreferences prefs,
