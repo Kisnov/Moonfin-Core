@@ -5,15 +5,9 @@ int? _toInt(dynamic value) {
   return null;
 }
 
-/// The resolution badge for a video stream, read off its dimensions.
+/// The resolution badge for a video stream, or null when it has no usable dimensions.
 ///
-/// The thresholds sit below each nominal size on purpose: a scope-ratio film is
-/// letterboxed to fewer lines than its name suggests, and a stream cropped a
-/// few pixels either way is still the resolution it is sold as.
-///
-/// Returns null when the server gave no usable dimensions. Some libraries carry
-/// a zero width or height on a stream that was never probed, and calling that
-/// SD would be inventing a fact rather than reading one.
+/// Thresholds sit below each nominal size so letterboxed and slightly cropped streams still match.
 String? videoResolutionLabel(Map<String, dynamic> stream) {
   final width = _toInt(stream['Width']);
   final height = _toInt(stream['Height']);

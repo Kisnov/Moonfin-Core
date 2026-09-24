@@ -10903,9 +10903,7 @@ String? codecFromStreams(
       (videoStream == null ? null : videoResolutionLabel(videoStream)) ??
       item.videoResolution;
   if (res != null) badges.add(res);
-  // videoRangeLabel always answers, so SDR is dropped here rather than badged.
-  // It is the same reading the player panels show, and the only one that finds
-  // Emby's typed field.
+  // Same reading as the player panels; SDR isn't badged.
   final hdr = videoStream == null ? null : videoRangeLabel(videoStream);
   if (hdr != null && hdr != 'SDR') badges.add(hdr);
   final vcodec =
