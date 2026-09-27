@@ -117,7 +117,7 @@ import '../../../util/season_queue_context.dart';
 import '../../../util/focus/dpad_keys.dart';
 import '../../../util/language_matching.dart';
 import '../../../util/subtitle_track_logic.dart';
-import '../../../util/audio_track_logic.dart';
+import '../../../util/detail_track_highlight.dart';
 import '../../../util/artwork_request_size.dart';
 import '../../../util/platform_detection.dart';
 import 'detail_layout_metrics.dart';
@@ -8384,30 +8384,15 @@ class DetailActionButtonsState extends State<DetailActionButtons> {
     return manager.subtitleStreamIndex;
   }
 
-  int? _effectiveAudioStreamIndex(List<Map<String, dynamic>> audioStreams) {
-    if (_selectedAudioIndex != null) {
-      return _selectedAudioIndex;
-    }
-    final active = _activePlaybackAudioIndex();
-    if (active != null) {
-      return active;
-    }
-
-    final prefs = GetIt.instance<UserPreferences>();
-    final manager = GetIt.instance<PlaybackManager>();
-    return computeEffectiveAudioIndex(
+  int? _effectiveAudioStreamIndex(
+    List<Map<String, dynamic>> audioStreams, {
+    AggregatedItem? item,
+  }) {
+    return highlightedAudioIndex(
       audioStreams: audioStreams,
-      preferredAudioLanguage:
-          manager.lastExplicitAudioLanguage ??
-          prefs.get(UserPreferences.defaultAudioLanguage),
-      fallbackAudioLanguage: prefs.get(UserPreferences.fallbackAudioLanguage),
-      preferDefaultAudioTrack: prefs.get(
-        UserPreferences.preferDefaultAudioTrack,
-      ),
-      preferAudioDescription: prefs.get(UserPreferences.preferAudioDescription),
-      explicitAudioIndex: null,
-      lastExplicitAudioIndex: manager.lastExplicitAudioIndex,
-      lastExplicitAudioTitle: manager.lastExplicitAudioTitle,
+      seriesId: (item ?? widget.viewModel.item)?.seriesId,
+      selectedIndex: _selectedAudioIndex,
+      activePlaybackIndex: _activePlaybackAudioIndex(),
     );
   }
 
@@ -8417,7 +8402,10 @@ class DetailActionButtonsState extends State<DetailActionButtons> {
     AggregatedItem? item,
   }) {
     final prefs = GetIt.instance<UserPreferences>();
-    final audioStreamIndex = _effectiveAudioStreamIndex(audioStreams);
+    final audioStreamIndex = _effectiveAudioStreamIndex(
+      audioStreams,
+      item: item,
+    );
     String? activeAudioLanguage;
     if (audioStreamIndex != null) {
       final activeAudioStream = audioStreams.firstWhere(
@@ -9205,7 +9193,10 @@ class DetailActionButtonsState extends State<DetailActionButtons> {
     final subtitleStreams = mediaStreams
         .where((s) => s['Type'] == 'Subtitle')
         .toList();
-    final audioStreamIndex = _effectiveAudioStreamIndex(audioStreams);
+    final audioStreamIndex = _effectiveAudioStreamIndex(
+      audioStreams,
+      item: item,
+    );
     final subtitleStreamIndex = _effectiveSubtitleStreamIndex(
       subtitleStreams,
       audioStreams,
@@ -9366,6 +9357,7 @@ class DetailActionButtonsState extends State<DetailActionButtons> {
                 .toList();
             final epAudioStreamIndex = _effectiveAudioStreamIndex(
               epAudioStreams,
+              item: selectedEpisode,
             );
             final epSubtitleStreamIndex = _effectiveSubtitleStreamIndex(
               epSubtitleStreams,
@@ -9436,6 +9428,7 @@ class DetailActionButtonsState extends State<DetailActionButtons> {
                 .toList();
             final epAudioStreamIndex = _effectiveAudioStreamIndex(
               epAudioStreams,
+              item: selectedEpisode,
             );
             final epSubtitleStreamIndex = _effectiveSubtitleStreamIndex(
               epSubtitleStreams,
@@ -9588,6 +9581,7 @@ class DetailActionButtonsState extends State<DetailActionButtons> {
                 .toList();
             final epAudioStreamIndex = _effectiveAudioStreamIndex(
               epAudioStreams,
+              item: targetItem,
             );
             final epSubtitleStreamIndex = _effectiveSubtitleStreamIndex(
               epSubtitleStreams,
@@ -9979,7 +9973,10 @@ class DetailActionButtonsState extends State<DetailActionButtons> {
     final subtitleStreams = mediaStreams
         .where((s) => s['Type'] == 'Subtitle')
         .toList();
-    final audioStreamIndex = _effectiveAudioStreamIndex(audioStreams);
+    final audioStreamIndex = _effectiveAudioStreamIndex(
+      audioStreams,
+      item: item,
+    );
     final subtitleStreamIndex = _effectiveSubtitleStreamIndex(
       subtitleStreams,
       audioStreams,

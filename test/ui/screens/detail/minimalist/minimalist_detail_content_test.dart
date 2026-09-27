@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:jellyfin_preference/jellyfin_preference.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:moonfin/data/models/series_track_preference.dart';
 import 'package:moonfin/data/repositories/item_mutation_repository.dart';
 import 'package:moonfin/data/repositories/mdblist_repository.dart';
 import 'package:moonfin/data/repositories/offline_repository.dart';
@@ -323,6 +324,55 @@ void main() {
   testWidgets('a movie gets no second line under its title', (tester) async {
     await pumpContent(tester, viewModel('Movie'));
     expect(find.byKey(const ValueKey('minimalist-episode-name')), findsNothing);
+  });
+
+  // The action row here is the same one the classic screen shows.
+  testWidgets('the audio picker marks the series audio track', (tester) async {
+    await prefs.set(UserPreferences.defaultAudioLanguage, 'eng');
+    await prefs.setSeriesAudioPreference(
+      'series-1',
+      const SeriesTrackPreference(language: 'jpn'),
+    );
+    final data = itemData('Episode')
+      ..['SeriesId'] = 'series-1'
+      ..['MediaSources'] = [
+        {
+          'Id': 'source-1',
+          'MediaStreams': [
+            {'Type': 'Video', 'Index': 0},
+            {
+              'Type': 'Audio',
+              'Index': 1,
+              'Language': 'eng',
+              'DisplayTitle': 'English',
+              'IsDefault': true,
+            },
+            {
+              'Type': 'Audio',
+              'Index': 2,
+              'Language': 'jpn',
+              'DisplayTitle': 'Japanese',
+            },
+          ],
+        },
+      ];
+    await pumpContent(tester, viewModel('Episode', data: data));
+
+    await tester.tap(find.byIcon(Icons.audiotrack));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 500));
+
+    final selectedRow = find.ancestor(
+      of: find.byIcon(Icons.check_circle),
+      matching: find.byType(Row),
+    );
+    expect(
+      find.descendant(
+        of: selectedRow.first,
+        matching: find.text('2 - Japanese'),
+      ),
+      findsOneWidget,
+    );
   });
 
   /// A series whose episodes span [seasons] seasons, three per season.
