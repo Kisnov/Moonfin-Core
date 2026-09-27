@@ -629,27 +629,9 @@ void registerPlaybackModule() {
       if (matchedIndex != null) return matchedIndex;
     }
 
-    final effectiveAudioIndex = computeEffectiveAudioIndex(
-      audioStreams: audioStreams,
-      preferredAudioLanguage:
-          manager.lastExplicitAudioLanguage ??
-          (prefs.get(UserPreferences.defaultAudioLanguage) as String? ??
-              'auto'),
-      fallbackAudioLanguage:
-          prefs.get(UserPreferences.fallbackAudioLanguage) as String? ?? '',
-      preferDefaultAudioTrack:
-          prefs.get(UserPreferences.preferDefaultAudioTrack) as bool? ?? false,
-      preferAudioDescription:
-          prefs.get(UserPreferences.preferAudioDescription) as bool? ?? false,
-      explicitAudioIndex: manager.audioSelectionExplicit
-          ? manager.audioStreamIndex
-          : null,
-      lastExplicitAudioIndex: manager.lastExplicitAudioIndex,
-      lastExplicitAudioTitle: manager.lastExplicitAudioTitle,
-    );
-
+    // The audio selector runs first, so this is the track that will play.
     final activeAudioStream = audioStreams.firstWhere(
-      (s) => s['Index'] == effectiveAudioIndex,
+      (s) => s['Index'] == manager.audioStreamIndex,
       orElse: () => const <String, dynamic>{},
     );
     final activeAudioLanguage = activeAudioStream.isNotEmpty
