@@ -8430,7 +8430,8 @@ class DetailActionButtonsState extends State<DetailActionButtons> {
     // Only for the item on screen. Callers naming a different episode want it
     // resolved against that episode's own streams, where an index picked here
     // means nothing.
-    if (item == null && _selectedSubtitleIndex != null) {
+    if ((item == null || item.id == widget.viewModel.item?.id) &&
+        _selectedSubtitleIndex != null) {
       return _selectedSubtitleIndex;
     }
 

@@ -3,10 +3,13 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:jellyfin_preference/jellyfin_preference.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:moonfin/data/models/series_track_preference.dart';
 import 'package:moonfin/data/repositories/item_mutation_repository.dart';
 import 'package:moonfin/data/repositories/mdblist_repository.dart';
 import 'package:moonfin/data/repositories/offline_repository.dart';
 import 'package:moonfin/data/repositories/tmdb_repository.dart';
+import 'package:moonfin/data/services/cast/cast_service.dart';
+import 'package:moonfin/data/services/cast/cast_target.dart';
 import 'package:moonfin/data/services/row_data_source.dart';
 import 'package:moonfin/data/services/plugin_sync_service.dart';
 import 'package:moonfin/data/viewmodels/item_detail_view_model.dart';
@@ -46,6 +49,33 @@ class _PlaybackManager extends Mock implements PlaybackManager {}
 class _OfflineRepository extends Mock implements OfflineRepository {}
 
 class _QueueService extends Mock implements QueueService {}
+
+class _CastService extends Fake implements CastService {
+  int? castSubtitleIndex;
+
+  @override
+  Stream<CastTarget> discoverTargetsStreamed(AggregatedItem item) =>
+      Stream.value(
+        const CastTarget(
+          id: 'tv',
+          kind: CastTargetKind.jellyfinSession,
+          title: 'Living room',
+        ),
+      );
+
+  @override
+  Future<void> playToTarget(
+    CastTarget target, {
+    required AggregatedItem item,
+    List<AggregatedItem>? queueItems,
+    int? startPositionTicks,
+    String? mediaSourceId,
+    int? audioStreamIndex,
+    int? subtitleStreamIndex,
+  }) async {
+    castSubtitleIndex = subtitleStreamIndex;
+  }
+}
 
 Future<UserPreferences> _preferences() async {
   SharedPreferences.setMockInitialValues({});
@@ -506,5 +536,52 @@ void main() {
     await pumpContent(tester, viewModel('Playlist'));
     await tester.pumpAndSettle();
     expect(find.byType(ModernDetailContent), findsOneWidget);
+  });
+
+  testWidgets('Cast sends the subtitle picked on the page', (tester) async {
+    final cast = _CastService();
+    GetIt.instance.registerSingleton<CastService>(cast);
+    await prefs.setSeriesSubtitlePreference(
+      'series-1',
+      const SeriesTrackPreference(language: 'eng', title: 'English'),
+    );
+    final data = itemData('Episode')
+      ..['SeriesId'] = 'series-1'
+      ..['MediaSources'] = [
+        {
+          'Id': 'source-1',
+          'MediaStreams': [
+            {'Type': 'Video', 'Index': 0},
+            {'Type': 'Audio', 'Index': 1, 'Language': 'eng'},
+            {
+              'Type': 'Subtitle',
+              'Index': 2,
+              'Language': 'eng',
+              'Title': 'English',
+            },
+            {
+              'Type': 'Subtitle',
+              'Index': 3,
+              'Language': 'spa',
+              'Title': 'Spanish',
+            },
+          ],
+        },
+      ];
+    final vm = viewModel('Episode', data: data);
+    await pumpContent(tester, vm);
+    // What a subtitle downloaded on the page leaves behind: picked, but not
+    // the series choice.
+    vm.selectedSubtitleIndex = 3;
+    await tester.pump();
+
+    await tester.tap(find.byIcon(Icons.cast));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 500));
+    await tester.tap(find.text('Living room'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 500));
+
+    expect(cast.castSubtitleIndex, 3);
   });
 }
