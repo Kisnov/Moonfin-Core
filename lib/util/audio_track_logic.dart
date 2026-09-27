@@ -115,15 +115,14 @@ int? computeEffectiveAudioIndex({
     return _rankAudioCandidates(fallbackMatches, preferDefaultAudioTrack, preferAudioDescription)['Index'] as int?;
   }
 
-  // 7. Fall back to the file's default track
-  if (defaultTracks.isNotEmpty) {
+  // 7. Fall back to the file's default track when the flag sets one apart, then English
+  if (defaultTracks.isNotEmpty && defaultTracks.length < candidates.length) {
     return _rankAudioCandidates(defaultTracks, preferDefaultAudioTrack, preferAudioDescription)['Index'] as int?;
   }
 
-  // 8. Match English fallback
   final englishMatches = candidates.where((s) => matchLang(s['Language'], 'eng')).toList();
   if (englishMatches.isNotEmpty) {
-    // 8a. Prefer exact same track index.
+    // 7a. Prefer exact same track index.
     if (lastExplicitAudioIndex != null) {
       final m = englishMatches.firstWhere(
         (s) => s['Index'] == lastExplicitAudioIndex,
@@ -131,7 +130,7 @@ int? computeEffectiveAudioIndex({
       );
       if (m.isNotEmpty) return m['Index'] as int?;
     }
-    // 8b. Prefer same track name.
+    // 7b. Prefer same track name.
     if (normTitle != null && normTitle.isNotEmpty) {
       final m = englishMatches.firstWhere(
         (s) => _trackTitle(s)?.trim().toLowerCase() == normTitle,
@@ -142,7 +141,7 @@ int? computeEffectiveAudioIndex({
     return _rankAudioCandidates(englishMatches, preferDefaultAudioTrack, preferAudioDescription)['Index'] as int?;
   }
 
-  // 9. Fall back to the best remaining candidate
+  // 8. Fall back to default track or first candidate
   return _rankAudioCandidates(candidates, preferDefaultAudioTrack, preferAudioDescription)['Index'] as int?;
 }
 

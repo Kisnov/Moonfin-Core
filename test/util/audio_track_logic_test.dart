@@ -222,6 +222,33 @@ void main() {
       expect(index, 1); // eng is Index 1
     });
 
+    test('falls back to English if every track is flagged default', () {
+      final allDefaultStreams = [
+        {
+          'Type': 'Audio',
+          'Index': 0,
+          'Language': 'fre',
+          'IsDefault': true,
+          'Channels': 6,
+        },
+        {
+          'Type': 'Audio',
+          'Index': 1,
+          'Language': 'eng',
+          'IsDefault': true,
+          'Channels': 2,
+        },
+      ];
+      final index = computeEffectiveAudioIndex(
+        audioStreams: allDefaultStreams,
+        preferredAudioLanguage: 'jpn',
+        fallbackAudioLanguage: 'ger',
+        preferDefaultAudioTrack: false,
+        preferAudioDescription: false,
+      );
+      expect(index, 1); // eng is Index 1
+    });
+
     test('falls back to default/first track if nothing matched', () {
       final unmatchedStreams = [
         {
