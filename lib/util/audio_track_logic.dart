@@ -64,9 +64,11 @@ int? computeEffectiveAudioIndex({
   }
 
   // 4. Prefer Default Audio Track
-  final defaultTracks = candidates.where((s) => s['IsDefault'] == true).toList();
-  if (preferDefaultAudioTrack && defaultTracks.isNotEmpty) {
-    return _rankAudioCandidates(defaultTracks, preferDefaultAudioTrack, preferAudioDescription)['Index'] as int?;
+  if (preferDefaultAudioTrack) {
+    final defaultTracks = candidates.where((s) => s['IsDefault'] == true).toList();
+    if (defaultTracks.isNotEmpty) {
+      return _rankAudioCandidates(defaultTracks, preferDefaultAudioTrack, preferAudioDescription)['Index'] as int?;
+    }
   }
 
   final normTitle = lastExplicitAudioTitle?.trim().toLowerCase();
@@ -97,11 +99,7 @@ int? computeEffectiveAudioIndex({
     if (matches.isNotEmpty) return preferRemembered(matches);
   }
 
-  // 7. Fall back to the file's default track when the flag sets one apart, then English
-  if (defaultTracks.isNotEmpty && defaultTracks.length < candidates.length) {
-    return _rankAudioCandidates(defaultTracks, preferDefaultAudioTrack, preferAudioDescription)['Index'] as int?;
-  }
-
+  // 7. Match English fallback
   final englishMatches = candidates.where((s) => matchLang(s['Language'], 'eng')).toList();
   if (englishMatches.isNotEmpty) return preferRemembered(englishMatches);
 
