@@ -142,8 +142,9 @@ class _TestService implements PlayerService {
   Future<void> onPlaybackStop(
     dynamic mediaItem,
     StreamResolutionResult resolution,
-    Duration position,
-  ) async {}
+    Duration position, {
+    bool releaseLiveStream = true,
+  }) async {}
 
   @override
   Future<void> closeLiveStream(String liveStreamId) async {}
@@ -267,6 +268,26 @@ void main() {
 
       expect(h.sawFailure, isFalse);
       expect(h.drops.single, contains('Dropped a late playerError'));
+    } finally {
+      await h.dispose();
+    }
+  });
+
+  test('a subtitle that fails to load is logged without failing the bring-up', () async {
+    const message =
+        'Could not load subtitle file: /Videos/movie/Subtitles/3/0/Stream.subrip';
+    final h = _Harness();
+    try {
+      await h.manager.playItems(<dynamic>[_item]);
+
+      h.backend.emit(const <String, dynamic>{
+        'event': 'subtitleError',
+        'message': message,
+      });
+      await pumpEventQueue();
+
+      expect(h.sawFailure, isFalse);
+      expect(h.notes, contains(message));
     } finally {
       await h.dispose();
     }

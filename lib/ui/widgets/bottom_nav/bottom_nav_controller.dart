@@ -10,6 +10,7 @@ import '../../../auth/repositories/user_repository.dart';
 import '../../../data/models/aggregated_library.dart';
 import '../../../data/repositories/multi_server_repository.dart';
 import '../../../data/repositories/user_views_repository.dart';
+import '../../../data/services/achievements_service.dart';
 import '../../../data/services/library_scope_service.dart';
 import '../../../data/services/plugin_sync_service.dart';
 import '../../../data/services/saved_media_presence.dart';
@@ -20,6 +21,7 @@ import '../../../preference/user_preferences.dart';
 import '../../../util/game_library.dart';
 import '../../../util/live_tv_library.dart';
 import '../downloads_nav_slot.dart';
+import '../friends_nav_slot.dart';
 import 'bottom_nav_model.dart';
 
 /// Everything the bottom navbar knows beyond its own layout: which tabs are
@@ -31,6 +33,7 @@ class BottomNavController extends ChangeNotifier {
     _viewsRepo.addListener(_scheduleLibrariesReload);
     _pluginSync?.addListener(_onPrefsChanged);
     _messages?.addListener(notifyListeners);
+    _achievements?.addListener(notifyListeners);
     _savedMedia?.addListener(notifyListeners);
     _userSub = _userRepo.currentUserStream.listen((_) {
       _loadUser();
@@ -47,6 +50,7 @@ class BottomNavController extends ChangeNotifier {
   final _viewsRepo = GetIt.instance<UserViewsRepository>();
   final PluginSyncService? _pluginSync = _maybe<PluginSyncService>();
   final ServerMessagesService? _messages = _maybe<ServerMessagesService>();
+  final AchievementsService? _achievements = _maybe<AchievementsService>();
   final SavedMediaPresence? _savedMedia = _maybe<SavedMediaPresence>();
 
   static T? _maybe<T extends Object>() =>
@@ -129,14 +133,16 @@ class BottomNavController extends ChangeNotifier {
           DownloadsNavSlot.isOffered() && DownloadsNavSlot.hasSavedMedia(),
       shuffle: _prefs.get(UserPreferences.showShuffleButton),
       syncPlay: syncPlay,
+      quickConnect:
+          _maybe<MediaServerClient>()?.serverType == ServerType.jellyfin,
       alsoOnBar: style == BottomNavbarStyle.split
           ? const {BottomNavTab.search}
           : const {},
     );
   }
 
-  /// Whether the You hub lists server messages: the user turned the button on
-  /// and the server has something to say.
+  /// Whether the bottom navbar hub lists server messages: the user turned the
+  /// button on and the server has something to say.
   bool get messagesVisible =>
       _prefs.get(UserPreferences.showServerMessagesButton) &&
       (_messages?.messages.isNotEmpty ?? false);
@@ -145,6 +151,18 @@ class BottomNavController extends ChangeNotifier {
   /// entry is hidden, so the avatar never nags about something unreachable.
   int get unreadMessages =>
       messagesVisible ? (_messages?.unreadCount ?? 0) : 0;
+
+  /// Whether the bottom navbar hub lists Friends: the user left the button on
+  /// and the server's Achievement Badges plugin has friends turned on.
+  bool get friendsVisible =>
+      FriendsNavSlot.isOffered() && (_achievements?.socialAvailable ?? false);
+
+  /// Friend requests and unread chats. Zero while Friends is hidden.
+  int get friendsBadge =>
+      friendsVisible ? (_achievements?.socialBadgeCount ?? 0) : 0;
+
+  /// What the avatar counts: everything waiting behind the bottom navbar hub.
+  int get hubBadge => unreadMessages + friendsBadge;
 
   // Rebuilding the bar on every preference write in the app would be wasted
   // work, so only the settings the bar reads are compared.
@@ -162,6 +180,7 @@ class BottomNavController extends ChangeNotifier {
         _prefs.get(UserPreferences.syncPlayEnabled),
         _prefs.get(UserPreferences.showSyncPlayButton),
         _prefs.get(UserPreferences.showServerMessagesButton),
+        _prefs.get(UserPreferences.showFriendsButton),
         _prefs.get(UserPreferences.showDownloadsButton),
         _prefs.get(UserPreferences.enableMultiServerLibraries),
         _prefs.get(UserPreferences.navbarColor),
@@ -251,6 +270,7 @@ class BottomNavController extends ChangeNotifier {
       _viewsRepo.removeListener(_scheduleLibrariesReload);
       _pluginSync?.removeListener(_onPrefsChanged);
       _messages?.removeListener(notifyListeners);
+      _achievements?.removeListener(notifyListeners);
       _savedMedia?.removeListener(notifyListeners);
     } catch (_) {}
     _userSub?.cancel();

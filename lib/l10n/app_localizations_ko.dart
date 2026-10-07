@@ -193,6 +193,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get spotlightChaptersExtras => 'Chapters and Extras';
 
   @override
+  String get spotlightFileDetails => 'File Details';
+
+  @override
   String get spotlightSimilarRecommendations => 'Similar and Recommendations';
 
   @override
@@ -784,6 +787,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get uiScaleGrandparents => 'Grandparents';
+
+  @override
+  String get uiScaleGreatGrandparents => 'Great-Grandparents';
 
   @override
   String get scrollDirection => '스크롤 방향';
@@ -2057,6 +2063,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get shortcutMpvStats => 'mpv statistics on or off';
 
   @override
+  String get shortcutRecropBlackBars => 'Recrop black bars';
+
+  @override
   String get shortcutLeaveFullscreenOrStop =>
       'Exit fullscreen, or stop if not fullscreen';
 
@@ -2424,6 +2433,24 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get record => '녹화 예약';
+
+  @override
+  String nextSeriesRecording(String dateTime) {
+    return 'Next series recording: $dateTime';
+  }
+
+  @override
+  String get noUpcomingSeriesRecording =>
+      'Series recording is scheduled, but the guide has no upcoming episodes';
+
+  @override
+  String get recordCurrentEpisode => 'Record This Episode';
+
+  @override
+  String get recordCurrentProgram => 'Record This Program';
+
+  @override
+  String get cancelCurrentRecording => 'Cancel This Recording';
 
   @override
   String get cancelRecordingAction => '녹화 취소';
@@ -3068,6 +3095,88 @@ class AppLocalizationsKo extends AppLocalizations {
   String get fallingLeaves => '떨어지는 나뭇잎';
 
   @override
+  String get seasonalChristmas => 'Christmas';
+
+  @override
+  String get seasonalPetals => 'Spring Petals';
+
+  @override
+  String get seasonalFireflies => 'Fireflies';
+
+  @override
+  String get seasonalHalloween => 'Halloween';
+
+  @override
+  String get seasonalDensity => 'Density';
+
+  @override
+  String get seasonalDensityLight => 'Light';
+
+  @override
+  String get seasonalDensityNormal => 'Normal';
+
+  @override
+  String get seasonalDensityHeavy => 'Heavy';
+
+  @override
+  String get seasonalRow => 'Seasonal Row';
+
+  @override
+  String get seasonalRowDescription =>
+      'Show a row of holiday movies from your library, with Seerr suggestions when available.';
+
+  @override
+  String get seasonalRowSubtitle => 'Seasonal';
+
+  @override
+  String get seasonalRowCountry => 'Country';
+
+  @override
+  String get seasonalRowCountryAuto => 'Automatic';
+
+  @override
+  String get countryUnitedStates => 'United States';
+
+  @override
+  String get countryCanada => 'Canada';
+
+  @override
+  String get seasonalRowCountryOther => 'Other';
+
+  @override
+  String get seasonalRowHolidays => 'Holidays';
+
+  @override
+  String get seasonalRowHolidaysHint => 'Untick a holiday to hide its row.';
+
+  @override
+  String get holidayNewYear => 'New Year\'s';
+
+  @override
+  String get holidayValentines => 'Valentine\'s Day';
+
+  @override
+  String get holidayEaster => 'Easter';
+
+  @override
+  String get holidayPride => 'Pride';
+
+  @override
+  String get holidayHalloween => 'Halloween';
+
+  @override
+  String get holidayThanksgiving => 'Thanksgiving';
+
+  @override
+  String get holidayChristmas => 'Christmas Movies';
+
+  @override
+  String get holidayLunarNewYear => 'Lunar New Year';
+
+  @override
+  String get holidayDiwali => 'Diwali';
+
+  @override
   String get themeMusic => '테마 음악';
 
   @override
@@ -3149,7 +3258,23 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get settingsCropBlackBarsDescription =>
-      'Detect encoded letterbox bars, crop them, then fill the screen.';
+      'Detect encoded letterbox bars after playback starts, crop them, then fill the screen. Recrop from the player zoom button.';
+
+  @override
+  String get cropBlackBarsRecropInterval => 'Recrop interval';
+
+  @override
+  String get cropBlackBarsOnce => 'Once at start';
+
+  @override
+  String get cropBlackBarsEverySecond => 'Every second';
+
+  @override
+  String get settingsCropBlackBarsIntervalDescription =>
+      'Follow aspect ratio changes during playback.';
+
+  @override
+  String get playerRecroppingBlackBars => 'Recropping black bars';
 
   @override
   String get stretch => '뻗기';
@@ -3316,6 +3441,139 @@ class AppLocalizationsKo extends AppLocalizations {
   @override
   String get detailMetadataUpcomingEpisodeDateSubtitle =>
       'Uses Sonarr and TMDB to show upcoming release dates';
+
+  @override
+  String get detailSections => 'Sections';
+
+  @override
+  String get detailSectionsDescription =>
+      'Choose which parts of the Details screen to show';
+
+  @override
+  String get detailSectionsScreenDescription =>
+      'Only the sections the current Details screen style can show are listed. Hiding one hides it in every style that has it.';
+
+  @override
+  String get detailSectionGroupHeader => 'Header';
+
+  @override
+  String get detailSectionGroupSections => 'Sections';
+
+  @override
+  String get detailSectionGroupPerson => 'Person pages';
+
+  @override
+  String get detailSectionGroupCollection => 'Collection pages';
+
+  @override
+  String get detailSectionGroupOther => 'Other';
+
+  @override
+  String get detailSectionLogo => 'Logo';
+
+  @override
+  String get detailSectionLogoSubtitle => 'Shows the title as text when off';
+
+  @override
+  String get detailSectionTagline => 'Tagline';
+
+  @override
+  String get detailSectionPoster => 'Poster';
+
+  @override
+  String get detailSectionVersionBadge => 'Version badge';
+
+  @override
+  String get detailSectionUpNext => 'Next Up';
+
+  @override
+  String get detailSectionLyrics => 'Lyrics';
+
+  @override
+  String get detailSectionCast => 'Cast';
+
+  @override
+  String get detailSectionCastSubtitle => 'Also on collection pages';
+
+  @override
+  String get detailSectionCrew => 'Directors & writers';
+
+  @override
+  String get detailSectionStudios => 'Studios';
+
+  @override
+  String get detailSectionChapters => 'Chapters';
+
+  @override
+  String get detailSectionExtras => 'Extras';
+
+  @override
+  String get detailSectionCollections => 'Collections';
+
+  @override
+  String get detailSectionMoreLikeThis => 'More Like This';
+
+  @override
+  String get detailSectionMoreLikeThisSubtitle =>
+      'Also similar albums and artists';
+
+  @override
+  String get detailSectionMoreEpisodes => 'More episodes';
+
+  @override
+  String get detailSectionMoreEpisodesSubtitle => 'On episode pages';
+
+  @override
+  String get detailSectionMediaInfo => 'Media info';
+
+  @override
+  String get detailSectionMediaInfoSubtitle =>
+      'File, streams and Direct Play check';
+
+  @override
+  String get detailSectionSeerrGenresTags => 'Genres & tags';
+
+  @override
+  String get detailSectionSeerrStats => 'Stats';
+
+  @override
+  String get detailSectionSeerrRecommendations => 'Recommendations';
+
+  @override
+  String get detailSectionSeerrSimilar => 'Similar titles';
+
+  @override
+  String get detailSectionSeerrCollection => 'Collection banner';
+
+  @override
+  String get detailSectionSeerrPersonAppearances => 'Appearances';
+
+  @override
+  String get detailSectionSeerrPersonCrew => 'Crew credits';
+
+  @override
+  String get detailSectionPersonPagesSubtitle => 'On person pages';
+
+  @override
+  String get detailSectionBiography => 'Biography';
+
+  @override
+  String get detailSectionBirthplace => 'Birthplace';
+
+  @override
+  String get detailSectionGuestAppearances => 'Guest appearances';
+
+  @override
+  String get detailSectionMusicVideos => 'Music videos';
+
+  @override
+  String get detailSectionPlaylistOrder => 'Playlist order';
+
+  @override
+  String get detailSectionBookGenres => 'Book genres';
+
+  @override
+  String get detailSectionPhotoExif => 'Photo details';
 
   @override
   String upcomingEpisodeNext(String date, int season, int episode) {
@@ -4215,6 +4473,23 @@ class AppLocalizationsKo extends AppLocalizations {
   String get showInLatestMedia => '최신 미디어에 표시';
 
   @override
+  String get libraryOrder => 'Library Order';
+
+  @override
+  String get libraryOrderSubtitle => 'Choose the order of your libraries';
+
+  @override
+  String get libraryOrderDescription =>
+      'Your libraries appear in this order on My Media, the recently added rows and the navigation bar. The order is saved to your server account, so other apps you sign in to use it too.';
+
+  @override
+  String get libraryOrderTvHint =>
+      'Press left or right to move the highlighted library.';
+
+  @override
+  String get libraryOrderSaveFailed => 'Couldn\'t save the library order';
+
+  @override
   String get sourceLibraries => '소스 라이브러리';
 
   @override
@@ -4752,6 +5027,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get seerrDiscoveryRows => 'Seerr 둘러보기 행';
+
+  @override
+  String get seerrDiscoverSliders => 'Seerr Discover Sliders';
 
   @override
   String get yourWatchlist => '내 관심 목록';
@@ -9231,6 +9509,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get trackActionPlayNext => '다음 곡 재생';
 
   @override
+  String get trackActionViewDetails => 'View Details';
+
+  @override
   String get trackActionAddToQueue => '대기열에 추가';
 
   @override
@@ -9499,6 +9780,10 @@ class AppLocalizationsKo extends AppLocalizations {
   @override
   String get settingsAllowSelfSignedCertsSubtitle =>
       '자체 서명 또는 사설 CA TLS 인증서를 사용하는 서버를 신뢰합니다. 직접 관리하는 서버에만 사용하세요. 이 설정을 켜면 모든 연결에서 인증서 검증이 해제됩니다.';
+
+  @override
+  String get untrustedServerCertificate =>
+      'This server\'s certificate isn\'t trusted. If it\'s your own server and uses a self-signed or private certificate, you can allow it here.';
 
   @override
   String get settingsPrivacyAndSafetySection => '개인정보 보호 및 안전';
@@ -10703,6 +10988,32 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
+  String get achievementsUnlockToasts => 'Unlock notifications';
+
+  @override
+  String get achievementsUnlockToastsSubtitle =>
+      'Show a notification when you unlock a badge';
+
+  @override
+  String get achievementsUnlockedNotification => 'Achievement unlocked';
+
+  @override
+  String achievementsUnlockedCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count achievements unlocked',
+      one: '$count achievement unlocked',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String achievementsUnlockedMore(int count) {
+    return '+$count more';
+  }
+
+  @override
   String get achievementsQuests => 'Quests';
 
   @override
@@ -11089,6 +11400,346 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get achievementsLoadFailed => 'Could not load your achievements.';
+
+  @override
+  String get friends => 'Friends';
+
+  @override
+  String get friendsSubtitle =>
+      'See who\'s online and chat with people on this server';
+
+  @override
+  String get friendsShowButton => 'Show friends button';
+
+  @override
+  String get friendsShowButtonSubtitle =>
+      'Friends and chat from the Achievement Badges plugin';
+
+  @override
+  String get friendsMessages => 'Messages';
+
+  @override
+  String friendsUnreadCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count unread messages',
+      one: '1 unread message',
+      zero: 'No unread messages',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get friendsRequests => 'Friend requests';
+
+  @override
+  String friendsRequestCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count waiting for you',
+      one: '1 waiting for you',
+      zero: 'Nothing waiting',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get friendsAdd => 'Add friends';
+
+  @override
+  String get friendsAddSubtitle => 'Find people on this server';
+
+  @override
+  String get friendsPrivacy => 'Privacy';
+
+  @override
+  String get friendsPrivacySubtitle => 'What your friends can see';
+
+  @override
+  String get friendsOnline => 'Online';
+
+  @override
+  String get friendsOffline => 'Offline';
+
+  @override
+  String get friendsNone =>
+      'No friends yet. Add people from this server to see them here.';
+
+  @override
+  String friendsWatching(String title) {
+    return 'Watching $title';
+  }
+
+  @override
+  String friendsLastWatched(String title) {
+    return 'Last watched $title';
+  }
+
+  @override
+  String friendsLastSeen(String time) {
+    return 'Last seen $time';
+  }
+
+  @override
+  String get friendsLoadFailed =>
+      'Could not load this. Check your connection and try again.';
+
+  @override
+  String get friendsActionFailed => 'That didn\'t work. Try again in a moment.';
+
+  @override
+  String get friendsIncoming => 'Waiting for you';
+
+  @override
+  String get friendsOutgoing => 'Sent by you';
+
+  @override
+  String get friendsNoRequests => 'No friend requests.';
+
+  @override
+  String get friendsAccept => 'Accept';
+
+  @override
+  String get friendsDecline => 'Decline';
+
+  @override
+  String get friendsCancelRequest => 'Cancel request';
+
+  @override
+  String friendsRequestFrom(String name) {
+    return '$name wants to be friends';
+  }
+
+  @override
+  String friendsCancelRequestBody(String name) {
+    return 'Take back the request you sent to $name?';
+  }
+
+  @override
+  String get friendsSearchHint => 'Search people';
+
+  @override
+  String get friendsNoMatches => 'No one matches that name.';
+
+  @override
+  String friendsRequestSent(String name) {
+    return 'Request sent to $name';
+  }
+
+  @override
+  String get friendsSendRequest => 'Add as friend';
+
+  @override
+  String get friendsSendMessage => 'Send message';
+
+  @override
+  String friendsOpenItem(String title) {
+    return 'Open $title';
+  }
+
+  @override
+  String get friendsRemove => 'Remove friend';
+
+  @override
+  String friendsRemoveBody(String name) {
+    return 'Remove $name from your friends? You can add them again later.';
+  }
+
+  @override
+  String get friendsBlock => 'Block';
+
+  @override
+  String get friendsUnblock => 'Unblock';
+
+  @override
+  String friendsBlockBody(String name) {
+    return 'Block $name? Neither of you will be able to message the other directly. Group chats you share stay open.';
+  }
+
+  @override
+  String friendsUnblockBody(String name) {
+    return 'Unblock $name?';
+  }
+
+  @override
+  String get friendsBlocked => 'Blocked users';
+
+  @override
+  String friendsProfileHidden(String name) {
+    return '$name keeps their profile private.';
+  }
+
+  @override
+  String get friendsAppearOffline => 'Appear offline';
+
+  @override
+  String get friendsAppearOfflineSubtitle =>
+      'Friends always see you as offline';
+
+  @override
+  String get friendsHideNowPlaying => 'Hide what I\'m watching';
+
+  @override
+  String get friendsHideNowPlayingSubtitle =>
+      'Friends still see you online, but not what\'s playing';
+
+  @override
+  String get friendsHideLastWatched => 'Hide my last watched';
+
+  @override
+  String get friendsHideLastWatchedSubtitle =>
+      'Friends won\'t see what you watched last while you\'re offline';
+
+  @override
+  String get friendsMessageNotifications => 'Message notifications';
+
+  @override
+  String get friendsMessageNotificationsSubtitle =>
+      'Show a banner when a friend messages you';
+
+  @override
+  String get friendsMuteDuringPlayback => 'Mute during playback';
+
+  @override
+  String get friendsMuteDuringPlaybackSubtitle =>
+      'No message banners while a video or game is playing';
+
+  @override
+  String get friendsSaveFailed => 'Could not save your settings.';
+
+  @override
+  String get chatNew => 'New message';
+
+  @override
+  String get chatNewSubtitle => 'Start a chat with a friend';
+
+  @override
+  String get chatNewGroup => 'New group';
+
+  @override
+  String get chatNewGroupSubtitle => 'Chat with several friends at once';
+
+  @override
+  String get chatNone => 'No messages yet.';
+
+  @override
+  String get chatYou => 'You';
+
+  @override
+  String chatYouSaid(String text) {
+    return 'You: $text';
+  }
+
+  @override
+  String get chatPhoto => 'Photo';
+
+  @override
+  String get chatEmoji => 'Emoji';
+
+  @override
+  String get chatEmojiSearch => 'Search emoji';
+
+  @override
+  String get chatNoRecentEmoji => 'No recent emoji';
+
+  @override
+  String get chatViewPhoto => 'View photo';
+
+  @override
+  String get chatHint => 'Write a message';
+
+  @override
+  String get chatAttach => 'Send a photo';
+
+  @override
+  String get chatEdited => 'edited';
+
+  @override
+  String get chatSeen => 'Seen';
+
+  @override
+  String get chatSent => 'Sent';
+
+  @override
+  String get chatEditing => 'Editing message';
+
+  @override
+  String get chatMessageOptions => 'Message options';
+
+  @override
+  String get chatDeleteBody => 'Delete this message for everyone?';
+
+  @override
+  String get chatClear => 'Clear conversation';
+
+  @override
+  String get chatClearBody =>
+      'Delete every message in this chat for everyone in it?';
+
+  @override
+  String get chatGroupInfo => 'Group info';
+
+  @override
+  String get chatGroupName => 'Group name';
+
+  @override
+  String chatMemberCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count members',
+      one: '1 member',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get chatOwner => 'Owner';
+
+  @override
+  String get chatAdmin => 'Admin';
+
+  @override
+  String get chatMakeAdmin => 'Make admin';
+
+  @override
+  String get chatRemoveAdmin => 'Remove admin';
+
+  @override
+  String get chatRemoveMember => 'Remove from group';
+
+  @override
+  String get chatAddMember => 'Add people';
+
+  @override
+  String get chatNobodyToAdd => 'No one left to add.';
+
+  @override
+  String get chatLeave => 'Leave group';
+
+  @override
+  String get chatLeaveBody =>
+      'Leave this group? Someone will have to add you back to rejoin.';
+
+  @override
+  String get chatCreate => 'Create group';
+
+  @override
+  String get chatPickMembers => 'Pick at least two friends';
+
+  @override
+  String chatNewMessageFrom(String name) {
+    return 'New message from $name';
+  }
+
+  @override
+  String get chatImageTooLarge => 'That image is over 8 MB.';
+
+  @override
+  String get chatImageUnsupported =>
+      'Only PNG, JPEG, GIF and WebP images can be sent.';
 
   @override
   String get embeddedBrowserNotAvailable => '이 플랫폼에서는 내장 브라우저를 사용할 수 없습니다.';
@@ -12443,6 +13094,34 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
+  String get smartDownloadsSection => 'Smart downloads';
+
+  @override
+  String get smartDownloadsEnable => 'Download next episodes';
+
+  @override
+  String get smartDownloadsEnableSubtitle =>
+      'When you finish an episode on any device, Moonfin downloads the next ones. Downloaded episodes are deleted once watched.';
+
+  @override
+  String get smartDownloadsKeepReady => 'Episodes to keep downloaded';
+
+  @override
+  String smartDownloadsKeepReadySubtitle(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Keeps the next $count episodes downloaded',
+      one: 'Keeps the next episode downloaded',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get smartDownloadsKeepReadyLowered =>
+      'Episodes already downloaded stay on your device. The new number applies to future downloads.';
+
+  @override
   String get autoDownloadSection => 'Automatic downloads';
 
   @override
@@ -12704,6 +13383,22 @@ class AppLocalizationsKo extends AppLocalizations {
       'How far focus moves for each swipe on the Siri Remote touchpad';
 
   @override
+  String get appleTvHomeScreen => 'Apple TV home screen';
+
+  @override
+  String get topShelf => 'Top Shelf';
+
+  @override
+  String get topShelfDescription =>
+      'What the Apple TV home screen shows above the Moonfin icon when it is selected. This setting stays on this device.';
+
+  @override
+  String get topShelfLatestMedia => 'Latest media';
+
+  @override
+  String get topShelfAppBanner => 'Moonfin banner';
+
+  @override
   String get keepVideoClearOfDynamicIsland =>
       'Keep video clear of the Dynamic Island';
 
@@ -12728,7 +13423,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get bottomNavbarTabsDescription =>
-      'Pin up to 3 tabs between Home and You. Everything else is in the You menu.';
+      'Pin up to 3 tabs between Home and You. Everything else is in the bottom navbar hub.';
 
   @override
   String get bottomNavbarTabsAutomatic => 'Automatic';
@@ -12755,7 +13450,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get bottomNavbarButtonsNote =>
-      'These decide which tabs you can pin to the bottom bar and what shows in the You menu.';
+      'These decide what shows in the bottom navbar hub and which tabs you can pin to the bottom bar. Tabs already on the bar aren\'t listed here.';
 
   @override
   String get navYou => 'You';

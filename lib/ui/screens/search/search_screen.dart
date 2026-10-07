@@ -11,6 +11,8 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:server_core/server_core.dart';
 
 import '../../../data/models/aggregated_item.dart';
+import '../../../data/offline/connectivity_aware_media_server_client.dart';
+import '../../../data/repositories/multi_server_repository.dart';
 import '../../../data/repositories/search_repository.dart';
 import '../../../data/repositories/seerr_repository.dart';
 import '../../../data/services/recent_searches_store.dart';
@@ -31,8 +33,10 @@ import '../../util/error_message.dart';
 import '../../util/search_group_title_localizer.dart';
 import '../../../util/focus/grid_focus_node_mixin.dart';
 import '../../../util/focus/row_focus_coordinator.dart';
+import '../../theme/app_theme_controller.dart';
 import '../../widgets/bottom_nav/bottom_navbar.dart';
 import '../../widgets/library_row.dart';
+import '../../widgets/media_badge.dart';
 import '../../widgets/media_card.dart';
 import '../../widgets/navigation_layout.dart';
 import '../../widgets/focus/context_menu_sheet.dart';
@@ -68,7 +72,11 @@ class _SearchScreenState extends State<SearchScreen>
   final Map<String, FocusNode> _allRowNodes = <String, FocusNode>{};
   // Per-row keys so focusing a card can scroll its whole row (title included)
   // into view rather than just the card.
-  final Map<int, GlobalKey> _allRowKeys = <int, GlobalKey>{};
+  final Map<String, GlobalKey> _allRowKeys = <String, GlobalKey>{};
+  // What each All tab row shows, top to bottom, as of the last build. Nodes
+  // and keys go by this rather than the row's position, so a row that arrives
+  // late doesn't take focus or scroll position from the rows below it.
+  List<String> _allRowIds = const [];
   // The results tab pill is a single focus stop.
   final _tabsFocusNode = FocusNode(debugLabel: 'search_tabs');
   // Vertical focus model: search field, then the tabs pill. Rebuilt each build.
@@ -82,6 +90,9 @@ class _SearchScreenState extends State<SearchScreen>
   static const _tmdbPosterBase = 'https://image.tmdb.org/t/p/w342';
   int _selectedTab = 0;
   String? _tabSelectionQuery;
+  // The tabs as of the last results, so the selection stays on its tab when a
+  // group arrives late.
+  List<String> _shownTabKeys = const [];
   bool _focusTabsAfterResults = false;
   bool _applyingRemoteSearch = false;
   String _lastSearchText = '';
@@ -90,10 +101,6 @@ class _SearchScreenState extends State<SearchScreen>
   // without stealing it from the search field.
   int _lastGridCount = -1;
   Object? _lastGridFirstId;
-
-  /// D-pad/keyboard focus navigation applies on TV and desktop; mobile is touch.
-  bool get _usesDpad =>
-      PlatformDetection.isTV || PlatformDetection.useDesktopUi;
 
   /// The focus node that owns the search field on this platform.
   FocusNode get _fieldNode =>
@@ -111,6 +118,11 @@ class _SearchScreenState extends State<SearchScreen>
       _searchRepository,
       getIt<MediaServerClient>(),
       scopedParentId: widget.scopedLibraryId,
+      multiServerRepository: widget.scopedLibraryId == null &&
+              _userPreferences.get(UserPreferences.enableMultiServerLibraries) &&
+              !shouldUseOfflineCatalog()
+          ? getIt<MultiServerRepository>()
+          : null,
     );
     _vm.addListener(_onViewModelChanged);
     _initSeerr();
@@ -134,8 +146,8 @@ class _SearchScreenState extends State<SearchScreen>
       });
     }
 
-    // Desktop keyboard/d-pad: let arrow Down/Up leave the plain text field.
-    if (PlatformDetection.useDesktopUi) {
+    // Let keyboard/remote arrows leave the normal-layout search field.
+    if (!PlatformDetection.isTV) {
       _searchInputFocus.onKeyEvent = _onSearchInputKey;
     }
     // Initial focus is granted by the RequestInitialFocus wrapper in build().
@@ -145,8 +157,8 @@ class _SearchScreenState extends State<SearchScreen>
   void didChangeDependencies() {
     super.didChangeDependencies();
     final route = ModalRoute.of(context);
-    if (widget.remoteSearch != null && route != null) {
-      routeLifecycleObserver.subscribe(this, route);
+    if (widget.remoteSearch != null && route is PageRoute<dynamic>) {
+      pageRouteLifecycleObserver.subscribe(this, route);
     }
   }
 
@@ -168,9 +180,16 @@ class _SearchScreenState extends State<SearchScreen>
 
   void _onViewModelChanged() {
     final query = _searchController.text.trim();
+    final tabKeys = _tabKeys;
+    final keptTab = _selectedTab < _shownTabKeys.length
+        ? tabKeys.indexOf(_shownTabKeys[_selectedTab])
+        : -1;
+    _shownTabKeys = tabKeys;
     if (_tabCount > 0 && query != _tabSelectionQuery) {
       _tabSelectionQuery = query;
       _selectedTab = _leadingTabCount;
+    } else if (keptTab >= 0) {
+      _selectedTab = keptTab;
     } else if (_selectedTab >= _tabCount) {
       _selectedTab = _tabCount == 0 ? 0 : _leadingTabCount;
     }
@@ -184,7 +203,25 @@ class _SearchScreenState extends State<SearchScreen>
       });
     }
     _maybeBumpGridVersion();
+    _keepFocusedAllCardInView();
     if (mounted) setState(() {});
+  }
+
+  // A row that arrives late pushes the rows below it down, which can leave the
+  // focused card off screen.
+  void _keepFocusedAllCardInView() {
+    final focused = FocusManager.instance.primaryFocus;
+    if (focused == null || !_allRowNodes.containsValue(focused)) return;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final cardContext = focused.context;
+      if (!mounted || cardContext == null) return;
+      unawaited(
+        Scrollable.ensureVisible(
+          cardContext,
+          alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtEnd,
+        ),
+      );
+    });
   }
 
   // Detect when the current grid tab's content changed (async results arriving)
@@ -248,6 +285,9 @@ class _SearchScreenState extends State<SearchScreen>
     if (!mounted) return;
     _applyingRemoteSearch = true;
     try {
+      // A native editor has its own snapshot. Dismiss it before applying phone
+      // text so a later native completion can't replace the newer query.
+      _searchTvFieldKey.currentState?.closeKeyboard(submit: false);
       _searchController.value = TextEditingValue(
         text: text,
         selection: TextSelection.collapsed(offset: text.length),
@@ -318,6 +358,16 @@ class _SearchScreenState extends State<SearchScreen>
     return hasContent ? _leadingTabCount + 1 + _vm.results.length : 0;
   }
 
+  // Names the tabs in the order _buildResults labels them.
+  List<String> get _tabKeys => _tabCount == 0
+      ? const []
+      : [
+          if (_hasSeerr) 'seerr',
+          if (_hasGames) 'games',
+          'all',
+          for (final group in _vm.results) group.itemTypes.first,
+        ];
+
   // How many special tabs sit before the All tab. This is also the All index.
   int get _leadingTabCount => (_hasSeerr ? 1 : 0) + (_hasGames ? 1 : 0);
 
@@ -358,7 +408,6 @@ class _SearchScreenState extends State<SearchScreen>
   }
 
   void _focusFirstResult() {
-    if (!_usesDpad) return;
     if (_tabIsAll(_selectedTab)) {
       _focusAllCard(0, 0);
     } else {
@@ -517,7 +566,7 @@ class _SearchScreenState extends State<SearchScreen>
 
   @override
   void dispose() {
-    routeLifecycleObserver.unsubscribe(this);
+    pageRouteLifecycleObserver.unsubscribe(this);
     widget.remoteSearch?.close();
     _vm.removeListener(_onViewModelChanged);
     _searchController.removeListener(_onSearchTextChanged);
@@ -638,7 +687,13 @@ class _SearchScreenState extends State<SearchScreen>
   }
 
   KeyEventResult _onVoiceKey(FocusNode node, KeyEvent event) {
-    if (!PlatformDetection.isTV) return KeyEventResult.ignored;
+    if (!PlatformDetection.isTV) {
+      if (isActivateKey(event)) {
+        _toggleVoiceSearch();
+        return KeyEventResult.handled;
+      }
+      return KeyEventResult.ignored;
+    }
     if (event is! KeyDownEvent && event is! KeyRepeatEvent) {
       return KeyEventResult.ignored;
     }
@@ -701,7 +756,6 @@ class _SearchScreenState extends State<SearchScreen>
     if (event.logicalKey == LogicalKeyboardKey.enter ||
         event.logicalKey == LogicalKeyboardKey.select) {
       if (!_searchFocus.hasFocus) _searchFocus.requestFocus();
-      widget.remoteSearch?.close();
       _searchTvFieldKey.currentState?.openKeyboard();
       return KeyEventResult.handled;
     }
@@ -733,7 +787,7 @@ class _SearchScreenState extends State<SearchScreen>
   }
 
   String? _imageUrl(AggregatedItem item, {int? maxWidth, int? maxHeight}) {
-    final api = _vm.imageApi;
+    final api = _vm.imageApiFor(item);
     final type = item.type;
     if (type == 'Episode' || type == 'Program' || type == 'Recording') {
       if (item.backdropImageTags.isNotEmpty) {
@@ -770,7 +824,7 @@ class _SearchScreenState extends State<SearchScreen>
   }
 
   Widget _buildVoiceActivation() {
-    final hasFocus = _usesDpad && _voiceFocus.hasFocus;
+    final hasFocus = _voiceFocus.hasFocus;
     final isListening = _voiceController.isListening;
     final isInitializing = _voiceController.isInitializing;
     final backgroundColor = isListening
@@ -827,12 +881,8 @@ class _SearchScreenState extends State<SearchScreen>
       ),
     );
 
-    if (!_usesDpad) {
-      return button;
-    }
-
-    // On TV, _onVoiceKey drives directional focus; on desktop the button just
-    // joins the Tab traversal order (the handler no-ops off-TV).
+    // TV handles directional focus itself. Other layouts use normal traversal
+    // and also take activation from a connected remote.
     return Focus(
       focusNode: _voiceFocus,
       onKeyEvent: _onVoiceKey,
@@ -1124,27 +1174,31 @@ class _SearchScreenState extends State<SearchScreen>
     );
   }
 
-  FocusNode _allCardNode(int row, int col) => _allRowNodes.putIfAbsent(
-    '$row:$col',
-    () => FocusNode(debugLabel: 'search_all_$row:$col'),
-  );
+  FocusNode _allCardNode(int row, int col) {
+    final id = '${_allRowIds[row]}:$col';
+    return _allRowNodes.putIfAbsent(
+      id,
+      () => FocusNode(debugLabel: 'search_all_$id'),
+    );
+  }
 
   GlobalKey _allRowKey(int row) =>
-      _allRowKeys.putIfAbsent(row, () => GlobalKey());
+      _allRowKeys.putIfAbsent(_allRowIds[row], () => GlobalKey());
 
   void _focusAllCard(int row, int col, {bool changedRow = true}) {
+    if (row >= _allRowIds.length) return;
     final node = _allCardNode(row, col);
+    final rowKey = _allRowKey(row);
     if (node.context != null) {
       node.requestFocus();
-      _ensureAllCardVisible(row, node, changedRow: changedRow);
+      _ensureAllCardVisible(rowKey, node, changedRow: changedRow);
       return;
     }
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) return;
-      final target = _allCardNode(row, col);
-      if (target.canRequestFocus) {
-        target.requestFocus();
-        _ensureAllCardVisible(row, target, changedRow: changedRow);
+      if (node.canRequestFocus) {
+        node.requestFocus();
+        _ensureAllCardVisible(rowKey, node, changedRow: changedRow);
       }
     });
   }
@@ -1153,7 +1207,7 @@ class _SearchScreenState extends State<SearchScreen>
   // outer list vertically when the row actually changed. Scrolling vertically on
   // every left/right press is what makes the page bounce up and down.
   void _ensureAllCardVisible(
-    int row,
+    GlobalKey rowKey,
     FocusNode node, {
     required bool changedRow,
   }) {
@@ -1162,7 +1216,7 @@ class _SearchScreenState extends State<SearchScreen>
       _revealInNearestScrollable(cardContext, alignment: 0.5);
     }
     if (!changedRow) return;
-    final rowContext = _allRowKey(row).currentContext;
+    final rowContext = rowKey.currentContext;
     if (rowContext != null) {
       unawaited(
         Scrollable.ensureVisible(
@@ -1253,6 +1307,11 @@ class _SearchScreenState extends State<SearchScreen>
 
     final hasSeerr = _vm.seerrResults.isNotEmpty;
     final hasGames = _vm.gameResults.isNotEmpty;
+    _allRowIds = [
+      for (final g in groups) g.itemTypes.first,
+      if (hasSeerr) 'seerr',
+      if (hasGames) 'games',
+    ];
     // Library groups come first, then the Seerr and Games rows when present.
     final rowLens = <int>[
       for (final g in groups) g.items.length,
@@ -1360,10 +1419,8 @@ class _SearchScreenState extends State<SearchScreen>
       ar: ar,
       focusColor: focusColor,
       cardFocusExpansion: cardFocusExpansion,
-      focusNode: _usesDpad ? _allCardNode(row, col) : null,
-      onNavKey: _usesDpad
-          ? (node, event) => _onAllCardKey(row, col, rowLens, event)
-          : null,
+      focusNode: _allCardNode(row, col),
+      onNavKey: (node, event) => _onAllCardKey(row, col, rowLens, event),
     );
   }
 
@@ -1380,10 +1437,8 @@ class _SearchScreenState extends State<SearchScreen>
       width: cardWidth,
       focusColor: focusColor,
       cardFocusExpansion: cardFocusExpansion,
-      focusNode: _usesDpad ? _allCardNode(row, col) : null,
-      onNavKey: _usesDpad
-          ? (node, event) => _onAllCardKey(row, col, rowLens, event)
-          : null,
+      focusNode: _allCardNode(row, col),
+      onNavKey: (node, event) => _onAllCardKey(row, col, rowLens, event),
     );
   }
 
@@ -1400,10 +1455,8 @@ class _SearchScreenState extends State<SearchScreen>
       width: cardWidth,
       focusColor: focusColor,
       cardFocusExpansion: cardFocusExpansion,
-      focusNode: _usesDpad ? _allCardNode(row, col) : null,
-      onNavKey: _usesDpad
-          ? (node, event) => _onAllCardKey(row, col, rowLens, event)
-          : null,
+      focusNode: _allCardNode(row, col),
+      onNavKey: (node, event) => _onAllCardKey(row, col, rowLens, event),
     );
   }
 
@@ -1425,10 +1478,26 @@ class _SearchScreenState extends State<SearchScreen>
       MediaQuery.devicePixelRatioOf(context),
       ArtworkShape.forAspectRatio(ar),
     );
+    final serverName = _vm.serverNameFor(item);
+    // A person's round portrait would clip the badge, so their server goes on
+    // the line under the name instead.
+    final serverOnSubtitle = serverName != null && item.type == 'Person';
     return MediaCard(
       title: item.name,
-      subtitle: _subtitle(item),
+      subtitle: serverOnSubtitle ? serverName : _subtitle(item),
       imageUrl: _imageUrl(item, maxWidth: requestWidth),
+      imageOverlays: [
+        if (serverName != null && !serverOnSubtitle)
+          Positioned(
+            left: 6,
+            right: 6,
+            bottom: (item.playedPercentage ?? 0) > 0 ? 16 : 6,
+            child: Align(
+              alignment: Alignment.bottomLeft,
+              child: _ServerBadge(name: serverName),
+            ),
+          ),
+      ],
       width: width,
       aspectRatio: ar,
       isFavorite: item.isFavorite,
@@ -1604,15 +1673,13 @@ class _SearchScreenState extends State<SearchScreen>
       ar: ar,
       focusColor: focusColor,
       cardFocusExpansion: cardFocusExpansion,
-      focusNode: _usesDpad ? getGridItemFocusNode(index) : null,
-      onNavKey: _usesDpad
-          ? (node, event) => _onGridKey(
-              index: index,
-              columns: columns,
-              count: count,
-              event: event,
-            )
-          : null,
+      focusNode: getGridItemFocusNode(index),
+      onNavKey: (node, event) => _onGridKey(
+        index: index,
+        columns: columns,
+        count: count,
+        event: event,
+      ),
     );
   }
 
@@ -1629,15 +1696,13 @@ class _SearchScreenState extends State<SearchScreen>
       width: cellWidth,
       focusColor: focusColor,
       cardFocusExpansion: cardFocusExpansion,
-      focusNode: _usesDpad ? getGridItemFocusNode(index) : null,
-      onNavKey: _usesDpad
-          ? (node, event) => _onGridKey(
-              index: index,
-              columns: columns,
-              count: count,
-              event: event,
-            )
-          : null,
+      focusNode: getGridItemFocusNode(index),
+      onNavKey: (node, event) => _onGridKey(
+        index: index,
+        columns: columns,
+        count: count,
+        event: event,
+      ),
     );
   }
 
@@ -1682,15 +1747,44 @@ class _SearchScreenState extends State<SearchScreen>
       width: cellWidth,
       focusColor: focusColor,
       cardFocusExpansion: cardFocusExpansion,
-      focusNode: _usesDpad ? getGridItemFocusNode(index) : null,
-      onNavKey: _usesDpad
-          ? (node, event) => _onGridKey(
-              index: index,
-              columns: columns,
-              count: count,
-              event: event,
-            )
-          : null,
+      focusNode: getGridItemFocusNode(index),
+      onNavKey: (node, event) => _onGridKey(
+        index: index,
+        columns: columns,
+        count: count,
+        event: event,
+      ),
+    );
+  }
+}
+
+class _ServerBadge extends StatelessWidget {
+  const _ServerBadge({required this.name});
+
+  final String name;
+
+  @override
+  Widget build(BuildContext context) {
+    context.dependOnInheritedWidgetOfExactType<AppThemeScope>();
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: AppColorScheme.scrim.withValues(alpha: 0.75),
+        borderRadius: AppRadius.circular(4),
+        boxShadow: kMediaBadgeShadow,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+        child: Text(
+          name,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+            color: AppColorScheme.onBadge,
+            fontSize: 10,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
     );
   }
 }
