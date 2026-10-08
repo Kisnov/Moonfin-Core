@@ -2682,7 +2682,7 @@
     "@focusBorderColor": {
         "description": "Setting for focus border color"
     },
-    "watchedIndicators": "Indicadors observats",
+    "watchedIndicators": "Indicadors de contingut vist",
     "@watchedIndicators": {
         "description": "Setting for watched indicator display"
     },
@@ -4211,11 +4211,11 @@
     "@navigation": {
         "description": "Navigation settings title"
     },
-    "watchedIndicatorsBackdrops": "Indicadors observats, telons de fons",
+    "watchedIndicatorsBackdrops": "Indicadors de contingut vist, telons de fons",
     "@watchedIndicatorsBackdrops": {
         "description": "Appearance settings subtitle on mobile"
     },
-    "focusColorWatchedIndicatorsBackdrops": "Color del focus, indicadors observats, fons",
+    "focusColorWatchedIndicatorsBackdrops": "Color del focus, indicadors de contingut vist, fons",
     "@focusColorWatchedIndicatorsBackdrops": {
         "description": "Appearance settings subtitle on desktop"
     },
@@ -6495,7 +6495,7 @@
     "@contextMenuMarkWatched": {
         "description": "Context menu action to mark an item as watched"
     },
-    "contextMenuMarkUnwatched": "Marca com a no observat",
+    "contextMenuMarkUnwatched": "Marca com a no vist",
     "@contextMenuMarkUnwatched": {
         "description": "Context menu action to mark an item as unwatched"
     },
@@ -13439,5 +13439,60 @@
     "seerrDiscoverSliders": "Carrusels de Descobreix de Seerr",
     "@seerrDiscoverSliders": {
         "description": "Seerr Lists heading for the sliders an admin set up on Seerr's discover page"
+    },
+    "nextSeriesRecording": "Següent enregistrament de la sèrie: {dateTime}",
+    "@nextSeriesRecording": {
+        "description": "Next scheduled recording for the current series, shown in the Live TV recording dialog",
+        "placeholders": {
+            "dateTime": {
+                "type": "String",
+                "example": "Oct 5, 2026 · 8:00 PM"
+            }
+        }
+    },
+    "noUpcomingSeriesRecording": "L'enregistrament de la sèrie està programat, però la guia no té cap episodi pròxim",
+    "@noUpcomingSeriesRecording": {
+        "description": "A series recording rule exists but no future episode timer is available"
+    },
+    "recordCurrentEpisode": "Enregistra aquest episodi",
+    "@recordCurrentEpisode": {
+        "description": "Live TV player action to record only the current episode"
+    },
+    "recordCurrentProgram": "Enregistra aquest programa",
+    "@recordCurrentProgram": {
+        "description": "Live TV player action to record only the current program"
+    },
+    "cancelCurrentRecording": "Cancel·la aquest enregistrament",
+    "@cancelCurrentRecording": {
+        "description": "Live TV player action to cancel only the current recording, leaving any series rule intact"
+    },
+    "smartDownloadsSection": "Baixades intel·ligents",
+    "@smartDownloadsSection": {
+        "description": "Settings section header for downloading the next episodes of a series after one is watched"
+    },
+    "smartDownloadsEnable": "Baixa els episodis següents",
+    "@smartDownloadsEnable": {
+        "description": "Switch that swaps a watched downloaded episode for the next episodes of the series"
+    },
+    "smartDownloadsEnableSubtitle": "Quan acabes un episodi en qualsevol dispositiu, Moonfin baixa els següents. Els episodis baixats se suprimeixen un cop vistos.",
+    "@smartDownloadsEnableSubtitle": {
+        "description": "Explains the smart downloads switch, including that watched episodes are deleted"
+    },
+    "smartDownloadsKeepReady": "Episodis que es mantenen baixats",
+    "@smartDownloadsKeepReady": {
+        "description": "Setting for how many unwatched episodes of a series stay downloaded after one is watched"
+    },
+    "smartDownloadsKeepReadySubtitle": "{count, plural, =1{Manté baixat el següent episodi} other{Manté baixats els {count} episodis següents}}",
+    "@smartDownloadsKeepReadySubtitle": {
+        "description": "Subtitle under the episodes to keep ready setting",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "smartDownloadsKeepReadyLowered": "Els episodis que ja s'han baixat es queden al dispositiu. El nou nombre s'aplica a les baixades futures.",
+    "@smartDownloadsKeepReadyLowered": {
+        "description": "Shown after lowering the episodes to keep downloaded, explaining nothing is deleted"
     }
 }
