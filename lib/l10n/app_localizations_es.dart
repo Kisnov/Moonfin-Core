@@ -13771,7 +13771,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get storageAndDownloads => 'Storage & Downloads';
 
   @override
-  String get services => 'Services';
+  String get integrations => 'Integraciones';
 
   @override
   String get settingsSync => 'Settings Sync';
@@ -21683,6 +21683,9 @@ class AppLocalizationsEs419 extends AppLocalizationsEs {
 
   @override
   String get whenFullscreen => 'Cuando pantalla completa';
+
+  @override
+  String get integrations => 'Integraciones';
 }
 
 /// The translations for Spanish Castilian, as used in Argentina (`es_AR`).
@@ -29290,6 +29293,9 @@ class AppLocalizationsEsAr extends AppLocalizationsEs {
 
   @override
   String get whenFullscreen => 'Cuando pantalla completa';
+
+  @override
+  String get integrations => 'Integraciones';
 }
 
 /// The translations for Spanish Castilian, as used in the Dominican Republic (`es_DO`).
@@ -36897,6 +36903,9 @@ class AppLocalizationsEsDo extends AppLocalizationsEs {
 
   @override
   String get whenFullscreen => 'Cuando pantalla completa';
+
+  @override
+  String get integrations => 'Integraciones';
 }
 
 /// The translations for Spanish Castilian, as used in Mexico (`es_MX`).
@@ -44565,4 +44574,7 @@ class AppLocalizationsEsMx extends AppLocalizationsEs {
   @override
   String get settingsMusicPlaybackTimeDescription =>
       'Elige qué se muestra a la derecha de la barra de progreso de la música.';
+
+  @override
+  String get integrations => 'Integraciones';
 }

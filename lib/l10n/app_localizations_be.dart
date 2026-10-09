@@ -13720,7 +13720,7 @@ class AppLocalizationsBe extends AppLocalizations {
   String get storageAndDownloads => 'Storage & Downloads';
 
   @override
-  String get services => 'Services';
+  String get integrations => 'Інтэграцыі';
 
   @override
   String get settingsSync => 'Settings Sync';

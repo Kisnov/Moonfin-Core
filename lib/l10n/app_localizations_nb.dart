@@ -13645,7 +13645,7 @@ class AppLocalizationsNb extends AppLocalizations {
   String get storageAndDownloads => 'Storage & Downloads';
 
   @override
-  String get services => 'Services';
+  String get integrations => 'Integrasjoner';
 
   @override
   String get settingsSync => 'Settings Sync';

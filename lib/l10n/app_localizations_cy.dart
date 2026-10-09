@@ -13712,7 +13712,7 @@ class AppLocalizationsCy extends AppLocalizations {
   String get storageAndDownloads => 'Storage & Downloads';
 
   @override
-  String get services => 'Services';
+  String get integrations => 'Integreiddiadau';
 
   @override
   String get settingsSync => 'Settings Sync';

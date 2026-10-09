@@ -13268,7 +13268,7 @@ class AppLocalizationsYue extends AppLocalizations {
   String get storageAndDownloads => 'Storage & Downloads';
 
   @override
-  String get services => 'Services';
+  String get integrations => '整合';
 
   @override
   String get settingsSync => 'Settings Sync';
@@ -20679,6 +20679,9 @@ class AppLocalizationsYueCn extends AppLocalizationsYue {
 
   @override
   String get whenFullscreen => 'When fullscreen';
+
+  @override
+  String get integrations => '集成';
 }
 
 /// The translations for Yue Chinese Cantonese, as used in Hong Kong (`yue_HK`).
@@ -27969,4 +27972,7 @@ class AppLocalizationsYueHk extends AppLocalizationsYue {
 
   @override
   String get whenFullscreen => 'When fullscreen';
+
+  @override
+  String get integrations => '整合';
 }

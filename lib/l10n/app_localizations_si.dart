@@ -13643,7 +13643,7 @@ class AppLocalizationsSi extends AppLocalizations {
   String get storageAndDownloads => 'Storage & Downloads';
 
   @override
-  String get services => 'Services';
+  String get integrations => 'ඒකාබද්ධ කිරීම්';
 
   @override
   String get settingsSync => 'Settings Sync';

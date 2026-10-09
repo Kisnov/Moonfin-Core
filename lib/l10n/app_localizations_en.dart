@@ -13569,7 +13569,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get storageAndDownloads => 'Storage & Downloads';
 
   @override
-  String get services => 'Services';
+  String get integrations => 'Integrations';
 
   @override
   String get settingsSync => 'Settings Sync';
@@ -26419,4 +26419,7 @@ class AppLocalizationsEnGb extends AppLocalizationsEn {
   @override
   String get keepVideoClearOfDynamicIslandDescription =>
       'In landscape the camera housing covers one edge of the screen. This holds the picture back from it, which only changes anything for video wide enough to reach that far.';
+
+  @override
+  String get integrations => 'Integrations';
 }

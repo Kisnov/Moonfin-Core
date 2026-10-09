@@ -13661,7 +13661,7 @@ class AppLocalizationsEt extends AppLocalizations {
   String get storageAndDownloads => 'Storage & Downloads';
 
   @override
-  String get services => 'Services';
+  String get integrations => 'Integratsioonid';
 
   @override
   String get settingsSync => 'Settings Sync';

@@ -40,7 +40,7 @@ class _ServicesScreenState extends State<_ServicesScreen> {
     return withCleanSettingsTypography(
       context,
       Scaffold(
-        appBar: buildSettingsAppBar(context, Text(l10n.services)),
+        appBar: buildSettingsAppBar(context, Text(l10n.integrations)),
         body: FocusScope(
           node: _servicesScope,
           autofocus: true,

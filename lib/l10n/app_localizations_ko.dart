@@ -13317,7 +13317,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get storageAndDownloads => 'Storage & Downloads';
 
   @override
-  String get services => 'Services';
+  String get integrations => '통합';
 
   @override
   String get settingsSync => 'Settings Sync';

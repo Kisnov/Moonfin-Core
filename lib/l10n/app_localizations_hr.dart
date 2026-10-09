@@ -13875,7 +13875,7 @@ class AppLocalizationsHr extends AppLocalizations {
   String get storageAndDownloads => 'Storage & Downloads';
 
   @override
-  String get services => 'Services';
+  String get integrations => 'Integracije';
 
   @override
   String get settingsSync => 'Settings Sync';

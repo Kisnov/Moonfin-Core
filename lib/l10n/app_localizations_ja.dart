@@ -13351,7 +13351,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get storageAndDownloads => 'Storage & Downloads';
 
   @override
-  String get services => 'Services';
+  String get integrations => '統合';
 
   @override
   String get settingsSync => 'Settings Sync';

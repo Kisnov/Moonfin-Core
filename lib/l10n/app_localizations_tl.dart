@@ -13764,7 +13764,7 @@ class AppLocalizationsTl extends AppLocalizations {
   String get storageAndDownloads => 'Storage & Downloads';
 
   @override
-  String get services => 'Services';
+  String get integrations => 'Mga pagsasama';
 
   @override
   String get settingsSync => 'Settings Sync';

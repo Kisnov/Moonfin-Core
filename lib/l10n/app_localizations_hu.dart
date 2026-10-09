@@ -13749,7 +13749,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get storageAndDownloads => 'Storage & Downloads';
 
   @override
-  String get services => 'Services';
+  String get integrations => 'Integrációk';
 
   @override
   String get settingsSync => 'Settings Sync';

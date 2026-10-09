@@ -13749,7 +13749,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get storageAndDownloads => 'Storage & Downloads';
 
   @override
-  String get services => 'Services';
+  String get integrations => 'Integrazioni';
 
   @override
   String get settingsSync => 'Settings Sync';

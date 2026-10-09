@@ -23915,11 +23915,11 @@ abstract class AppLocalizations {
   /// **'Storage & Downloads'**
   String get storageAndDownloads;
 
-  /// Settings root entry and screen for connected services such as Seerr and Achievement Badges
+  /// Settings root entry and screen for connected integrations such as Seerr and Achievement Badges
   ///
   /// In en, this message translates to:
-  /// **'Services'**
-  String get services;
+  /// **'Integrations'**
+  String get integrations;
 
   /// Settings screen for syncing settings through the Moonbase plugin
   ///

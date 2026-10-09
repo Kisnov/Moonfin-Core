@@ -13714,7 +13714,7 @@ class AppLocalizationsLv extends AppLocalizations {
   String get storageAndDownloads => 'Storage & Downloads';
 
   @override
-  String get services => 'Services';
+  String get integrations => 'Integrācijas';
 
   @override
   String get settingsSync => 'Settings Sync';

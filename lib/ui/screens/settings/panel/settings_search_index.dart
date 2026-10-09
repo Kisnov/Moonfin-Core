@@ -411,13 +411,13 @@ List<_SettingsSearchEntry> _buildSettingsSearchIndex({
   );
   final services = _SearchSection(
     slug: 'services',
-    path: [l10n.services],
+    path: [l10n.integrations],
     icon: Icons.hub,
     open: () => push(const _ServicesScreen()),
   );
   final seerr = _SearchSection(
     slug: 'seerr',
-    path: [l10n.services, l10n.seerr],
+    path: [l10n.integrations, l10n.seerr],
     icon: Icons.movie_filter,
     open: () => push(const SeerrConfigScreen()),
   );
@@ -1779,7 +1779,7 @@ List<_SettingsSearchEntry> _buildSettingsSearchIndex({
         keywords: ['mpv config'],
       ),
 
-    services.screen(keywords: ['seerr', 'achievements']),
+    services.screen(keywords: ['seerr', 'achievements', 'services']),
     settingsSync.screen(
       keywords: ['moonbase', 'plugin', 'server sync', 'status', 'profile'],
     ),

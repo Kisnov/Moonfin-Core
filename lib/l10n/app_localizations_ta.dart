@@ -13734,7 +13734,7 @@ class AppLocalizationsTa extends AppLocalizations {
   String get storageAndDownloads => 'Storage & Downloads';
 
   @override
-  String get services => 'Services';
+  String get integrations => 'ஒருங்கிணைப்புகள்';
 
   @override
   String get settingsSync => 'Settings Sync';

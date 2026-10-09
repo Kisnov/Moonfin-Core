@@ -13194,7 +13194,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get storageAndDownloads => 'Storage & Downloads';
 
   @override
-  String get services => 'Services';
+  String get integrations => '集成';
 
   @override
   String get settingsSync => 'Settings Sync';
@@ -22750,4 +22750,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get groupByStudio => '製片商';
+
+  @override
+  String get integrations => '整合';
 }

@@ -13671,7 +13671,7 @@ class AppLocalizationsMn extends AppLocalizations {
   String get storageAndDownloads => 'Storage & Downloads';
 
   @override
-  String get services => 'Services';
+  String get integrations => 'Интеграци';
 
   @override
   String get settingsSync => 'Settings Sync';

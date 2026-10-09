@@ -13737,7 +13737,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get storageAndDownloads => 'Storage & Downloads';
 
   @override
-  String get services => 'Services';
+  String get integrations => 'Integrações';
 
   @override
   String get settingsSync => 'Settings Sync';
@@ -27133,6 +27133,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get navYou => 'Você';
+
+  @override
+  String get integrations => 'Integrações';
 }
 
 /// The translations for Portuguese, as used in Portugal (`pt_PT`).
@@ -37000,4 +37003,7 @@ class AppLocalizationsPtPt extends AppLocalizationsPt {
   @override
   String get imdbTopEnglishMovies =>
       'Filmes em inglês mais bem avaliados do IMDb';
+
+  @override
+  String get integrations => 'Integrações';
 }

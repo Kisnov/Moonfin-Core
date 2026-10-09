@@ -13037,9 +13037,9 @@
   "@storageAndDownloads": {
     "description": "Settings root entry and screen for downloads, storage location and the image cache"
   },
-  "services": "Services",
-  "@services": {
-    "description": "Settings root entry and screen for connected services such as Seerr and Achievement Badges"
+  "integrations": "Integrations",
+  "@integrations": {
+    "description": "Settings root entry and screen for connected integrations such as Seerr and Achievement Badges"
   },
   "settingsSync": "Settings Sync",
   "@settingsSync": {
