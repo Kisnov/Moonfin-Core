@@ -939,11 +939,10 @@ class _GlobalShortcutScopeState extends State<_GlobalShortcutScope>
 
   @override
   void onWindowEvent(String eventName) {
-    if (eventName == 'maximize') {
-      _isMaximized = true;
-    } else if (eventName == 'unmaximize') {
-      _isMaximized = false;
-    }
+    _isMaximized = FullscreenHelper.maximizedAfterWindowEvent(
+      eventName,
+      _isMaximized,
+    );
     if (eventName == 'move' ||
         eventName == 'resize' ||
         eventName == 'moved' ||
