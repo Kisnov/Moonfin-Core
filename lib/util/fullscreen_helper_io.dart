@@ -22,7 +22,10 @@ Future<void> setFullscreen(bool value) async {
         PlatformDetection.isWindows &&
         (value ? await _waitUntilVisible() : await windowManager.isVisible());
     if (value) {
-      _wasMaximized = await windowManager.isMaximized();
+      // macOS fullscreen hides the title bar itself and puts a zoomed window
+      // back afterwards, so it skips the restore below.
+      _wasMaximized =
+          !PlatformDetection.isMacOS && await windowManager.isMaximized();
       if (_wasMaximized) {
         // A maximized window keeps its title bar in fullscreen. On Windows
         // hide it instead of restoring, which animates the window down and up.
