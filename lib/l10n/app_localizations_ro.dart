@@ -4285,23 +4285,7 @@ class AppLocalizationsRo extends AppLocalizations {
   }
 
   @override
-  String get customizationProfile => 'Profil de personalizare';
-
-  @override
-  String get customizationProfileDescription =>
-      'Alege profilul de încărcat, editat și sincronizat. Global se aplică peste tot, cu excepția cazului în care un profil de dispozitiv îl înlocuiește. Punctul verde marchează profilul actual al dispozitivului.';
-
-  @override
-  String get loadProfile => 'Încarcă profilul';
-
-  @override
   String get syncing => 'Se sincronizează...';
-
-  @override
-  String get syncToProfile => 'Sincronizează profilul';
-
-  @override
-  String get resetProfile => 'Resetează profilul';
 
   @override
   String resetProfileTitle(String profile) {
@@ -5084,34 +5068,49 @@ class AppLocalizationsRo extends AppLocalizations {
   String get pluginNotDetected => 'Pluginul nu a fost detectat';
 
   @override
-  String get pluginDetectedDescription =>
-      'Pluginul de server a fost detectat. Sincronizarea se activează automat prima dată când pluginul este găsit.';
-
-  @override
   String get pluginNotDetectedDescription =>
       'Pluginul de server nu este detectat momentan. Setările locale folosesc în continuare valorile lor salvate sau valorile implicite încorporate.';
 
   @override
-  String pluginStatusVersion(String status, String version) {
-    return '$status\nVersiune: $version';
+  String get pluginConnected => 'Connected';
+
+  @override
+  String pluginConnectedVersion(String version) {
+    return 'Connected, version $version';
   }
 
   @override
-  String get availableServices => 'Servicii disponibile';
+  String get pluginSyncOn => 'Sync on';
 
   @override
-  String get serverPluginSync => 'Sincronizarea pluginului serverului';
+  String get pluginSyncOff => 'Sync off';
 
   @override
-  String get syncSettingsWithPlugin =>
-      'Sincronizează setările cu pluginul serverului';
+  String get syncProfileDescription =>
+      'This device syncs with the profile you pick until you pick another.';
 
   @override
-  String get whatSyncControls => 'Ce controlează sincronizarea';
+  String get profileAppliesEverywhere => 'Applies everywhere';
 
   @override
-  String get syncControlsDescription =>
-      'Sincronizarea controlează doar dacă setările pluginului sunt trimise către server și preluate de pe acesta. Selectarea profilului și acțiunile de sincronizare a profilului se află în setările de Personalizare, când sincronizarea pluginului este activată.';
+  String get profileOverridesGlobal => 'Overrides Global';
+
+  @override
+  String get profileThisDevice => 'This device';
+
+  @override
+  String get profileLoad => 'Load';
+
+  @override
+  String get profileLoadSubtitle => 'Server to this device';
+
+  @override
+  String get profileSaveSubtitle => 'This device to server';
+
+  @override
+  String resetNamedProfile(String profile) {
+    return 'Reset $profile Profile';
+  }
 
   @override
   String get recentRequests => 'Cereri recente';
@@ -10149,10 +10148,6 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String get settingsSeasonalSurprise => 'Surpriză de sezon';
-
-  @override
-  String get settingsPluginScreenDescription =>
-      'Moonbase alimentează integrările de pe partea de server, inclusiv surse de evaluare suplimentare, cereri Seerr și preferințe sincronizate.';
 
   @override
   String get useNativeEmulator => 'Emulare nativă';

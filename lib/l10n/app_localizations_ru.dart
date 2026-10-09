@@ -4263,23 +4263,7 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String get customizationProfile => 'Профиль настройки';
-
-  @override
-  String get customizationProfileDescription =>
-      'Выберите профиль для загрузки, редактирования и синхронизации. Global применяется везде, если только профиль устройства не переопределяет его. Зеленая точка обозначает текущий профиль устройства.';
-
-  @override
-  String get loadProfile => 'Загрузить профиль';
-
-  @override
   String get syncing => 'Синхронизация...';
-
-  @override
-  String get syncToProfile => 'Синхронизировать с профилем';
-
-  @override
-  String get resetProfile => 'Reset Profile';
 
   @override
   String resetProfileTitle(String profile) {
@@ -5056,34 +5040,49 @@ class AppLocalizationsRu extends AppLocalizations {
   String get pluginNotDetected => 'Плагин не обнаружен';
 
   @override
-  String get pluginDetectedDescription =>
-      'Обнаружен плагин сервера. Синхронизация включается автоматически при первом обнаружении плагина.';
-
-  @override
   String get pluginNotDetectedDescription =>
       'Плагин сервера в настоящее время не обнаружен. Локальные настройки по-прежнему используют сохраненные значения или встроенные значения по умолчанию.';
 
   @override
-  String pluginStatusVersion(String status, String version) {
-    return '$status\nВерсия: $version';
+  String get pluginConnected => 'Connected';
+
+  @override
+  String pluginConnectedVersion(String version) {
+    return 'Connected, version $version';
   }
 
   @override
-  String get availableServices => 'Доступные услуги';
+  String get pluginSyncOn => 'Sync on';
 
   @override
-  String get serverPluginSync => 'Синхронизация серверных плагинов';
+  String get pluginSyncOff => 'Sync off';
 
   @override
-  String get syncSettingsWithPlugin =>
-      'Синхронизация настроек с плагином сервера';
+  String get syncProfileDescription =>
+      'This device syncs with the profile you pick until you pick another.';
 
   @override
-  String get whatSyncControls => 'Какие элементы управления синхронизацией';
+  String get profileAppliesEverywhere => 'Applies everywhere';
 
   @override
-  String get syncControlsDescription =>
-      'Синхронизация только контролирует, будут ли настройки, поддерживаемые плагином, передаваться на сервер и извлекаться с него. Действия по выбору профиля и синхронизации профиля находятся в настройках настройки, если синхронизация плагинов включена.';
+  String get profileOverridesGlobal => 'Overrides Global';
+
+  @override
+  String get profileThisDevice => 'This device';
+
+  @override
+  String get profileLoad => 'Load';
+
+  @override
+  String get profileLoadSubtitle => 'Server to this device';
+
+  @override
+  String get profileSaveSubtitle => 'This device to server';
+
+  @override
+  String resetNamedProfile(String profile) {
+    return 'Reset $profile Profile';
+  }
 
   @override
   String get recentRequests => 'Недавние запросы';
@@ -10098,10 +10097,6 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get settingsSeasonalSurprise => 'Сезонный сюрприз';
-
-  @override
-  String get settingsPluginScreenDescription =>
-      'Moonbase обеспечивает интеграцию на стороне сервера, включая дополнительные источники рейтингов, запросы Seerr и синхронизированные настройки.';
 
   @override
   String get useNativeEmulator => 'Native Emulation';

@@ -4233,23 +4233,7 @@ class AppLocalizationsEo extends AppLocalizations {
   }
 
   @override
-  String get customizationProfile => 'Personigo Profilo';
-
-  @override
-  String get customizationProfileDescription =>
-      'Elektu la profilon por ŝargi, redakti kaj sinkronigi. Tutmonda validas ĉie krom se aparata profilo superregas ĝin. La verda punkto markas vian nunan aparatan profilon.';
-
-  @override
-  String get loadProfile => 'Ŝargi Profilon';
-
-  @override
   String get syncing => 'Sinkronigante...';
-
-  @override
-  String get syncToProfile => 'Sinkronigi al Profilo';
-
-  @override
-  String get resetProfile => 'Reset Profile';
 
   @override
   String resetProfileTitle(String profile) {
@@ -5024,34 +5008,49 @@ class AppLocalizationsEo extends AppLocalizations {
   String get pluginNotDetected => 'Kromaĵo Ne Detektita';
 
   @override
-  String get pluginDetectedDescription =>
-      'Serla kromaĵo detektita. Sinkronigo estas ebligita aŭtomate la unuan fojon kiam la kromprogramo estas trovita.';
-
-  @override
   String get pluginNotDetectedDescription =>
       'Servila kromaĵo ne estas nuntempe detektita. Lokaj agordoj ankoraŭ uzas siajn konservitajn valorojn aŭ enkonstruitajn defaŭltojn.';
 
   @override
-  String pluginStatusVersion(String status, String version) {
-    return '$status\nVersio: $version';
+  String get pluginConnected => 'Connected';
+
+  @override
+  String pluginConnectedVersion(String version) {
+    return 'Connected, version $version';
   }
 
   @override
-  String get availableServices => 'Disponeblaj Servoj';
+  String get pluginSyncOn => 'Sync on';
 
   @override
-  String get serverPluginSync => 'Servila Kromaĵo Sync';
+  String get pluginSyncOff => 'Sync off';
 
   @override
-  String get syncSettingsWithPlugin =>
-      'Sinkronigi agordojn kun la servila kromaĵo';
+  String get syncProfileDescription =>
+      'This device syncs with the profile you pick until you pick another.';
 
   @override
-  String get whatSyncControls => 'Kio sinkronigas kontrolojn';
+  String get profileAppliesEverywhere => 'Applies everywhere';
 
   @override
-  String get syncControlsDescription =>
-      'Sinkronigi nur kontrolas ĉu kromprogramoj apogitaj agordoj estas puŝitaj al kaj tiritaj de la servilo. Profilelekto kaj profilsinkronigaj agoj estas en Personigo-agordoj kiam kromprogramo sinkronigas estas ebligita.';
+  String get profileOverridesGlobal => 'Overrides Global';
+
+  @override
+  String get profileThisDevice => 'This device';
+
+  @override
+  String get profileLoad => 'Load';
+
+  @override
+  String get profileLoadSubtitle => 'Server to this device';
+
+  @override
+  String get profileSaveSubtitle => 'This device to server';
+
+  @override
+  String resetNamedProfile(String profile) {
+    return 'Reset $profile Profile';
+  }
 
   @override
   String get recentRequests => 'Lastatempaj Petoj';
@@ -10019,10 +10018,6 @@ class AppLocalizationsEo extends AppLocalizations {
 
   @override
   String get settingsSeasonalSurprise => 'Sezona Surprizo';
-
-  @override
-  String get settingsPluginScreenDescription =>
-      'Moonbase funkciigas servilflankajn integriĝojn inkluzive de kromaj taksaj fontoj, Seerr-petoj kaj sinkronigitaj preferoj.';
 
   @override
   String get useNativeEmulator => 'Native Emulation';

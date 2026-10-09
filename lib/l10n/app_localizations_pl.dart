@@ -4423,23 +4423,7 @@ class AppLocalizationsPl extends AppLocalizations {
   }
 
   @override
-  String get customizationProfile => 'Profil dostosowywania';
-
-  @override
-  String get customizationProfileDescription =>
-      'Wybierz profil do wczytania, edycji i synchronizacji. Profil globalny obowiązuje wszędzie, chyba że zastąpi go profil urządzenia. Zielona kropka oznacza bieżący profil urządzenia.';
-
-  @override
-  String get loadProfile => 'Wczytaj profil';
-
-  @override
   String get syncing => 'Synchronizacja...';
-
-  @override
-  String get syncToProfile => 'Synchronizuj profil';
-
-  @override
-  String get resetProfile => 'Resetuj profil';
 
   @override
   String resetProfileTitle(String profile) {
@@ -5220,34 +5204,49 @@ class AppLocalizationsPl extends AppLocalizations {
   String get pluginNotDetected => 'Nie wykryto wtyczki';
 
   @override
-  String get pluginDetectedDescription =>
-      'Wykryto wtyczkę serwera. Synchronizacja jest włączana automatycznie przy pierwszym znalezieniu wtyczki.';
-
-  @override
   String get pluginNotDetectedDescription =>
       'Wtyczka serwera nie jest obecnie wykrywana. Ustawienia lokalne nadal korzystają z zapisanych wartości lub ustawień domyślnych aplikacji.';
 
   @override
-  String pluginStatusVersion(String status, String version) {
-    return '$status\nWersja: $version';
+  String get pluginConnected => 'Connected';
+
+  @override
+  String pluginConnectedVersion(String version) {
+    return 'Connected, version $version';
   }
 
   @override
-  String get availableServices => 'Dostępne usługi';
+  String get pluginSyncOn => 'Sync on';
 
   @override
-  String get serverPluginSync => 'Synchronizacja wtyczki serwera';
+  String get pluginSyncOff => 'Sync off';
 
   @override
-  String get syncSettingsWithPlugin =>
-      'Synchronizuj ustawienia z wtyczką serwera';
+  String get syncProfileDescription =>
+      'This device syncs with the profile you pick until you pick another.';
 
   @override
-  String get whatSyncControls => 'Co obejmuje synchronizacja';
+  String get profileAppliesEverywhere => 'Applies everywhere';
 
   @override
-  String get syncControlsDescription =>
-      'Synchronizacja kontroluje tylko to, czy ustawienia oparte na wtyczkach są przesyłane na serwer i pobierane z niego. Wybór profilu i akcje synchronizacji profilu znajdują się w ustawieniach dostosowywania, gdy włączona jest synchronizacja wtyczek.';
+  String get profileOverridesGlobal => 'Overrides Global';
+
+  @override
+  String get profileThisDevice => 'This device';
+
+  @override
+  String get profileLoad => 'Load';
+
+  @override
+  String get profileLoadSubtitle => 'Server to this device';
+
+  @override
+  String get profileSaveSubtitle => 'This device to server';
+
+  @override
+  String resetNamedProfile(String profile) {
+    return 'Reset $profile Profile';
+  }
 
   @override
   String get recentRequests => 'Ostatnie prośby';
@@ -10335,10 +10334,6 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get settingsSeasonalSurprise => 'Sezonowa niespodzianka';
-
-  @override
-  String get settingsPluginScreenDescription =>
-      'Moonbase obsługuje integrację po stronie serwera, w tym dodatkowe źródła ocen, prośby Seerr i synchronizację preferencji.';
 
   @override
   String get useNativeEmulator => 'Natywna emulacja';

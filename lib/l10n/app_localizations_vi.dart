@@ -4239,23 +4239,7 @@ class AppLocalizationsVi extends AppLocalizations {
   }
 
   @override
-  String get customizationProfile => 'Hồ sơ tùy chỉnh';
-
-  @override
-  String get customizationProfileDescription =>
-      'Chọn hồ sơ để tải, chỉnh sửa và đồng bộ hóa. Toàn cầu áp dụng ở mọi nơi trừ khi hồ sơ thiết bị ghi đè lên nó. Dấu chấm màu xanh lá cây đánh dấu hồ sơ thiết bị hiện tại của bạn.';
-
-  @override
-  String get loadProfile => 'Tải hồ sơ';
-
-  @override
   String get syncing => 'Đang đồng bộ hóa...';
-
-  @override
-  String get syncToProfile => 'Đồng bộ hóa với hồ sơ';
-
-  @override
-  String get resetProfile => 'Reset Profile';
 
   @override
   String resetProfileTitle(String profile) {
@@ -5033,33 +5017,49 @@ class AppLocalizationsVi extends AppLocalizations {
   String get pluginNotDetected => 'Plugin không được phát hiện';
 
   @override
-  String get pluginDetectedDescription =>
-      'Đã phát hiện plugin máy chủ. Đồng bộ hóa được bật tự động khi tìm thấy plugin lần đầu tiên.';
-
-  @override
   String get pluginNotDetectedDescription =>
       'Plugin máy chủ hiện không được phát hiện. Cài đặt cục bộ vẫn sử dụng các giá trị đã lưu hoặc mặc định tích hợp.';
 
   @override
-  String pluginStatusVersion(String status, String version) {
-    return '$status\nPhiên bản: $version';
+  String get pluginConnected => 'Connected';
+
+  @override
+  String pluginConnectedVersion(String version) {
+    return 'Connected, version $version';
   }
 
   @override
-  String get availableServices => 'Dịch vụ có sẵn';
+  String get pluginSyncOn => 'Sync on';
 
   @override
-  String get serverPluginSync => 'Đồng bộ hóa plugin máy chủ';
+  String get pluginSyncOff => 'Sync off';
 
   @override
-  String get syncSettingsWithPlugin => 'Đồng bộ hóa cài đặt với plugin máy chủ';
+  String get syncProfileDescription =>
+      'This device syncs with the profile you pick until you pick another.';
 
   @override
-  String get whatSyncControls => 'Điều khiển đồng bộ hóa nào';
+  String get profileAppliesEverywhere => 'Applies everywhere';
 
   @override
-  String get syncControlsDescription =>
-      'Đồng bộ hóa chỉ kiểm soát xem các cài đặt hỗ trợ plugin có được đẩy tới và lấy ra khỏi máy chủ hay không. Hành động lựa chọn hồ sơ và đồng bộ hóa hồ sơ nằm trong cài đặt Tùy chỉnh khi bật đồng bộ hóa plugin.';
+  String get profileOverridesGlobal => 'Overrides Global';
+
+  @override
+  String get profileThisDevice => 'This device';
+
+  @override
+  String get profileLoad => 'Load';
+
+  @override
+  String get profileLoadSubtitle => 'Server to this device';
+
+  @override
+  String get profileSaveSubtitle => 'This device to server';
+
+  @override
+  String resetNamedProfile(String profile) {
+    return 'Reset $profile Profile';
+  }
 
   @override
   String get recentRequests => 'Yêu cầu gần đây';
@@ -10030,10 +10030,6 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get settingsSeasonalSurprise => 'Bất ngờ theo mùa';
-
-  @override
-  String get settingsPluginScreenDescription =>
-      'Moonbase hỗ trợ tích hợp phía máy chủ bao gồm các nguồn xếp hạng bổ sung, yêu cầu Seerr và tùy chọn được đồng bộ hóa.';
 
   @override
   String get useNativeEmulator => 'Native Emulation';

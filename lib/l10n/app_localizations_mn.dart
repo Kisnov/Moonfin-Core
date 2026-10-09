@@ -4238,23 +4238,7 @@ class AppLocalizationsMn extends AppLocalizations {
   }
 
   @override
-  String get customizationProfile => 'Тохируулах профайл';
-
-  @override
-  String get customizationProfileDescription =>
-      'Ачаалах, засах, синк хийх профайлаа сонгоно уу. Төхөөрөмжийн профайл үүнийг хүчингүй болгохоос бусад тохиолдолд глобал нь хаа сайгүй хэрэгжинэ. Ногоон цэг нь таны одоогийн төхөөрөмжийн профайлыг тэмдэглэнэ.';
-
-  @override
-  String get loadProfile => 'Профайлыг ачаалах';
-
-  @override
   String get syncing => 'Синк хийж байна...';
-
-  @override
-  String get syncToProfile => 'Профайл руу синк хийх';
-
-  @override
-  String get resetProfile => 'Reset Profile';
 
   @override
   String resetProfileTitle(String profile) {
@@ -5034,34 +5018,49 @@ class AppLocalizationsMn extends AppLocalizations {
   String get pluginNotDetected => 'Plugin илэрсэнгүй';
 
   @override
-  String get pluginDetectedDescription =>
-      'Серверийн залгаас илэрсэн. Plugin анх олдох үед синк автоматаар идэвхждэг.';
-
-  @override
   String get pluginNotDetectedDescription =>
       'Серверийн залгаас одоогоор илрээгүй байна. Орон нутгийн тохиргоонууд хадгалсан утгууд эсвэл суулгасан өгөгдмөлүүдийг ашигладаг хэвээр байна.';
 
   @override
-  String pluginStatusVersion(String status, String version) {
-    return '$status\nХувилбар: $version';
+  String get pluginConnected => 'Connected';
+
+  @override
+  String pluginConnectedVersion(String version) {
+    return 'Connected, version $version';
   }
 
   @override
-  String get availableServices => 'Боломжтой үйлчилгээ';
+  String get pluginSyncOn => 'Sync on';
 
   @override
-  String get serverPluginSync => 'Серверийн залгаасын синк';
+  String get pluginSyncOff => 'Sync off';
 
   @override
-  String get syncSettingsWithPlugin =>
-      'Серверийн залгаастай тохиргоог синк хийнэ үү';
+  String get syncProfileDescription =>
+      'This device syncs with the profile you pick until you pick another.';
 
   @override
-  String get whatSyncControls => 'Ямар синхрончлолыг хянадаг';
+  String get profileAppliesEverywhere => 'Applies everywhere';
 
   @override
-  String get syncControlsDescription =>
-      'Синхрончлол нь зөвхөн залгаас дээр тулгуурласан тохиргоог сервер рүү түлхэж, серверээс татах эсэхийг хянадаг. Профайл сонгох болон профайлыг синк хийх үйлдэл нь залгаасын синк идэвхжсэн үед Тохируулах тохиргоонд байна.';
+  String get profileOverridesGlobal => 'Overrides Global';
+
+  @override
+  String get profileThisDevice => 'This device';
+
+  @override
+  String get profileLoad => 'Load';
+
+  @override
+  String get profileLoadSubtitle => 'Server to this device';
+
+  @override
+  String get profileSaveSubtitle => 'This device to server';
+
+  @override
+  String resetNamedProfile(String profile) {
+    return 'Reset $profile Profile';
+  }
 
   @override
   String get recentRequests => 'Сүүлийн үеийн хүсэлтүүд';
@@ -10049,10 +10048,6 @@ class AppLocalizationsMn extends AppLocalizations {
 
   @override
   String get settingsSeasonalSurprise => 'Улирлын гэнэтийн бэлэг';
-
-  @override
-  String get settingsPluginScreenDescription =>
-      'Moonbase нь нэмэлт үнэлгээний эх сурвалж, Seerr хүсэлт, синхрончлогдсон тохиргоо зэрэг сервер талын интеграцчлалыг идэвхжүүлдэг.';
 
   @override
   String get useNativeEmulator => 'Native Emulation';

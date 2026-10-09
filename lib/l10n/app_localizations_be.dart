@@ -4251,23 +4251,7 @@ class AppLocalizationsBe extends AppLocalizations {
   }
 
   @override
-  String get customizationProfile => 'Профіль налады';
-
-  @override
-  String get customizationProfileDescription =>
-      'Выберыце профіль для загрузкі, рэдагавання і сінхранізацыі. Global прымяняецца ўсюды, калі толькі профіль прылады не адмяняе яго. Зялёная кропка пазначае ваш бягучы профіль прылады.';
-
-  @override
-  String get loadProfile => 'Загрузіць профіль';
-
-  @override
   String get syncing => 'Сінхранізацыя...';
-
-  @override
-  String get syncToProfile => 'Сінхранізацыя з профілем';
-
-  @override
-  String get resetProfile => 'Reset Profile';
 
   @override
   String resetProfileTitle(String profile) {
@@ -5047,33 +5031,49 @@ class AppLocalizationsBe extends AppLocalizations {
   String get pluginNotDetected => 'Плагін не выяўлены';
 
   @override
-  String get pluginDetectedDescription =>
-      'Выяўлены серверны плагін. Сінхранізацыя ўключаецца аўтаматычна пры першым знойдзеным плагіне.';
-
-  @override
   String get pluginNotDetectedDescription =>
       'Серверны плагін зараз не выяўлены. Лакальныя налады па-ранейшаму выкарыстоўваюць свае захаваныя значэнні або ўбудаваныя значэнні па змаўчанні.';
 
   @override
-  String pluginStatusVersion(String status, String version) {
-    return '$status\nВерсія: $version';
+  String get pluginConnected => 'Connected';
+
+  @override
+  String pluginConnectedVersion(String version) {
+    return 'Connected, version $version';
   }
 
   @override
-  String get availableServices => 'Даступныя паслугі';
+  String get pluginSyncOn => 'Sync on';
 
   @override
-  String get serverPluginSync => 'Сінхранізацыя плагіна сервера';
+  String get pluginSyncOff => 'Sync off';
 
   @override
-  String get syncSettingsWithPlugin => 'Сінхранізацыя налад з убудовай сервера';
+  String get syncProfileDescription =>
+      'This device syncs with the profile you pick until you pick another.';
 
   @override
-  String get whatSyncControls => 'Якія элементы кіравання сінхранізацыяй';
+  String get profileAppliesEverywhere => 'Applies everywhere';
 
   @override
-  String get syncControlsDescription =>
-      'Сінхранізацыя кантралюе толькі тое, ці будуць налады, якія падтрымліваюцца ўбудовамі, адпраўляцца на сервер і атрымліваць з яго. Выбар профілю і дзеянні сінхранізацыі профілю знаходзяцца ў наладах налады, калі ўключана сінхранізацыя плагіна.';
+  String get profileOverridesGlobal => 'Overrides Global';
+
+  @override
+  String get profileThisDevice => 'This device';
+
+  @override
+  String get profileLoad => 'Load';
+
+  @override
+  String get profileLoadSubtitle => 'Server to this device';
+
+  @override
+  String get profileSaveSubtitle => 'This device to server';
+
+  @override
+  String resetNamedProfile(String profile) {
+    return 'Reset $profile Profile';
+  }
 
   @override
   String get recentRequests => 'Апошнія запыты';
@@ -10077,10 +10077,6 @@ class AppLocalizationsBe extends AppLocalizations {
 
   @override
   String get settingsSeasonalSurprise => 'Сезонны сюрпрыз';
-
-  @override
-  String get settingsPluginScreenDescription =>
-      'Moonbase забяспечвае інтэграцыю на баку сервера, уключаючы дадатковыя крыніцы рэйтынгаў, запыты Seerr і сінхранізаваныя налады.';
 
   @override
   String get useNativeEmulator => 'Native Emulation';

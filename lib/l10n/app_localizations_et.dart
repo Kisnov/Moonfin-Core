@@ -4243,23 +4243,7 @@ class AppLocalizationsEt extends AppLocalizations {
   }
 
   @override
-  String get customizationProfile => 'Kohandamise profiil';
-
-  @override
-  String get customizationProfileDescription =>
-      'Valige laadimiseks, muutmiseks ja sünkroonimiseks profiil. Globaalne kehtib kõikjal, välja arvatud juhul, kui seadme profiil seda alistab. Roheline punkt tähistab teie praegust seadme profiili.';
-
-  @override
-  String get loadProfile => 'Laadi profiil';
-
-  @override
   String get syncing => 'Sünkroonimine...';
-
-  @override
-  String get syncToProfile => 'Sünkrooni profiiliga';
-
-  @override
-  String get resetProfile => 'Reset Profile';
 
   @override
   String resetProfileTitle(String profile) {
@@ -5029,34 +5013,49 @@ class AppLocalizationsEt extends AppLocalizations {
   String get pluginNotDetected => 'Pluginat ei tuvastatud';
 
   @override
-  String get pluginDetectedDescription =>
-      'Tuvastati serveri pistikprogramm. Sünkroonimine lubatakse pistikprogrammi esmakordsel leidmisel automaatselt.';
-
-  @override
   String get pluginNotDetectedDescription =>
       'Serveri pistikprogrammi ei tuvastata praegu. Kohalikud seaded kasutavad endiselt oma salvestatud väärtusi või sisseehitatud vaikeseadeid.';
 
   @override
-  String pluginStatusVersion(String status, String version) {
-    return '$status\nVersioon: $version';
+  String get pluginConnected => 'Connected';
+
+  @override
+  String pluginConnectedVersion(String version) {
+    return 'Connected, version $version';
   }
 
   @override
-  String get availableServices => 'Saadaolevad teenused';
+  String get pluginSyncOn => 'Sync on';
 
   @override
-  String get serverPluginSync => 'Serveri pistikprogrammi sünkroonimine';
+  String get pluginSyncOff => 'Sync off';
 
   @override
-  String get syncSettingsWithPlugin =>
-      'Sünkroonige seaded serveri pistikprogrammiga';
+  String get syncProfileDescription =>
+      'This device syncs with the profile you pick until you pick another.';
 
   @override
-  String get whatSyncControls => 'Millised sünkroonimise juhised';
+  String get profileAppliesEverywhere => 'Applies everywhere';
 
   @override
-  String get syncControlsDescription =>
-      'Sünkroonimine juhib ainult seda, kas pistikprogrammide tagatud seaded lükatakse serverisse ja tõmmatakse sealt. Kui pistikprogrammi sünkroonimine on lubatud, on profiili valik ja profiili sünkroonimistoimingud jaotises Kohandamise seaded.';
+  String get profileOverridesGlobal => 'Overrides Global';
+
+  @override
+  String get profileThisDevice => 'This device';
+
+  @override
+  String get profileLoad => 'Load';
+
+  @override
+  String get profileLoadSubtitle => 'Server to this device';
+
+  @override
+  String get profileSaveSubtitle => 'This device to server';
+
+  @override
+  String resetNamedProfile(String profile) {
+    return 'Reset $profile Profile';
+  }
 
   @override
   String get recentRequests => 'Viimased taotlused';
@@ -10040,10 +10039,6 @@ class AppLocalizationsEt extends AppLocalizations {
 
   @override
   String get settingsSeasonalSurprise => 'Hooajaline üllatus';
-
-  @override
-  String get settingsPluginScreenDescription =>
-      'Moonbase võimaldab serveripoolseid integratsioone, sealhulgas täiendavaid reitinguallikaid, Seerr-i päringuid ja sünkroonitud eelistusi.';
 
   @override
   String get useNativeEmulator => 'Native Emulation';

@@ -4217,23 +4217,7 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
-  String get customizationProfile => 'โปรไฟล์การปรับแต่ง';
-
-  @override
-  String get customizationProfileDescription =>
-      'เลือกโปรไฟล์ที่จะโหลด แก้ไข และซิงค์ Global มีผลทุกที่ เว้นแต่ว่าโปรไฟล์อุปกรณ์จะแทนที่ข้อมูลดังกล่าว จุดสีเขียวทำเครื่องหมายโปรไฟล์อุปกรณ์ปัจจุบันของคุณ';
-
-  @override
-  String get loadProfile => 'โหลดโปรไฟล์';
-
-  @override
   String get syncing => 'กำลังซิงค์...';
-
-  @override
-  String get syncToProfile => 'ซิงค์กับโปรไฟล์';
-
-  @override
-  String get resetProfile => 'Reset Profile';
 
   @override
   String resetProfileTitle(String profile) {
@@ -5000,33 +4984,49 @@ class AppLocalizationsTh extends AppLocalizations {
   String get pluginNotDetected => 'ตรวจไม่พบปลั๊กอิน';
 
   @override
-  String get pluginDetectedDescription =>
-      'ตรวจพบปลั๊กอินของเซิร์ฟเวอร์ การซิงค์จะเปิดใช้งานโดยอัตโนมัติในครั้งแรกที่พบปลั๊กอิน';
-
-  @override
   String get pluginNotDetectedDescription =>
       'ตรวจไม่พบปลั๊กอินของเซิร์ฟเวอร์ในขณะนี้ การตั้งค่าในเครื่องยังคงใช้ค่าที่บันทึกไว้หรือค่าเริ่มต้นในตัว';
 
   @override
-  String pluginStatusVersion(String status, String version) {
-    return '$status\nเวอร์ชัน: $version';
+  String get pluginConnected => 'Connected';
+
+  @override
+  String pluginConnectedVersion(String version) {
+    return 'Connected, version $version';
   }
 
   @override
-  String get availableServices => 'บริการที่มีอยู่';
+  String get pluginSyncOn => 'Sync on';
 
   @override
-  String get serverPluginSync => 'การซิงค์ปลั๊กอินเซิร์ฟเวอร์';
+  String get pluginSyncOff => 'Sync off';
 
   @override
-  String get syncSettingsWithPlugin => 'ซิงค์การตั้งค่ากับปลั๊กอินเซิร์ฟเวอร์';
+  String get syncProfileDescription =>
+      'This device syncs with the profile you pick until you pick another.';
 
   @override
-  String get whatSyncControls => 'สิ่งที่ควบคุมการซิงค์';
+  String get profileAppliesEverywhere => 'Applies everywhere';
 
   @override
-  String get syncControlsDescription =>
-      'การซิงค์จะควบคุมเฉพาะว่าจะพุชและดึงการตั้งค่าที่สนับสนุนปลั๊กอินจากเซิร์ฟเวอร์หรือไม่ การเลือกโปรไฟล์และการซิงค์โปรไฟล์อยู่ในการตั้งค่าการปรับแต่งเมื่อเปิดใช้งานการซิงค์ปลั๊กอิน';
+  String get profileOverridesGlobal => 'Overrides Global';
+
+  @override
+  String get profileThisDevice => 'This device';
+
+  @override
+  String get profileLoad => 'Load';
+
+  @override
+  String get profileLoadSubtitle => 'Server to this device';
+
+  @override
+  String get profileSaveSubtitle => 'This device to server';
+
+  @override
+  String resetNamedProfile(String profile) {
+    return 'Reset $profile Profile';
+  }
 
   @override
   String get recentRequests => 'คำขอล่าสุด';
@@ -9972,10 +9972,6 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get settingsSeasonalSurprise => 'ความประหลาดใจตามฤดูกาล';
-
-  @override
-  String get settingsPluginScreenDescription =>
-      'Moonbase ขับเคลื่อนการรวมฝั่งเซิร์ฟเวอร์ รวมถึงแหล่งที่มาของการจัดอันดับเพิ่มเติม คำขอ Seerr และการตั้งค่าที่ซิงค์';
 
   @override
   String get useNativeEmulator => 'Native Emulation';

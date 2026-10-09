@@ -4239,23 +4239,7 @@ class AppLocalizationsUg extends AppLocalizations {
   }
 
   @override
-  String get customizationProfile => 'خاسلاشتۇرۇش ئارخىپى';
-
-  @override
-  String get customizationProfileDescription =>
-      'يۈكلەش ، تەھرىرلەش ۋە ماسقەدەملەش ئۈچۈن ئارخىپنى تاللاڭ. ئۈسكۈنىنىڭ ئارخىپى ئۇنى بېسىپ قويمىسىلا يەرشارى ھەممە يەردە قوللىنىلىدۇ. يېشىل چېكىت نۆۋەتتىكى ئۈسكۈنىنىڭ ئارخىپىنى كۆرسىتىدۇ.';
-
-  @override
-  String get loadProfile => 'ئارخىپنى يۈكلەڭ';
-
-  @override
   String get syncing => 'ماسقەدەملەش ...';
-
-  @override
-  String get syncToProfile => 'ئارخىپقا ماسقەدەملەش';
-
-  @override
-  String get resetProfile => 'Reset Profile';
 
   @override
   String resetProfileTitle(String profile) {
@@ -5033,34 +5017,49 @@ class AppLocalizationsUg extends AppLocalizations {
   String get pluginNotDetected => 'قىستۇرما بايقالمىدى';
 
   @override
-  String get pluginDetectedDescription =>
-      'مۇلازىمېتىر قىستۇرمىسى بايقالدى. قىستۇرما تۇنجى قېتىم تېپىلغاندا ماسقەدەملەش ئاپتوماتىك قوزغىتىلىدۇ.';
-
-  @override
   String get pluginNotDetectedDescription =>
       'مۇلازىمېتىر قىستۇرمىسى ھازىرچە بايقالمىدى. يەرلىك تەڭشەكلەر يەنىلا ساقلانغان قىممەتلىرىنى ياكى كۆڭۈلدىكى كۆڭۈلدىكى قىممەتنى ئىشلىتىدۇ.';
 
   @override
-  String pluginStatusVersion(String status, String version) {
-    return '$status\nنەشرى: $version';
+  String get pluginConnected => 'Connected';
+
+  @override
+  String pluginConnectedVersion(String version) {
+    return 'Connected, version $version';
   }
 
   @override
-  String get availableServices => 'ئىشلەتكىلى بولىدىغان مۇلازىمەتلەر';
+  String get pluginSyncOn => 'Sync on';
 
   @override
-  String get serverPluginSync => 'مۇلازىمېتىر قىستۇرمىسى ماسقەدەملەش';
+  String get pluginSyncOff => 'Sync off';
 
   @override
-  String get syncSettingsWithPlugin =>
-      'مۇلازىمېتىر قىستۇرمىسى بىلەن تەڭشەكلەرنى ماسقەدەملەڭ';
+  String get syncProfileDescription =>
+      'This device syncs with the profile you pick until you pick another.';
 
   @override
-  String get whatSyncControls => 'ماسقەدەملەشنى كونترول قىلىدۇ';
+  String get profileAppliesEverywhere => 'Applies everywhere';
 
   @override
-  String get syncControlsDescription =>
-      'ماسقەدەملەش پەقەت قىستۇرما قوللايدىغان تەڭشەكلەرنىڭ مۇلازىمېتىرغا ئىتتىرىلىپ تارتىپ چىقىرىلىشىنى كونترول قىلىدۇ. قىستۇرما ماسقەدەملەش قوزغىتىلغاندا ئارخىپ تاللاش ۋە ئارخىپ ماسقەدەملەش ھەرىكىتى خاسلاشتۇرۇش تەڭشىكىدە بولىدۇ.';
+  String get profileOverridesGlobal => 'Overrides Global';
+
+  @override
+  String get profileThisDevice => 'This device';
+
+  @override
+  String get profileLoad => 'Load';
+
+  @override
+  String get profileLoadSubtitle => 'Server to this device';
+
+  @override
+  String get profileSaveSubtitle => 'This device to server';
+
+  @override
+  String resetNamedProfile(String profile) {
+    return 'Reset $profile Profile';
+  }
 
   @override
   String get recentRequests => 'يېقىنقى تەلەپلەر';
@@ -10059,10 +10058,6 @@ class AppLocalizationsUg extends AppLocalizations {
 
   @override
   String get settingsSeasonalSurprise => 'پەسىل خاراكتېرلىك ھەيران قېلىش';
-
-  @override
-  String get settingsPluginScreenDescription =>
-      'Moonbase قوشۇمچە مۇلازىمېتىر مەنبەلىرى ، Seerr تەلىپى ۋە ماس قەدەملىك تاللاشلارنى ئۆز ئىچىگە ئالىدۇ.';
 
   @override
   String get useNativeEmulator => 'Native Emulation';

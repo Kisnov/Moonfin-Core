@@ -4253,23 +4253,7 @@ class AppLocalizationsLt extends AppLocalizations {
   }
 
   @override
-  String get customizationProfile => 'Tinkinimo profilis';
-
-  @override
-  String get customizationProfileDescription =>
-      'Pasirinkite profilį, kurį norite įkelti, redaguoti ir sinchronizuoti. Visuotinis taikomas visur, nebent įrenginio profilis jo nepaiso. Žalias taškas žymi dabartinį įrenginio profilį.';
-
-  @override
-  String get loadProfile => 'Įkelti profilį';
-
-  @override
   String get syncing => 'Sinchronizuojama...';
-
-  @override
-  String get syncToProfile => 'Sinchronizuoti su profiliu';
-
-  @override
-  String get resetProfile => 'Reset Profile';
 
   @override
   String resetProfileTitle(String profile) {
@@ -5044,34 +5028,49 @@ class AppLocalizationsLt extends AppLocalizations {
   String get pluginNotDetected => 'Papildinys neaptiktas';
 
   @override
-  String get pluginDetectedDescription =>
-      'Aptiktas serverio papildinys. Sinchronizavimas įjungiamas automatiškai, kai pirmą kartą randamas papildinys.';
-
-  @override
   String get pluginNotDetectedDescription =>
       'Serverio papildinys šiuo metu neaptiktas. Vietiniai nustatymai vis tiek naudoja išsaugotas vertes arba įtaisytuosius numatytuosius nustatymus.';
 
   @override
-  String pluginStatusVersion(String status, String version) {
-    return '$status\nVersija: $version';
+  String get pluginConnected => 'Connected';
+
+  @override
+  String pluginConnectedVersion(String version) {
+    return 'Connected, version $version';
   }
 
   @override
-  String get availableServices => 'Galimos paslaugos';
+  String get pluginSyncOn => 'Sync on';
 
   @override
-  String get serverPluginSync => 'Serverio papildinio sinchronizavimas';
+  String get pluginSyncOff => 'Sync off';
 
   @override
-  String get syncSettingsWithPlugin =>
-      'Sinchronizuoti nustatymus su serverio papildiniu';
+  String get syncProfileDescription =>
+      'This device syncs with the profile you pick until you pick another.';
 
   @override
-  String get whatSyncControls => 'Kokie sinchronizavimo valdikliai';
+  String get profileAppliesEverywhere => 'Applies everywhere';
 
   @override
-  String get syncControlsDescription =>
-      'Sinchronizavimas tik valdo, ar papildinio palaikomi nustatymai siunčiami į serverį ir ištraukiami iš jo. Profilio pasirinkimas ir profilio sinchronizavimo veiksmai yra tinkinimo nustatymuose, kai įgalintas papildinio sinchronizavimas.';
+  String get profileOverridesGlobal => 'Overrides Global';
+
+  @override
+  String get profileThisDevice => 'This device';
+
+  @override
+  String get profileLoad => 'Load';
+
+  @override
+  String get profileLoadSubtitle => 'Server to this device';
+
+  @override
+  String get profileSaveSubtitle => 'This device to server';
+
+  @override
+  String resetNamedProfile(String profile) {
+    return 'Reset $profile Profile';
+  }
 
   @override
   String get recentRequests => 'Naujausi prašymai';
@@ -10080,10 +10079,6 @@ class AppLocalizationsLt extends AppLocalizations {
 
   @override
   String get settingsSeasonalSurprise => 'Sezoninė staigmena';
-
-  @override
-  String get settingsPluginScreenDescription =>
-      '„Moonbase“ teikia serverio integraciją, įskaitant papildomus įvertinimo šaltinius, „Seerr“ užklausas ir sinchronizuojamas nuostatas.';
 
   @override
   String get useNativeEmulator => 'Native Emulation';

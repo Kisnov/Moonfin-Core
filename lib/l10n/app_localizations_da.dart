@@ -4234,23 +4234,7 @@ class AppLocalizationsDa extends AppLocalizations {
   }
 
   @override
-  String get customizationProfile => 'Tilpasningsprofil';
-
-  @override
-  String get customizationProfileDescription =>
-      'Vælg den profil, der skal indlæses, redigere og synkronisere. Global gælder overalt, medmindre en enhedsprofil tilsidesætter det. Den grønne prik markerer din aktuelle enhedsprofil.';
-
-  @override
-  String get loadProfile => 'Indlæs profil';
-
-  @override
   String get syncing => 'Synkroniserer...';
-
-  @override
-  String get syncToProfile => 'Synkroniser til profil';
-
-  @override
-  String get resetProfile => 'Reset Profile';
 
   @override
   String resetProfileTitle(String profile) {
@@ -5024,34 +5008,49 @@ class AppLocalizationsDa extends AppLocalizations {
   String get pluginNotDetected => 'Plugin ikke fundet';
 
   @override
-  String get pluginDetectedDescription =>
-      'Server-plugin fundet. Synkronisering aktiveres automatisk, første gang pluginnet findes.';
-
-  @override
   String get pluginNotDetectedDescription =>
       'Server-plugin er ikke fundet i øjeblikket. Lokale indstillinger bruger stadig deres gemte værdier eller indbyggede standarder.';
 
   @override
-  String pluginStatusVersion(String status, String version) {
-    return '$status\nVersion: $version';
+  String get pluginConnected => 'Connected';
+
+  @override
+  String pluginConnectedVersion(String version) {
+    return 'Connected, version $version';
   }
 
   @override
-  String get availableServices => 'Tilgængelige tjenester';
+  String get pluginSyncOn => 'Sync on';
 
   @override
-  String get serverPluginSync => 'Synkronisering af serverplugin';
+  String get pluginSyncOff => 'Sync off';
 
   @override
-  String get syncSettingsWithPlugin =>
-      'Synkroniser indstillinger med serverpluginnet';
+  String get syncProfileDescription =>
+      'This device syncs with the profile you pick until you pick another.';
 
   @override
-  String get whatSyncControls => 'Hvad synkronisering styrer';
+  String get profileAppliesEverywhere => 'Applies everywhere';
 
   @override
-  String get syncControlsDescription =>
-      'Synkronisering styrer kun, om plugin-støttede indstillinger skubbes til og trækkes fra serveren. Profilvalg og profilsynkroniseringshandlinger er i tilpasningsindstillingerne, når plugin-synkronisering er aktiveret.';
+  String get profileOverridesGlobal => 'Overrides Global';
+
+  @override
+  String get profileThisDevice => 'This device';
+
+  @override
+  String get profileLoad => 'Load';
+
+  @override
+  String get profileLoadSubtitle => 'Server to this device';
+
+  @override
+  String get profileSaveSubtitle => 'This device to server';
+
+  @override
+  String resetNamedProfile(String profile) {
+    return 'Reset $profile Profile';
+  }
 
   @override
   String get recentRequests => 'Seneste anmodninger';
@@ -10028,10 +10027,6 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get settingsSeasonalSurprise => 'Sæsonbestemt overraskelse';
-
-  @override
-  String get settingsPluginScreenDescription =>
-      'Moonbase driver integrationer på serversiden, herunder yderligere vurderingskilder, Seerr-anmodninger og synkroniserede præferencer.';
 
   @override
   String get useNativeEmulator => 'Native Emulation';

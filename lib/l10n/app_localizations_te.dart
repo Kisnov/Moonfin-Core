@@ -4251,23 +4251,7 @@ class AppLocalizationsTe extends AppLocalizations {
   }
 
   @override
-  String get customizationProfile => 'అనుకూలీకరణ ప్రొఫైల్';
-
-  @override
-  String get customizationProfileDescription =>
-      'లోడ్ చేయడానికి, సవరించడానికి మరియు సమకాలీకరించడానికి ప్రొఫైల్‌ను ఎంచుకోండి. పరికర ప్రొఫైల్ దానిని భర్తీ చేయకపోతే గ్లోబల్ ప్రతిచోటా వర్తిస్తుంది. ఆకుపచ్చ చుక్క మీ ప్రస్తుత పరికర ప్రొఫైల్‌ను సూచిస్తుంది.';
-
-  @override
-  String get loadProfile => 'ప్రొఫైల్‌ను లోడ్ చేయండి';
-
-  @override
   String get syncing => 'సమకాలీకరిస్తోంది...';
-
-  @override
-  String get syncToProfile => 'ప్రొఫైల్‌కు సమకాలీకరించండి';
-
-  @override
-  String get resetProfile => 'Reset Profile';
 
   @override
   String resetProfileTitle(String profile) {
@@ -5047,34 +5031,49 @@ class AppLocalizationsTe extends AppLocalizations {
   String get pluginNotDetected => 'ప్లగిన్ కనుగొనబడలేదు';
 
   @override
-  String get pluginDetectedDescription =>
-      'సర్వర్ ప్లగ్ఇన్ కనుగొనబడింది. మొదటిసారి ప్లగిన్ కనుగొనబడినప్పుడు సమకాలీకరణ స్వయంచాలకంగా ప్రారంభించబడుతుంది.';
-
-  @override
   String get pluginNotDetectedDescription =>
       'సర్వర్ ప్లగిన్ ప్రస్తుతం కనుగొనబడలేదు. స్థానిక సెట్టింగ్‌లు ఇప్పటికీ వాటి సేవ్ చేసిన విలువలను లేదా అంతర్నిర్మిత డిఫాల్ట్‌లను ఉపయోగిస్తాయి.';
 
   @override
-  String pluginStatusVersion(String status, String version) {
-    return '$status\nవెర్షన్: $version';
+  String get pluginConnected => 'Connected';
+
+  @override
+  String pluginConnectedVersion(String version) {
+    return 'Connected, version $version';
   }
 
   @override
-  String get availableServices => 'అందుబాటులో ఉన్న సేవలు';
+  String get pluginSyncOn => 'Sync on';
 
   @override
-  String get serverPluginSync => 'సర్వర్ ప్లగిన్ సమకాలీకరణ';
+  String get pluginSyncOff => 'Sync off';
 
   @override
-  String get syncSettingsWithPlugin =>
-      'సర్వర్ ప్లగిన్‌తో సెట్టింగ్‌లను సమకాలీకరించండి';
+  String get syncProfileDescription =>
+      'This device syncs with the profile you pick until you pick another.';
 
   @override
-  String get whatSyncControls => 'ఏ సమకాలీకరణ నియంత్రణలు';
+  String get profileAppliesEverywhere => 'Applies everywhere';
 
   @override
-  String get syncControlsDescription =>
-      'సమకాలీకరణ మాత్రమే ప్లగిన్-మద్దతు గల సెట్టింగ్‌లు సర్వర్‌కు నెట్టబడతాయా లేదా తీసివేయబడతాయో లేదో నియంత్రిస్తుంది. ప్లగిన్ సమకాలీకరణ ప్రారంభించబడినప్పుడు ప్రొఫైల్ ఎంపిక మరియు ప్రొఫైల్ సమకాలీకరణ చర్యలు అనుకూలీకరణ సెట్టింగ్‌లలో ఉంటాయి.';
+  String get profileOverridesGlobal => 'Overrides Global';
+
+  @override
+  String get profileThisDevice => 'This device';
+
+  @override
+  String get profileLoad => 'Load';
+
+  @override
+  String get profileLoadSubtitle => 'Server to this device';
+
+  @override
+  String get profileSaveSubtitle => 'This device to server';
+
+  @override
+  String resetNamedProfile(String profile) {
+    return 'Reset $profile Profile';
+  }
 
   @override
   String get recentRequests => 'ఇటీవలి అభ్యర్థనలు';
@@ -10092,10 +10091,6 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get settingsSeasonalSurprise => 'కాలానుగుణ ఆశ్చర్యం';
-
-  @override
-  String get settingsPluginScreenDescription =>
-      'అదనపు రేటింగ్ మూలాలు, Seerr అభ్యర్థనలు, సింక్ చేసిన ప్రాధాన్యతలతో సహా సర్వర్-వైపు ఇంటిగ్రేషన్‌లను Moonbase శక్తివంతం చేస్తుంది.';
 
   @override
   String get useNativeEmulator => 'Native Emulation';

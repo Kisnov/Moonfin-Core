@@ -4228,23 +4228,7 @@ class AppLocalizationsBn extends AppLocalizations {
   }
 
   @override
-  String get customizationProfile => 'কাস্টমাইজেশন প্রোফাইল';
-
-  @override
-  String get customizationProfileDescription =>
-      'লোড, সম্পাদনা এবং সিঙ্ক করার জন্য প্রোফাইলটি বেছে নিন। গ্লোবাল সর্বত্র প্রযোজ্য যদি না একটি ডিভাইস প্রোফাইল এটিকে ওভাররাইড করে। সবুজ বিন্দু আপনার বর্তমান ডিভাইস প্রোফাইল চিহ্নিত করে।';
-
-  @override
-  String get loadProfile => 'প্রোফাইল লোড করুন';
-
-  @override
   String get syncing => 'সিঙ্ক হচ্ছে...';
-
-  @override
-  String get syncToProfile => 'প্রোফাইলে সিঙ্ক করুন';
-
-  @override
-  String get resetProfile => 'Reset Profile';
 
   @override
   String resetProfileTitle(String profile) {
@@ -5020,33 +5004,49 @@ class AppLocalizationsBn extends AppLocalizations {
   String get pluginNotDetected => 'প্লাগইন সনাক্ত করা যায়নি';
 
   @override
-  String get pluginDetectedDescription =>
-      'সার্ভার প্লাগইন সনাক্ত করা হয়েছে. প্রথমবার প্লাগইনটি পাওয়া গেলে সিঙ্ক স্বয়ংক্রিয়ভাবে সক্ষম হয়৷';
-
-  @override
   String get pluginNotDetectedDescription =>
       'সার্ভার প্লাগইন বর্তমানে সনাক্ত করা হয়নি. স্থানীয় সেটিংস এখনও তাদের সংরক্ষিত মান বা বিল্ট-ইন ডিফল্ট ব্যবহার করে।';
 
   @override
-  String pluginStatusVersion(String status, String version) {
-    return '$status\nসংস্করণ: $version';
+  String get pluginConnected => 'Connected';
+
+  @override
+  String pluginConnectedVersion(String version) {
+    return 'Connected, version $version';
   }
 
   @override
-  String get availableServices => 'উপলব্ধ সেবা';
+  String get pluginSyncOn => 'Sync on';
 
   @override
-  String get serverPluginSync => 'সার্ভার প্লাগইন সিঙ্ক';
+  String get pluginSyncOff => 'Sync off';
 
   @override
-  String get syncSettingsWithPlugin => 'সার্ভার প্লাগইনের সাথে সিঙ্ক সেটিংস';
+  String get syncProfileDescription =>
+      'This device syncs with the profile you pick until you pick another.';
 
   @override
-  String get whatSyncControls => 'কি সিঙ্ক নিয়ন্ত্রণ';
+  String get profileAppliesEverywhere => 'Applies everywhere';
 
   @override
-  String get syncControlsDescription =>
-      'সিঙ্ক শুধুমাত্র নিয়ন্ত্রণ করে যে প্লাগইন-ব্যাকড সেটিংস সার্ভার থেকে ধাক্কা দেওয়া এবং টানা হয় কিনা। প্লাগইন সিঙ্ক সক্ষম হলে প্রোফাইল নির্বাচন এবং প্রোফাইল সিঙ্ক অ্যাকশনগুলি কাস্টমাইজেশন সেটিংসে থাকে৷';
+  String get profileOverridesGlobal => 'Overrides Global';
+
+  @override
+  String get profileThisDevice => 'This device';
+
+  @override
+  String get profileLoad => 'Load';
+
+  @override
+  String get profileLoadSubtitle => 'Server to this device';
+
+  @override
+  String get profileSaveSubtitle => 'This device to server';
+
+  @override
+  String resetNamedProfile(String profile) {
+    return 'Reset $profile Profile';
+  }
 
   @override
   String get recentRequests => 'সাম্প্রতিক অনুরোধ';
@@ -10018,10 +10018,6 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get settingsSeasonalSurprise => 'ঋতু চমক';
-
-  @override
-  String get settingsPluginScreenDescription =>
-      'Moonbase অতিরিক্ত রেটিং উত্স, Seerr অনুরোধ এবং সিঙ্ক করা পছন্দগুলি সহ সার্ভার-সাইড ইন্টিগ্রেশন ক্ষমতা দেয়৷';
 
   @override
   String get useNativeEmulator => 'Native Emulation';

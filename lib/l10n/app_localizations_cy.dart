@@ -4262,23 +4262,7 @@ class AppLocalizationsCy extends AppLocalizations {
   }
 
   @override
-  String get customizationProfile => 'Proffil Addasu';
-
-  @override
-  String get customizationProfileDescription =>
-      'Dewiswch y proffil i\'w lwytho, ei olygu a\'i gysoni. Mae Global yn berthnasol ym mhobman oni bai bod proffil dyfais yn ei ddiystyru. Mae\'r dot gwyrdd yn nodi proffil eich dyfais cyfredol.';
-
-  @override
-  String get loadProfile => 'Proffil Llwyth';
-
-  @override
   String get syncing => 'Wrthi\'n cysoni…';
-
-  @override
-  String get syncToProfile => 'Cysoni i Broffil';
-
-  @override
-  String get resetProfile => 'Reset Profile';
 
   @override
   String resetProfileTitle(String profile) {
@@ -5052,34 +5036,49 @@ class AppLocalizationsCy extends AppLocalizations {
   String get pluginNotDetected => 'Ategyn Heb ei Ganfod';
 
   @override
-  String get pluginDetectedDescription =>
-      'Wedi canfod ategyn gweinydd. Mae cysoni wedi\'i alluogi\'n awtomatig y tro cyntaf y darganfyddir yr ategyn.';
-
-  @override
   String get pluginNotDetectedDescription =>
       'Nid yw ategyn gweinydd wedi\'i ganfod ar hyn o bryd. Mae gosodiadau lleol yn dal i ddefnyddio eu gwerthoedd sydd wedi\'u cadw neu eu rhagosodiadau adeiledig.';
 
   @override
-  String pluginStatusVersion(String status, String version) {
-    return '$status\nFersiwn: $version';
+  String get pluginConnected => 'Connected';
+
+  @override
+  String pluginConnectedVersion(String version) {
+    return 'Connected, version $version';
   }
 
   @override
-  String get availableServices => 'Gwasanaethau Sydd ar Gael';
+  String get pluginSyncOn => 'Sync on';
 
   @override
-  String get serverPluginSync => 'Cysoni Ategyn Gweinydd';
+  String get pluginSyncOff => 'Sync off';
 
   @override
-  String get syncSettingsWithPlugin =>
-      'Cysoni gosodiadau gyda\'r ategyn gweinydd';
+  String get syncProfileDescription =>
+      'This device syncs with the profile you pick until you pick another.';
 
   @override
-  String get whatSyncControls => 'Yr hyn sy\'n rheoli cysoni';
+  String get profileAppliesEverywhere => 'Applies everywhere';
 
   @override
-  String get syncControlsDescription =>
-      'Mae Sync ond yn rheoli a yw gosodiadau gyda chefnogaeth ategyn yn cael eu gwthio i\'r gweinydd a\'u tynnu ohono. Mae dewis proffil a chamau cysoni proffil mewn gosodiadau Addasu pan fydd cysoni ategyn wedi\'i alluogi.';
+  String get profileOverridesGlobal => 'Overrides Global';
+
+  @override
+  String get profileThisDevice => 'This device';
+
+  @override
+  String get profileLoad => 'Load';
+
+  @override
+  String get profileLoadSubtitle => 'Server to this device';
+
+  @override
+  String get profileSaveSubtitle => 'This device to server';
+
+  @override
+  String resetNamedProfile(String profile) {
+    return 'Reset $profile Profile';
+  }
 
   @override
   String get recentRequests => 'Ceisiadau Diweddar';
@@ -10082,10 +10081,6 @@ class AppLocalizationsCy extends AppLocalizations {
 
   @override
   String get settingsSeasonalSurprise => 'Syndod Tymhorol';
-
-  @override
-  String get settingsPluginScreenDescription =>
-      'Mae Moonbase yn pweru integreiddiadau ochr y gweinydd gan gynnwys ffynonellau graddio ychwanegol, ceisiadau Seerr, a dewisiadau synced.';
 
   @override
   String get useNativeEmulator => 'Native Emulation';

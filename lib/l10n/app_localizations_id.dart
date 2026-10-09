@@ -4237,23 +4237,7 @@ class AppLocalizationsId extends AppLocalizations {
   }
 
   @override
-  String get customizationProfile => 'Profil Kustomisasi';
-
-  @override
-  String get customizationProfileDescription =>
-      'Pilih profil untuk dimuat, diedit, dan disinkronkan. Global berlaku di semua tempat kecuali ditimpa oleh profil perangkat. Titik hijau menandai profil perangkat Anda saat ini.';
-
-  @override
-  String get loadProfile => 'Muat Profil';
-
-  @override
   String get syncing => 'Menyinkronkan...';
-
-  @override
-  String get syncToProfile => 'Sinkronkan Profil';
-
-  @override
-  String get resetProfile => 'Reset Profile';
 
   @override
   String resetProfileTitle(String profile) {
@@ -5029,34 +5013,49 @@ class AppLocalizationsId extends AppLocalizations {
   String get pluginNotDetected => 'Plugin Tidak Terdeteksi';
 
   @override
-  String get pluginDetectedDescription =>
-      'Plugin server terdeteksi. Sinkronisasi diaktifkan secara otomatis saat plugin pertama kali ditemukan.';
-
-  @override
   String get pluginNotDetectedDescription =>
       'Plugin server saat ini tidak terdeteksi. Pengaturan lokal tetap menggunakan nilai tersimpan atau default bawaan.';
 
   @override
-  String pluginStatusVersion(String status, String version) {
-    return '$status\nVersi: $version';
+  String get pluginConnected => 'Connected';
+
+  @override
+  String pluginConnectedVersion(String version) {
+    return 'Connected, version $version';
   }
 
   @override
-  String get availableServices => 'Layanan Tersedia';
+  String get pluginSyncOn => 'Sync on';
 
   @override
-  String get serverPluginSync => 'Sinkronisasi Plugin Server';
+  String get pluginSyncOff => 'Sync off';
 
   @override
-  String get syncSettingsWithPlugin =>
-      'Sinkronkan pengaturan dengan plugin server';
+  String get syncProfileDescription =>
+      'This device syncs with the profile you pick until you pick another.';
 
   @override
-  String get whatSyncControls => 'Apa yang dikendalikan sinkronisasi';
+  String get profileAppliesEverywhere => 'Applies everywhere';
 
   @override
-  String get syncControlsDescription =>
-      'Sinkronisasi hanya mengendalikan apakah pengaturan berbasis plugin didorong ke dan ditarik dari server. Pemilihan profil dan tindakan sinkronisasi profil ada di pengaturan Kustomisasi saat sinkronisasi plugin diaktifkan.';
+  String get profileOverridesGlobal => 'Overrides Global';
+
+  @override
+  String get profileThisDevice => 'This device';
+
+  @override
+  String get profileLoad => 'Load';
+
+  @override
+  String get profileLoadSubtitle => 'Server to this device';
+
+  @override
+  String get profileSaveSubtitle => 'This device to server';
+
+  @override
+  String resetNamedProfile(String profile) {
+    return 'Reset $profile Profile';
+  }
 
   @override
   String get recentRequests => 'Permintaan Terbaru';
@@ -10037,10 +10036,6 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get settingsSeasonalSurprise => 'Kejutan Musiman';
-
-  @override
-  String get settingsPluginScreenDescription =>
-      'Moonbase mendukung integrasi sisi server termasuk sumber rating tambahan, permintaan Seerr, dan preferensi tersinkronisasi.';
 
   @override
   String get useNativeEmulator => 'Native Emulation';

@@ -4256,23 +4256,7 @@ class AppLocalizationsSk extends AppLocalizations {
   }
 
   @override
-  String get customizationProfile => 'Profil prispôsobenia';
-
-  @override
-  String get customizationProfileDescription =>
-      'Vyberte profil, ktorý chcete načítať, upraviť a synchronizovať. Globálne platí všade, pokiaľ ho neprepíše profil zariadenia. Zelená bodka označuje váš aktuálny profil zariadenia.';
-
-  @override
-  String get loadProfile => 'Načítať profil';
-
-  @override
   String get syncing => 'Prebieha synchronizácia...';
-
-  @override
-  String get syncToProfile => 'Synchronizovať s profilom';
-
-  @override
-  String get resetProfile => 'Reset Profile';
 
   @override
   String resetProfileTitle(String profile) {
@@ -5049,34 +5033,49 @@ class AppLocalizationsSk extends AppLocalizations {
   String get pluginNotDetected => 'Plugin nebol zistený';
 
   @override
-  String get pluginDetectedDescription =>
-      'Zistil sa doplnok servera. Synchronizácia sa aktivuje automaticky pri prvom nájdení doplnku.';
-
-  @override
   String get pluginNotDetectedDescription =>
       'Serverový plugin momentálne nie je zistený. Miestne nastavenia stále používajú svoje uložené hodnoty alebo vstavané predvolené hodnoty.';
 
   @override
-  String pluginStatusVersion(String status, String version) {
-    return '$status\nVerzia: $version';
+  String get pluginConnected => 'Connected';
+
+  @override
+  String pluginConnectedVersion(String version) {
+    return 'Connected, version $version';
   }
 
   @override
-  String get availableServices => 'Dostupné služby';
+  String get pluginSyncOn => 'Sync on';
 
   @override
-  String get serverPluginSync => 'Synchronizácia serverového pluginu';
+  String get pluginSyncOff => 'Sync off';
 
   @override
-  String get syncSettingsWithPlugin =>
-      'Synchronizujte nastavenia s doplnkom servera';
+  String get syncProfileDescription =>
+      'This device syncs with the profile you pick until you pick another.';
 
   @override
-  String get whatSyncControls => 'Čo ovláda synchronizáciu';
+  String get profileAppliesEverywhere => 'Applies everywhere';
 
   @override
-  String get syncControlsDescription =>
-      'Synchronizácia kontroluje iba to, či sa nastavenia podporované doplnkami prenášajú na server a sťahujú zo servera. Výber profilu a akcie synchronizácie profilu sú v nastaveniach prispôsobenia, keď je povolená synchronizácia doplnkov.';
+  String get profileOverridesGlobal => 'Overrides Global';
+
+  @override
+  String get profileThisDevice => 'This device';
+
+  @override
+  String get profileLoad => 'Load';
+
+  @override
+  String get profileLoadSubtitle => 'Server to this device';
+
+  @override
+  String get profileSaveSubtitle => 'This device to server';
+
+  @override
+  String resetNamedProfile(String profile) {
+    return 'Reset $profile Profile';
+  }
 
   @override
   String get recentRequests => 'Nedávne žiadosti';
@@ -10086,10 +10085,6 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get settingsSeasonalSurprise => 'Sezónne prekvapenie';
-
-  @override
-  String get settingsPluginScreenDescription =>
-      'Moonbase poháňa integrácie na strane servera vrátane dodatočných zdrojov hodnotenia, požiadaviek Seerr a synchronizovaných preferencií.';
 
   @override
   String get useNativeEmulator => 'Native Emulation';

@@ -4255,23 +4255,7 @@ class AppLocalizationsTa extends AppLocalizations {
   }
 
   @override
-  String get customizationProfile => 'தனிப்பயனாக்குதல் சுயவிவரம்';
-
-  @override
-  String get customizationProfileDescription =>
-      'ஏற்ற, திருத்த மற்றும் ஒத்திசைக்க சுயவிவரத்தைத் தேர்ந்தெடுக்கவும். ஒரு சாதனச் சுயவிவரம் அதை மீறாத வரையில் Global எல்லா இடங்களிலும் பொருந்தும். பச்சைப் புள்ளி உங்கள் தற்போதைய சாதன சுயவிவரத்தைக் குறிக்கிறது.';
-
-  @override
-  String get loadProfile => 'சுயவிவரத்தை ஏற்றவும்';
-
-  @override
   String get syncing => 'ஒத்திசைக்கிறது...';
-
-  @override
-  String get syncToProfile => 'சுயவிவரத்துடன் ஒத்திசைக்கவும்';
-
-  @override
-  String get resetProfile => 'Reset Profile';
 
   @override
   String resetProfileTitle(String profile) {
@@ -5055,34 +5039,49 @@ class AppLocalizationsTa extends AppLocalizations {
   String get pluginNotDetected => 'செருகுநிரல் கண்டறியப்படவில்லை';
 
   @override
-  String get pluginDetectedDescription =>
-      'சர்வர் செருகுநிரல் கண்டறியப்பட்டது. முதல் முறையாக செருகுநிரல் கண்டறியப்படும்போது ஒத்திசைவு தானாகவே இயக்கப்படும்.';
-
-  @override
   String get pluginNotDetectedDescription =>
       'சர்வர் செருகுநிரல் தற்போது கண்டறியப்படவில்லை. உள்ளூர் அமைப்புகள் இன்னும் சேமித்த மதிப்புகள் அல்லது உள்ளமைக்கப்பட்ட இயல்புநிலைகளைப் பயன்படுத்துகின்றன.';
 
   @override
-  String pluginStatusVersion(String status, String version) {
-    return '$status\nபதிப்பு: $version';
+  String get pluginConnected => 'Connected';
+
+  @override
+  String pluginConnectedVersion(String version) {
+    return 'Connected, version $version';
   }
 
   @override
-  String get availableServices => 'கிடைக்கும் சேவைகள்';
+  String get pluginSyncOn => 'Sync on';
 
   @override
-  String get serverPluginSync => 'சர்வர் செருகுநிரல் ஒத்திசைவு';
+  String get pluginSyncOff => 'Sync off';
 
   @override
-  String get syncSettingsWithPlugin =>
-      'சேவையக செருகுநிரலுடன் அமைப்புகளை ஒத்திசைக்கவும்';
+  String get syncProfileDescription =>
+      'This device syncs with the profile you pick until you pick another.';
 
   @override
-  String get whatSyncControls => 'என்ன ஒத்திசைவு கட்டுப்பாடுகள்';
+  String get profileAppliesEverywhere => 'Applies everywhere';
 
   @override
-  String get syncControlsDescription =>
-      'செருகுநிரல்-ஆதரவு அமைப்புகள் சேவையகத்திற்குத் தள்ளப்பட்டு இழுக்கப்படுவதை மட்டுமே ஒத்திசைவு கட்டுப்படுத்துகிறது. செருகுநிரல் ஒத்திசைவு இயக்கப்பட்டிருக்கும் போது சுயவிவரத் தேர்வு மற்றும் சுயவிவர ஒத்திசைவு செயல்கள் தனிப்பயனாக்குதல் அமைப்புகளில் இருக்கும்.';
+  String get profileOverridesGlobal => 'Overrides Global';
+
+  @override
+  String get profileThisDevice => 'This device';
+
+  @override
+  String get profileLoad => 'Load';
+
+  @override
+  String get profileLoadSubtitle => 'Server to this device';
+
+  @override
+  String get profileSaveSubtitle => 'This device to server';
+
+  @override
+  String resetNamedProfile(String profile) {
+    return 'Reset $profile Profile';
+  }
 
   @override
   String get recentRequests => 'சமீபத்திய கோரிக்கைகள்';
@@ -10098,10 +10097,6 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get settingsSeasonalSurprise => 'பருவகால ஆச்சரியம்';
-
-  @override
-  String get settingsPluginScreenDescription =>
-      'கூடுதல் மதிப்பீட்டு ஆதாரங்கள், Seerr கோரிக்கைகள் மற்றும் ஒத்திசைக்கப்பட்ட விருப்பங்கள் உட்பட சர்வர்-பக்க ஒருங்கிணைப்புகளை Moonbase இயக்குகிறது.';
 
   @override
   String get useNativeEmulator => 'Native Emulation';

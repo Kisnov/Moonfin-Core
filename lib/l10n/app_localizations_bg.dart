@@ -4250,23 +4250,7 @@ class AppLocalizationsBg extends AppLocalizations {
   }
 
   @override
-  String get customizationProfile => 'Профил за персонализиране';
-
-  @override
-  String get customizationProfileDescription =>
-      'Изберете профила за зареждане, редактиране и синхронизиране. Global се прилага навсякъде, освен ако профил на устройство не го замени. Зелената точка маркира текущия ви профил на устройството.';
-
-  @override
-  String get loadProfile => 'Заредете профил';
-
-  @override
   String get syncing => 'Синхронизиране...';
-
-  @override
-  String get syncToProfile => 'Синхронизиране с профил';
-
-  @override
-  String get resetProfile => 'Reset Profile';
 
   @override
   String resetProfileTitle(String profile) {
@@ -5046,34 +5030,49 @@ class AppLocalizationsBg extends AppLocalizations {
   String get pluginNotDetected => 'Приставката не е открита';
 
   @override
-  String get pluginDetectedDescription =>
-      'Открит е сървърен плъгин. Синхронизирането се активира автоматично при първото намиране на приставката.';
-
-  @override
   String get pluginNotDetectedDescription =>
       'Сървърният плъгин в момента не е открит. Локалните настройки все още използват своите запазени стойности или вградени настройки по подразбиране.';
 
   @override
-  String pluginStatusVersion(String status, String version) {
-    return '$status\nВерсия: $version';
+  String get pluginConnected => 'Connected';
+
+  @override
+  String pluginConnectedVersion(String version) {
+    return 'Connected, version $version';
   }
 
   @override
-  String get availableServices => 'Налични услуги';
+  String get pluginSyncOn => 'Sync on';
 
   @override
-  String get serverPluginSync => 'Синхронизиране на сървърни добавки';
+  String get pluginSyncOff => 'Sync off';
 
   @override
-  String get syncSettingsWithPlugin =>
-      'Синхронизирайте настройките със сървърния плъгин';
+  String get syncProfileDescription =>
+      'This device syncs with the profile you pick until you pick another.';
 
   @override
-  String get whatSyncControls => 'Какви контроли за синхронизиране';
+  String get profileAppliesEverywhere => 'Applies everywhere';
 
   @override
-  String get syncControlsDescription =>
-      'Синхронизирането контролира само дали поддържаните от плъгини настройки се изпращат и изтеглят от сървъра. Изборът на профил и действията за синхронизиране на профил са в настройките за персонализиране, когато синхронизирането на плъгини е активирано.';
+  String get profileOverridesGlobal => 'Overrides Global';
+
+  @override
+  String get profileThisDevice => 'This device';
+
+  @override
+  String get profileLoad => 'Load';
+
+  @override
+  String get profileLoadSubtitle => 'Server to this device';
+
+  @override
+  String get profileSaveSubtitle => 'This device to server';
+
+  @override
+  String resetNamedProfile(String profile) {
+    return 'Reset $profile Profile';
+  }
 
   @override
   String get recentRequests => 'Последни заявки';
@@ -10117,10 +10116,6 @@ class AppLocalizationsBg extends AppLocalizations {
 
   @override
   String get settingsSeasonalSurprise => 'Сезонна изненада';
-
-  @override
-  String get settingsPluginScreenDescription =>
-      'Moonbase осигурява интеграции от страна на сървъра, включително допълнителни източници на оценка, Seerr заявки и синхронизирани предпочитания.';
 
   @override
   String get useNativeEmulator => 'Native Emulation';

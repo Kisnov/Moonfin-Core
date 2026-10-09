@@ -4255,23 +4255,7 @@ class AppLocalizationsSw extends AppLocalizations {
   }
 
   @override
-  String get customizationProfile => 'Wasifu wa Kubinafsisha';
-
-  @override
-  String get customizationProfileDescription =>
-      'Chagua wasifu wa kupakia, kuhariri na kusawazisha. Global inatumika kila mahali isipokuwa wasifu wa kifaa uubatilishe. Kitone cha kijani kinaonyesha wasifu wako wa sasa wa kifaa.';
-
-  @override
-  String get loadProfile => 'Pakia Wasifu';
-
-  @override
   String get syncing => 'Inasawazisha...';
-
-  @override
-  String get syncToProfile => 'Sawazisha kwa Wasifu';
-
-  @override
-  String get resetProfile => 'Reset Profile';
 
   @override
   String resetProfileTitle(String profile) {
@@ -5052,34 +5036,49 @@ class AppLocalizationsSw extends AppLocalizations {
   String get pluginNotDetected => 'Programu-jalizi Haijagunduliwa';
 
   @override
-  String get pluginDetectedDescription =>
-      'Programu-jalizi ya seva imegunduliwa. Usawazishaji umewashwa kiotomatiki mara ya kwanza programu-jalizi inapopatikana.';
-
-  @override
   String get pluginNotDetectedDescription =>
       'Programu-jalizi ya seva haijatambuliwa kwa sasa. Mipangilio ya ndani bado inatumia thamani zilizohifadhiwa au chaguomsingi zilizojumuishwa.';
 
   @override
-  String pluginStatusVersion(String status, String version) {
-    return '$status\nToleo: $version';
+  String get pluginConnected => 'Connected';
+
+  @override
+  String pluginConnectedVersion(String version) {
+    return 'Connected, version $version';
   }
 
   @override
-  String get availableServices => 'Huduma Zinazopatikana';
+  String get pluginSyncOn => 'Sync on';
 
   @override
-  String get serverPluginSync => 'Usawazishaji wa Programu-jalizi ya Seva';
+  String get pluginSyncOff => 'Sync off';
 
   @override
-  String get syncSettingsWithPlugin =>
-      'Sawazisha mipangilio na programu-jalizi ya seva';
+  String get syncProfileDescription =>
+      'This device syncs with the profile you pick until you pick another.';
 
   @override
-  String get whatSyncControls => 'Vidhibiti vipi vya kusawazisha';
+  String get profileAppliesEverywhere => 'Applies everywhere';
 
   @override
-  String get syncControlsDescription =>
-      'Usawazishaji hudhibiti tu ikiwa mipangilio inayoungwa mkono na programu-jalizi inasukumwa hadi na kuvutwa kutoka kwa seva. Uteuzi wa wasifu na vitendo vya kusawazisha wasifu viko katika mipangilio ya Kubinafsisha wakati usawazishaji wa programu-jalizi umewashwa.';
+  String get profileOverridesGlobal => 'Overrides Global';
+
+  @override
+  String get profileThisDevice => 'This device';
+
+  @override
+  String get profileLoad => 'Load';
+
+  @override
+  String get profileLoadSubtitle => 'Server to this device';
+
+  @override
+  String get profileSaveSubtitle => 'This device to server';
+
+  @override
+  String resetNamedProfile(String profile) {
+    return 'Reset $profile Profile';
+  }
 
   @override
   String get recentRequests => 'Maombi ya Hivi Karibuni';
@@ -10097,10 +10096,6 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get settingsSeasonalSurprise => 'Mshangao wa Msimu';
-
-  @override
-  String get settingsPluginScreenDescription =>
-      'Moonbase huwezesha miunganisho ya upande wa seva ikijumuisha vyanzo vya ziada vya ukadiriaji, maombi ya Seerr na mapendeleo yaliyosawazishwa.';
 
   @override
   String get useNativeEmulator => 'Native Emulation';

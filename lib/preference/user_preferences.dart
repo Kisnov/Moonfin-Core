@@ -354,6 +354,8 @@ class UserPreferences extends ChangeNotifier {
     'smart_downloads_enabled_at',
     'smart_downloads_played_since',
     'smart_downloads_applied_keep_ready',
+    // Per account but never synced: the profile this device syncs with.
+    'pref_plugin_sync_profile',
     // Newly synced settings. Anything that goes to the server profile has to be stored
     // per server and user, or one server's value is read back on the next.
     'all_genres_image_type',
@@ -3137,6 +3139,13 @@ class UserPreferences extends ChangeNotifier {
   static final pluginSyncEnabled = Preference(
     key: 'pref_plugin_sync_enabled',
     defaultValue: false,
+  );
+
+  /// The settings profile this device pulls from and pushes to. Empty follows
+  /// the device's own profile.
+  static final pluginSyncProfile = Preference(
+    key: 'pref_plugin_sync_profile',
+    defaultValue: '',
   );
 
   static Preference<bool> pluginSyncInitializedForServer(String serverKey) =>

@@ -4237,23 +4237,7 @@ class AppLocalizationsAf extends AppLocalizations {
   }
 
   @override
-  String get customizationProfile => 'Pasmaakprofiel';
-
-  @override
-  String get customizationProfileDescription =>
-      'Kies die profiel om te laai, te wysig en te sinkroniseer. Global is oral van toepassing, tensy \'n toestelprofiel dit ignoreer. Die groen kolletjie merk jou huidige toestelprofiel.';
-
-  @override
-  String get loadProfile => 'Laai profiel';
-
-  @override
   String get syncing => 'Sinkroniseer tans …';
-
-  @override
-  String get syncToProfile => 'Sinkroniseer met profiel';
-
-  @override
-  String get resetProfile => 'Reset Profile';
 
   @override
   String resetProfileTitle(String profile) {
@@ -5031,34 +5015,49 @@ class AppLocalizationsAf extends AppLocalizations {
   String get pluginNotDetected => 'Inprop nie opgespoor nie';
 
   @override
-  String get pluginDetectedDescription =>
-      'Bediener-inprop bespeur. Sinkronisering word outomaties geaktiveer die eerste keer dat die inprop gevind word.';
-
-  @override
   String get pluginNotDetectedDescription =>
       'Bedienerinprop word nie tans bespeur nie. Plaaslike instellings gebruik steeds hul gestoorde waardes of ingeboude verstekke.';
 
   @override
-  String pluginStatusVersion(String status, String version) {
-    return '$status\nWeergawe: $version';
+  String get pluginConnected => 'Connected';
+
+  @override
+  String pluginConnectedVersion(String version) {
+    return 'Connected, version $version';
   }
 
   @override
-  String get availableServices => 'Beskikbare dienste';
+  String get pluginSyncOn => 'Sync on';
 
   @override
-  String get serverPluginSync => 'Bediener-inpropsinkronisering';
+  String get pluginSyncOff => 'Sync off';
 
   @override
-  String get syncSettingsWithPlugin =>
-      'Sinkroniseer instellings met die bedienerinprop';
+  String get syncProfileDescription =>
+      'This device syncs with the profile you pick until you pick another.';
 
   @override
-  String get whatSyncControls => 'Wat sinchroniseer beheer';
+  String get profileAppliesEverywhere => 'Applies everywhere';
 
   @override
-  String get syncControlsDescription =>
-      'Sinkronisering beheer slegs of inprop-gesteunde instellings na die bediener gedruk en van die bediener af getrek word. Profielkeuse en profielsinkroniseringsaksies is in Pasmaakinstellings wanneer inpropsinkronisering geaktiveer is.';
+  String get profileOverridesGlobal => 'Overrides Global';
+
+  @override
+  String get profileThisDevice => 'This device';
+
+  @override
+  String get profileLoad => 'Load';
+
+  @override
+  String get profileLoadSubtitle => 'Server to this device';
+
+  @override
+  String get profileSaveSubtitle => 'This device to server';
+
+  @override
+  String resetNamedProfile(String profile) {
+    return 'Reset $profile Profile';
+  }
 
   @override
   String get recentRequests => 'Onlangse versoeke';
@@ -10037,10 +10036,6 @@ class AppLocalizationsAf extends AppLocalizations {
 
   @override
   String get settingsSeasonalSurprise => 'Seisoenale verrassing';
-
-  @override
-  String get settingsPluginScreenDescription =>
-      'Moonbase dryf bedienerkant-integrasies aan, insluitend bykomende graderingsbronne, Seerr-versoeke en gesinkroniseerde voorkeure.';
 
   @override
   String get useNativeEmulator => 'Native Emulation';

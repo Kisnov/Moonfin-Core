@@ -4175,23 +4175,7 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
-  String get customizationProfile => 'カスタマイズプロファイル';
-
-  @override
-  String get customizationProfileDescription =>
-      'ロード、編集、同期するプロファイルを選択します。グローバルは、デバイス プロファイルでオーバーライドされない限り、どこにでも適用されます。緑色の点は、現在のデバイス プロファイルを示します。';
-
-  @override
-  String get loadProfile => 'プロファイルをロードする';
-
-  @override
   String get syncing => '同期中...';
-
-  @override
-  String get syncToProfile => 'プロファイルに同期';
-
-  @override
-  String get resetProfile => 'Reset Profile';
 
   @override
   String resetProfileTitle(String profile) {
@@ -4945,33 +4929,49 @@ class AppLocalizationsJa extends AppLocalizations {
   String get pluginNotDetected => 'プラグインが検出されない';
 
   @override
-  String get pluginDetectedDescription =>
-      'サーバープラグインが検出されました。同期は、プラグインが初めて見つかったときに自動的に有効になります。';
-
-  @override
   String get pluginNotDetectedDescription =>
       'サーバープラグインは現在検出されません。ローカル設定では、保存された値または組み込みのデフォルトが引き続き使用されます。';
 
   @override
-  String pluginStatusVersion(String status, String version) {
-    return '$status\nバージョン: $version';
+  String get pluginConnected => 'Connected';
+
+  @override
+  String pluginConnectedVersion(String version) {
+    return 'Connected, version $version';
   }
 
   @override
-  String get availableServices => '利用可能なサービス';
+  String get pluginSyncOn => 'Sync on';
 
   @override
-  String get serverPluginSync => 'サーバープラグインの同期';
+  String get pluginSyncOff => 'Sync off';
 
   @override
-  String get syncSettingsWithPlugin => 'サーバープラグインと設定を同期する';
+  String get syncProfileDescription =>
+      'This device syncs with the profile you pick until you pick another.';
 
   @override
-  String get whatSyncControls => '同期制御の内容';
+  String get profileAppliesEverywhere => 'Applies everywhere';
 
   @override
-  String get syncControlsDescription =>
-      '同期は、プラグインに基づく設定をサーバーにプッシュまたはサーバーからプルするかどうかのみを制御します。プラグインの同期が有効になっている場合、プロファイルの選択とプロファイルの同期アクションはカスタマイズ設定にあります。';
+  String get profileOverridesGlobal => 'Overrides Global';
+
+  @override
+  String get profileThisDevice => 'This device';
+
+  @override
+  String get profileLoad => 'Load';
+
+  @override
+  String get profileLoadSubtitle => 'Server to this device';
+
+  @override
+  String get profileSaveSubtitle => 'This device to server';
+
+  @override
+  String resetNamedProfile(String profile) {
+    return 'Reset $profile Profile';
+  }
 
   @override
   String get recentRequests => '最近のリクエスト';
@@ -9802,10 +9802,6 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get settingsSeasonalSurprise => '季節のサプライズ';
-
-  @override
-  String get settingsPluginScreenDescription =>
-      'Moonbase は、追加の評価ソース、Seerr リクエスト、同期された設定などのサーバー側の統合を強化します。';
 
   @override
   String get useNativeEmulator => 'Native Emulation';

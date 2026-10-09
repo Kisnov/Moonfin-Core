@@ -4255,23 +4255,7 @@ class AppLocalizationsHu extends AppLocalizations {
   }
 
   @override
-  String get customizationProfile => 'Testreszabási profil';
-
-  @override
-  String get customizationProfileDescription =>
-      'Válaszd ki a betölteni, szerkeszteni és szinkronizálni kívánt profilt. A globális mindenhol érvényes, hacsak egy eszközprofil felül nem írja. A zöld pont az aktuális eszközprofilodat jelöli.';
-
-  @override
-  String get loadProfile => 'Profil betöltése';
-
-  @override
   String get syncing => 'Szinkronizálás...';
-
-  @override
-  String get syncToProfile => 'Szinkronizálás profillal';
-
-  @override
-  String get resetProfile => 'Reset Profile';
 
   @override
   String resetProfileTitle(String profile) {
@@ -5055,34 +5039,49 @@ class AppLocalizationsHu extends AppLocalizations {
   String get pluginNotDetected => 'Beépülő modul nem észlelhető';
 
   @override
-  String get pluginDetectedDescription =>
-      'Szerver beépülő modul észlelve. A szinkronizálás automatikusan engedélyezve van a beépülő modul első megtalálásakor.';
-
-  @override
   String get pluginNotDetectedDescription =>
       'A szerver beépülő modul jelenleg nem észlelhető. A helyi beállítások továbbra is a mentett értékeket vagy a beépített alapértelmezett értékeket használják.';
 
   @override
-  String pluginStatusVersion(String status, String version) {
-    return '$status\nVerzió: $version';
+  String get pluginConnected => 'Connected';
+
+  @override
+  String pluginConnectedVersion(String version) {
+    return 'Connected, version $version';
   }
 
   @override
-  String get availableServices => 'Elérhető szolgáltatások';
+  String get pluginSyncOn => 'Sync on';
 
   @override
-  String get serverPluginSync => 'Szerver beépülő modul szinkronizálása';
+  String get pluginSyncOff => 'Sync off';
 
   @override
-  String get syncSettingsWithPlugin =>
-      'Beállítások szinkronizálása a szerver beépülő modullal';
+  String get syncProfileDescription =>
+      'This device syncs with the profile you pick until you pick another.';
 
   @override
-  String get whatSyncControls => 'Mit szabályoz a szinkronizálás?';
+  String get profileAppliesEverywhere => 'Applies everywhere';
 
   @override
-  String get syncControlsDescription =>
-      'A szinkronizálás csak azt szabályozza, hogy a beépülő modulok által támogatott beállítások elküldésre kerülnek-e a szerverre, illetve lekérhetők-e onnan. A profil kiválasztása és a profilszinkronizálási műveletek a testreszabási beállításokban találhatók, ha a beépülő modul szinkronizálása engedélyezett.';
+  String get profileOverridesGlobal => 'Overrides Global';
+
+  @override
+  String get profileThisDevice => 'This device';
+
+  @override
+  String get profileLoad => 'Load';
+
+  @override
+  String get profileLoadSubtitle => 'Server to this device';
+
+  @override
+  String get profileSaveSubtitle => 'This device to server';
+
+  @override
+  String resetNamedProfile(String profile) {
+    return 'Reset $profile Profile';
+  }
 
   @override
   String get recentRequests => 'Legutóbbi kérések';
@@ -10112,10 +10111,6 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get settingsSeasonalSurprise => 'Szezonális meglepetés';
-
-  @override
-  String get settingsPluginScreenDescription =>
-      'A Moonbase a szerveroldali integrációkat segíti elő, beleértve a további értékelési forrásokat, a Seerr-kéréseket és a szinkronizált beállításokat.';
 
   @override
   String get useNativeEmulator => 'Native Emulation';

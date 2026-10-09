@@ -4271,23 +4271,7 @@ class AppLocalizationsEl extends AppLocalizations {
   }
 
   @override
-  String get customizationProfile => 'Προφίλ προσαρμογής';
-
-  @override
-  String get customizationProfileDescription =>
-      'Επιλέξτε το προφίλ για φόρτωση, επεξεργασία και συγχρονισμό. Το καθολικό ισχύει παντού, εκτός εάν το προφίλ συσκευής το παρακάμψει. Η πράσινη κουκκίδα σηματοδοτεί το τρέχον προφίλ της συσκευής σας.';
-
-  @override
-  String get loadProfile => 'Φόρτωση προφίλ';
-
-  @override
   String get syncing => 'Συγχρονισμός...';
-
-  @override
-  String get syncToProfile => 'Συγχρονισμός στο προφίλ';
-
-  @override
-  String get resetProfile => 'Reset Profile';
 
   @override
   String resetProfileTitle(String profile) {
@@ -5071,34 +5055,49 @@ class AppLocalizationsEl extends AppLocalizations {
   String get pluginNotDetected => 'Το πρόσθετο δεν εντοπίστηκε';
 
   @override
-  String get pluginDetectedDescription =>
-      'Εντοπίστηκε προσθήκη διακομιστή. Ο συγχρονισμός ενεργοποιείται αυτόματα την πρώτη φορά που εντοπίζεται η προσθήκη.';
-
-  @override
   String get pluginNotDetectedDescription =>
       'Η προσθήκη διακομιστή δεν έχει εντοπιστεί αυτήν τη στιγμή. Οι τοπικές ρυθμίσεις εξακολουθούν να χρησιμοποιούν τις αποθηκευμένες τιμές ή τις ενσωματωμένες προεπιλογές τους.';
 
   @override
-  String pluginStatusVersion(String status, String version) {
-    return '$status\nΈκδοση: $version';
+  String get pluginConnected => 'Connected';
+
+  @override
+  String pluginConnectedVersion(String version) {
+    return 'Connected, version $version';
   }
 
   @override
-  String get availableServices => 'Διαθέσιμες Υπηρεσίες';
+  String get pluginSyncOn => 'Sync on';
 
   @override
-  String get serverPluginSync => 'Συγχρονισμός προσθηκών διακομιστή';
+  String get pluginSyncOff => 'Sync off';
 
   @override
-  String get syncSettingsWithPlugin =>
-      'Συγχρονισμός ρυθμίσεων με την προσθήκη διακομιστή';
+  String get syncProfileDescription =>
+      'This device syncs with the profile you pick until you pick another.';
 
   @override
-  String get whatSyncControls => 'Τι στοιχεία ελέγχου συγχρονισμού';
+  String get profileAppliesEverywhere => 'Applies everywhere';
 
   @override
-  String get syncControlsDescription =>
-      'Ο συγχρονισμός ελέγχει μόνο εάν οι ρυθμίσεις που υποστηρίζονται από πρόσθετα προωθούνται και αποσύρονται από τον διακομιστή. Οι ενέργειες επιλογής προφίλ και συγχρονισμού προφίλ βρίσκονται στις ρυθμίσεις προσαρμογής όταν ο συγχρονισμός προσθηκών είναι ενεργοποιημένος.';
+  String get profileOverridesGlobal => 'Overrides Global';
+
+  @override
+  String get profileThisDevice => 'This device';
+
+  @override
+  String get profileLoad => 'Load';
+
+  @override
+  String get profileLoadSubtitle => 'Server to this device';
+
+  @override
+  String get profileSaveSubtitle => 'This device to server';
+
+  @override
+  String resetNamedProfile(String profile) {
+    return 'Reset $profile Profile';
+  }
 
   @override
   String get recentRequests => 'Πρόσφατα αιτήματα';
@@ -10164,10 +10163,6 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String get settingsSeasonalSurprise => 'Εποχιακή Έκπληξη';
-
-  @override
-  String get settingsPluginScreenDescription =>
-      'Το Moonbase παρέχει ενσωματώσεις από την πλευρά του διακομιστή, συμπεριλαμβανομένων πρόσθετων πηγών αξιολόγησης, αιτημάτων Seerr και συγχρονισμένων προτιμήσεων.';
 
   @override
   String get useNativeEmulator => 'Native Emulation';

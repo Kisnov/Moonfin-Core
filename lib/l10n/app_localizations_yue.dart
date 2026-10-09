@@ -4152,23 +4152,7 @@ class AppLocalizationsYue extends AppLocalizations {
   }
 
   @override
-  String get customizationProfile => '客製化簡介';
-
-  @override
-  String get customizationProfileDescription =>
-      '選擇要載入、編輯和同步的設定檔。全域適用於任何地方，除非設備設定檔覆蓋它。綠點標記您目前的設備設定檔。';
-
-  @override
-  String get loadProfile => '負載曲線';
-
-  @override
   String get syncing => '正在同步...';
-
-  @override
-  String get syncToProfile => '同步到設定檔';
-
-  @override
-  String get resetProfile => 'Reset Profile';
 
   @override
   String resetProfileTitle(String profile) {
@@ -4913,31 +4897,48 @@ class AppLocalizationsYue extends AppLocalizations {
   String get pluginNotDetected => '未偵測到插件';
 
   @override
-  String get pluginDetectedDescription => '檢測到伺服器插件。第一次找到外掛時會自動啟用同步。';
-
-  @override
   String get pluginNotDetectedDescription => '目前未偵測到伺服器插件。本地設定仍然使用其保存的值或內建預設值。';
 
   @override
-  String pluginStatusVersion(String status, String version) {
-    return '$status\n版本：$version';
+  String get pluginConnected => 'Connected';
+
+  @override
+  String pluginConnectedVersion(String version) {
+    return 'Connected, version $version';
   }
 
   @override
-  String get availableServices => '可用服務';
+  String get pluginSyncOn => 'Sync on';
 
   @override
-  String get serverPluginSync => '伺服器插件同步';
+  String get pluginSyncOff => 'Sync off';
 
   @override
-  String get syncSettingsWithPlugin => '與伺服器插件同步設定';
+  String get syncProfileDescription =>
+      'This device syncs with the profile you pick until you pick another.';
 
   @override
-  String get whatSyncControls => '同步控制什麼';
+  String get profileAppliesEverywhere => 'Applies everywhere';
 
   @override
-  String get syncControlsDescription =>
-      '同步僅控制插件支援的設定是否推送到伺服器或從伺服器拉出。啟用插件同步後，設定檔選擇和設定檔同步操作位於自訂設定中。';
+  String get profileOverridesGlobal => 'Overrides Global';
+
+  @override
+  String get profileThisDevice => 'This device';
+
+  @override
+  String get profileLoad => 'Load';
+
+  @override
+  String get profileLoadSubtitle => 'Server to this device';
+
+  @override
+  String get profileSaveSubtitle => 'This device to server';
+
+  @override
+  String resetNamedProfile(String profile) {
+    return 'Reset $profile Profile';
+  }
 
   @override
   String get recentRequests => '最近的請求';
@@ -9742,10 +9743,6 @@ class AppLocalizationsYue extends AppLocalizations {
 
   @override
   String get settingsSeasonalSurprise => '季節性驚喜';
-
-  @override
-  String get settingsPluginScreenDescription =>
-      'Moonbase 支援伺服器端集成，包括附加評級來源、Seerr 請求和同步首選項。';
 
   @override
   String get useNativeEmulator => 'Native Emulation';
@@ -15801,20 +15798,7 @@ class AppLocalizationsYueCn extends AppLocalizationsYue {
   }
 
   @override
-  String get customizationProfile => '定制简介';
-
-  @override
-  String get customizationProfileDescription =>
-      '选择要加载、编辑和同步的配置文件。全局适用于任何地方，除非设备配置文件覆盖它。绿点标记您当前的设备配置文件。';
-
-  @override
-  String get loadProfile => '负载曲线';
-
-  @override
   String get syncing => '正在同步...';
-
-  @override
-  String get syncToProfile => '同步到配置文件';
 
   @override
   String get profileSyncHidden => '配置文件同步隐藏';
@@ -16299,31 +16283,7 @@ class AppLocalizationsYueCn extends AppLocalizationsYue {
   String get pluginNotDetected => '未检测到插件';
 
   @override
-  String get pluginDetectedDescription => '检测到服务器插件。第一次找到插件时会自动启用同步。';
-
-  @override
   String get pluginNotDetectedDescription => '当前未检测到服务器插件。本地设置仍然使用其保存的值或内置默认值。';
-
-  @override
-  String pluginStatusVersion(String status, String version) {
-    return '$status\nVersion: $version';
-  }
-
-  @override
-  String get availableServices => '可用服务';
-
-  @override
-  String get serverPluginSync => '服务器插件同步';
-
-  @override
-  String get syncSettingsWithPlugin => '与服务器插件同步设置';
-
-  @override
-  String get whatSyncControls => '同步控制什么';
-
-  @override
-  String get syncControlsDescription =>
-      '同步仅控制插件支持的设置是否推送到服务器或从服务器拉出。启用插件同步后，配置文件选择和配置文件同步操作位于自定义设置中。';
 
   @override
   String get recentRequests => '最近的请求';
@@ -19748,10 +19708,6 @@ class AppLocalizationsYueCn extends AppLocalizationsYue {
   String get settingsSeasonalSurprise => '季节性惊喜';
 
   @override
-  String get settingsPluginScreenDescription =>
-      'Moonbase 支持服务器端集成，包括附加评级源、Seerr 请求和同步首选项。';
-
-  @override
   String get settingsHigh => '高的';
 
   @override
@@ -23133,20 +23089,7 @@ class AppLocalizationsYueHk extends AppLocalizationsYue {
   }
 
   @override
-  String get customizationProfile => '客製化簡介';
-
-  @override
-  String get customizationProfileDescription =>
-      '選擇要載入、編輯和同步的設定檔。全域適用於任何地方，除非設備設定檔覆蓋它。綠點標記您目前的設備設定檔。';
-
-  @override
-  String get loadProfile => '負載曲線';
-
-  @override
   String get syncing => '正在同步...';
-
-  @override
-  String get syncToProfile => '同步到設定檔';
 
   @override
   String get profileSyncHidden => '設定檔同步隱藏';
@@ -23631,31 +23574,7 @@ class AppLocalizationsYueHk extends AppLocalizationsYue {
   String get pluginNotDetected => '未偵測到插件';
 
   @override
-  String get pluginDetectedDescription => '檢測到伺服器插件。第一次找到外掛時會自動啟用同步。';
-
-  @override
   String get pluginNotDetectedDescription => '目前未偵測到伺服器插件。本地設定仍然使用其保存的值或內建預設值。';
-
-  @override
-  String pluginStatusVersion(String status, String version) {
-    return '$status\nVersion: $version';
-  }
-
-  @override
-  String get availableServices => '可用服務';
-
-  @override
-  String get serverPluginSync => '伺服器插件同步';
-
-  @override
-  String get syncSettingsWithPlugin => '與伺服器插件同步設定';
-
-  @override
-  String get whatSyncControls => '同步控制什麼';
-
-  @override
-  String get syncControlsDescription =>
-      '同步僅控制插件支援的設定是否推送到伺服器或從伺服器拉出。啟用插件同步後，設定檔選擇和設定檔同步操作位於自訂設定中。';
 
   @override
   String get recentRequests => '最近的請求';
@@ -27078,10 +26997,6 @@ class AppLocalizationsYueHk extends AppLocalizationsYue {
 
   @override
   String get settingsSeasonalSurprise => '季節性驚喜';
-
-  @override
-  String get settingsPluginScreenDescription =>
-      'Moonbase 支援伺服器端集成，包括附加評級來源、Seerr 請求和同步首選項。';
 
   @override
   String get settingsHigh => '高的';

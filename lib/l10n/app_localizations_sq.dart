@@ -4257,23 +4257,7 @@ class AppLocalizationsSq extends AppLocalizations {
   }
 
   @override
-  String get customizationProfile => 'Profili i personalizimit';
-
-  @override
-  String get customizationProfileDescription =>
-      'Zgjidhni profilin për të ngarkuar, modifikuar dhe sinkronizuar. Global zbatohet kudo, përveç nëse një profil pajisjeje e anulon atë. Pika e gjelbër shënon profilin tuaj aktual të pajisjes.';
-
-  @override
-  String get loadProfile => 'Ngarko profilin';
-
-  @override
   String get syncing => 'Po sinkronizohet...';
-
-  @override
-  String get syncToProfile => 'Sinkronizimi me profilin';
-
-  @override
-  String get resetProfile => 'Reset Profile';
 
   @override
   String resetProfileTitle(String profile) {
@@ -5056,34 +5040,49 @@ class AppLocalizationsSq extends AppLocalizations {
   String get pluginNotDetected => 'Shtojca nuk u zbulua';
 
   @override
-  String get pluginDetectedDescription =>
-      'U zbulua shtojca e serverit. Sinkronizimi aktivizohet automatikisht herën e parë që gjendet shtojca.';
-
-  @override
   String get pluginNotDetectedDescription =>
       'Shtojca e serverit nuk është zbuluar aktualisht. Cilësimet lokale përdorin ende vlerat e tyre të ruajtura ose parazgjedhjet e integruara.';
 
   @override
-  String pluginStatusVersion(String status, String version) {
-    return '$status\nVersioni: $version';
+  String get pluginConnected => 'Connected';
+
+  @override
+  String pluginConnectedVersion(String version) {
+    return 'Connected, version $version';
   }
 
   @override
-  String get availableServices => 'Shërbimet e disponueshme';
+  String get pluginSyncOn => 'Sync on';
 
   @override
-  String get serverPluginSync => 'Sinkronizimi i shtojcave të serverit';
+  String get pluginSyncOff => 'Sync off';
 
   @override
-  String get syncSettingsWithPlugin =>
-      'Sinkronizoni cilësimet me shtojcën e serverit';
+  String get syncProfileDescription =>
+      'This device syncs with the profile you pick until you pick another.';
 
   @override
-  String get whatSyncControls => 'Çfarë kontrollon sinkronizimi';
+  String get profileAppliesEverywhere => 'Applies everywhere';
 
   @override
-  String get syncControlsDescription =>
-      'Sync kontrollon vetëm nëse cilësimet e mbështetura nga plugin shtyhen dhe tërhiqen nga serveri. Zgjedhja e profilit dhe veprimet e sinkronizimit të profilit janë te cilësimet e personalizimit kur aktivizohet sinkronizimi i shtojcave.';
+  String get profileOverridesGlobal => 'Overrides Global';
+
+  @override
+  String get profileThisDevice => 'This device';
+
+  @override
+  String get profileLoad => 'Load';
+
+  @override
+  String get profileLoadSubtitle => 'Server to this device';
+
+  @override
+  String get profileSaveSubtitle => 'This device to server';
+
+  @override
+  String resetNamedProfile(String profile) {
+    return 'Reset $profile Profile';
+  }
 
   @override
   String get recentRequests => 'Kërkesat e fundit';
@@ -10108,10 +10107,6 @@ class AppLocalizationsSq extends AppLocalizations {
 
   @override
   String get settingsSeasonalSurprise => 'Surpriza sezonale';
-
-  @override
-  String get settingsPluginScreenDescription =>
-      'Moonbase fuqizon integrimet nga ana e serverit, duke përfshirë burime vlerësimi shtesë, kërkesat e Seerr dhe preferencat e sinkronizuara.';
 
   @override
   String get useNativeEmulator => 'Native Emulation';

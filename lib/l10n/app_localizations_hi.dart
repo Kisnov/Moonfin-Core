@@ -4228,23 +4228,7 @@ class AppLocalizationsHi extends AppLocalizations {
   }
 
   @override
-  String get customizationProfile => 'अनुकूलन प्रोफ़ाइल';
-
-  @override
-  String get customizationProfileDescription =>
-      'लोड करने, संपादित करने और सिंक करने के लिए प्रोफ़ाइल चुनें। ग्लोबल हर जगह लागू होता है जब तक कि कोई डिवाइस प्रोफ़ाइल इसे ओवरराइड न कर दे। हरा बिंदु आपके वर्तमान डिवाइस प्रोफ़ाइल को चिह्नित करता है।';
-
-  @override
-  String get loadProfile => 'प्रोफ़ाइल लोड करें';
-
-  @override
   String get syncing => 'सिंक हो रहा है...';
-
-  @override
-  String get syncToProfile => 'प्रोफ़ाइल से सिंक करें';
-
-  @override
-  String get resetProfile => 'Reset Profile';
 
   @override
   String resetProfileTitle(String profile) {
@@ -5019,33 +5003,49 @@ class AppLocalizationsHi extends AppLocalizations {
   String get pluginNotDetected => 'प्लगइन का पता नहीं चला';
 
   @override
-  String get pluginDetectedDescription =>
-      'सर्वर प्लगइन का पता चला. पहली बार प्लगइन मिलने पर सिंक स्वचालित रूप से सक्षम हो जाता है।';
-
-  @override
   String get pluginNotDetectedDescription =>
       'सर्वर प्लगइन फिलहाल पता नहीं चला है. स्थानीय सेटिंग्स अभी भी अपने सहेजे गए मानों या अंतर्निहित डिफ़ॉल्ट का उपयोग करती हैं।';
 
   @override
-  String pluginStatusVersion(String status, String version) {
-    return '$status\nसंस्करण: $version';
+  String get pluginConnected => 'Connected';
+
+  @override
+  String pluginConnectedVersion(String version) {
+    return 'Connected, version $version';
   }
 
   @override
-  String get availableServices => 'उपलब्ध सेवाएँ';
+  String get pluginSyncOn => 'Sync on';
 
   @override
-  String get serverPluginSync => 'सर्वर प्लगइन सिंक';
+  String get pluginSyncOff => 'Sync off';
 
   @override
-  String get syncSettingsWithPlugin => 'सर्वर प्लगइन के साथ सेटिंग्स सिंक करें';
+  String get syncProfileDescription =>
+      'This device syncs with the profile you pick until you pick another.';
 
   @override
-  String get whatSyncControls => 'कौन सा सिंक नियंत्रित करता है';
+  String get profileAppliesEverywhere => 'Applies everywhere';
 
   @override
-  String get syncControlsDescription =>
-      'सिंक केवल यह नियंत्रित करता है कि प्लगइन-समर्थित सेटिंग्स को सर्वर पर धकेला और खींचा गया है या नहीं। प्लगइन सिंक सक्षम होने पर प्रोफ़ाइल चयन और प्रोफ़ाइल सिंक क्रियाएं अनुकूलन सेटिंग्स में होती हैं।';
+  String get profileOverridesGlobal => 'Overrides Global';
+
+  @override
+  String get profileThisDevice => 'This device';
+
+  @override
+  String get profileLoad => 'Load';
+
+  @override
+  String get profileLoadSubtitle => 'Server to this device';
+
+  @override
+  String get profileSaveSubtitle => 'This device to server';
+
+  @override
+  String resetNamedProfile(String profile) {
+    return 'Reset $profile Profile';
+  }
 
   @override
   String get recentRequests => 'हाल के अनुरोध';
@@ -10008,10 +10008,6 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get settingsSeasonalSurprise => 'मौसमी आश्चर्य';
-
-  @override
-  String get settingsPluginScreenDescription =>
-      'Moonbase सर्वर-साइड इंटीग्रेशन को सक्षम बनाता है, जिनमें अतिरिक्त रेटिंग स्रोत, Seerr अनुरोध और सिंक की गई प्राथमिकताएँ शामिल हैं।';
 
   @override
   String get useNativeEmulator => 'Native Emulation';

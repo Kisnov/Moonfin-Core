@@ -4165,23 +4165,7 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
-  String get customizationProfile => '사용자 정의 프로필';
-
-  @override
-  String get customizationProfileDescription =>
-      '로드, 편집, 동기화할 프로필을 선택하세요. 기기 프로필이 재정의하지 않는 한 전역 프로필이 모든 곳에 적용됩니다. 녹색 점은 현재 기기 프로필을 나타냅니다.';
-
-  @override
-  String get loadProfile => '프로필 로드';
-
-  @override
   String get syncing => '동기화 중...';
-
-  @override
-  String get syncToProfile => '프로필에 동기화';
-
-  @override
-  String get resetProfile => '프로필 초기화';
 
   @override
   String resetProfileTitle(String profile) {
@@ -4928,33 +4912,49 @@ class AppLocalizationsKo extends AppLocalizations {
   String get pluginNotDetected => '플러그인이 감지되지 않음';
 
   @override
-  String get pluginDetectedDescription =>
-      '서버 플러그인이 감지되었습니다. 플러그인이 처음 발견되면 동기화가 자동으로 활성화됩니다.';
-
-  @override
   String get pluginNotDetectedDescription =>
       '서버 플러그인이 현재 감지되지 않습니다. 로컬 설정은 여전히 ​​저장된 값이나 기본 제공 기본값을 사용합니다.';
 
   @override
-  String pluginStatusVersion(String status, String version) {
-    return '$status\n버전: $version';
+  String get pluginConnected => 'Connected';
+
+  @override
+  String pluginConnectedVersion(String version) {
+    return 'Connected, version $version';
   }
 
   @override
-  String get availableServices => '이용 가능한 서비스';
+  String get pluginSyncOn => 'Sync on';
 
   @override
-  String get serverPluginSync => '서버 플러그인 동기화';
+  String get pluginSyncOff => 'Sync off';
 
   @override
-  String get syncSettingsWithPlugin => '서버 플러그인과 설정 동기화';
+  String get syncProfileDescription =>
+      'This device syncs with the profile you pick until you pick another.';
 
   @override
-  String get whatSyncControls => '어떤 동기화 제어';
+  String get profileAppliesEverywhere => 'Applies everywhere';
 
   @override
-  String get syncControlsDescription =>
-      '동기화는 플러그인 지원 설정을 서버에 푸시하고 서버에서 가져올지 여부만 제어합니다. 플러그인 동기화가 활성화되면 프로필 선택 및 프로필 동기화 작업이 사용자 정의 설정에 있습니다.';
+  String get profileOverridesGlobal => 'Overrides Global';
+
+  @override
+  String get profileThisDevice => 'This device';
+
+  @override
+  String get profileLoad => 'Load';
+
+  @override
+  String get profileLoadSubtitle => 'Server to this device';
+
+  @override
+  String get profileSaveSubtitle => 'This device to server';
+
+  @override
+  String resetNamedProfile(String profile) {
+    return 'Reset $profile Profile';
+  }
 
   @override
   String get recentRequests => '최근 요청';
@@ -9775,10 +9775,6 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get settingsSeasonalSurprise => '시즌 서프라이즈';
-
-  @override
-  String get settingsPluginScreenDescription =>
-      'Moonbase는 추가 평가 소스, Seerr 요청 및 동기화된 기본 설정을 포함한 서버 측 통합을 지원합니다.';
 
   @override
   String get useNativeEmulator => '네이티브 에뮬레이션';

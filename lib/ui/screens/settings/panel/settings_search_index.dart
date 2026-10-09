@@ -1780,7 +1780,9 @@ List<_SettingsSearchEntry> _buildSettingsSearchIndex({
       ),
 
     services.screen(keywords: ['seerr', 'achievements']),
-    settingsSync.screen(keywords: ['moonbase', 'plugin', 'server sync', 'status']),
+    settingsSync.screen(
+      keywords: ['moonbase', 'plugin', 'server sync', 'status', 'profile'],
+    ),
     ratingSources.screen(keywords: [
       'rotten tomatoes',
       'imdb',

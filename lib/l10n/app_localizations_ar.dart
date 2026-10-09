@@ -4247,23 +4247,7 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-  String get customizationProfile => 'ملف التخصيص';
-
-  @override
-  String get customizationProfileDescription =>
-      'اختر ملف التعريف لتحميله وتحريره ومزامنته. ينطبق العمومي في كل مكان ما لم يتجاوزه ملف تعريف الجهاز. تشير النقطة الخضراء إلى ملف تعريف جهازك الحالي.';
-
-  @override
-  String get loadProfile => 'تحميل الملف الشخصي';
-
-  @override
   String get syncing => 'جارٍ المزامنة...';
-
-  @override
-  String get syncToProfile => 'المزامنة مع الملف الشخصي';
-
-  @override
-  String get resetProfile => 'Reset Profile';
 
   @override
   String resetProfileTitle(String profile) {
@@ -5032,34 +5016,49 @@ class AppLocalizationsAr extends AppLocalizations {
   String get pluginNotDetected => 'لم يتم الكشف عن البرنامج المساعد';
 
   @override
-  String get pluginDetectedDescription =>
-      'تم اكتشاف البرنامج المساعد للخادم. يتم تمكين المزامنة تلقائيًا عند العثور على المكون الإضافي لأول مرة.';
-
-  @override
   String get pluginNotDetectedDescription =>
       'لم يتم الكشف عن البرنامج المساعد للخادم حاليا. لا تزال الإعدادات المحلية تستخدم القيم المحفوظة أو الإعدادات الافتراضية المضمنة.';
 
   @override
-  String pluginStatusVersion(String status, String version) {
-    return '$status\nالإصدار: $version';
+  String get pluginConnected => 'Connected';
+
+  @override
+  String pluginConnectedVersion(String version) {
+    return 'Connected, version $version';
   }
 
   @override
-  String get availableServices => 'الخدمات المتاحة';
+  String get pluginSyncOn => 'Sync on';
 
   @override
-  String get serverPluginSync => 'مزامنة البرنامج المساعد للخادم';
+  String get pluginSyncOff => 'Sync off';
 
   @override
-  String get syncSettingsWithPlugin =>
-      'مزامنة الإعدادات مع البرنامج المساعد للخادم';
+  String get syncProfileDescription =>
+      'This device syncs with the profile you pick until you pick another.';
 
   @override
-  String get whatSyncControls => 'ما الضوابط المزامنة';
+  String get profileAppliesEverywhere => 'Applies everywhere';
 
   @override
-  String get syncControlsDescription =>
-      'تتحكم المزامنة فقط فيما إذا كان يتم دفع الإعدادات المدعومة بالمكونات الإضافية إلى الخادم وسحبها منه. يتم تحديد ملف التعريف وإجراءات مزامنة ملف التعريف في إعدادات التخصيص عند تمكين مزامنة البرنامج المساعد.';
+  String get profileOverridesGlobal => 'Overrides Global';
+
+  @override
+  String get profileThisDevice => 'This device';
+
+  @override
+  String get profileLoad => 'Load';
+
+  @override
+  String get profileLoadSubtitle => 'Server to this device';
+
+  @override
+  String get profileSaveSubtitle => 'This device to server';
+
+  @override
+  String resetNamedProfile(String profile) {
+    return 'Reset $profile Profile';
+  }
 
   @override
   String get recentRequests => 'الطلبات الأخيرة';
@@ -10017,10 +10016,6 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get settingsSeasonalSurprise => 'مفاجأة موسمية';
-
-  @override
-  String get settingsPluginScreenDescription =>
-      'Moonbase يدعم عمليات التكامل على جانب الخادم بما في ذلك مصادر التصنيف الإضافية وطلبات Seerr والتفضيلات المتزامنة.';
 
   @override
   String get useNativeEmulator => 'Native Emulation';

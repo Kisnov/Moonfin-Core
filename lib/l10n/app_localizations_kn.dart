@@ -4252,23 +4252,7 @@ class AppLocalizationsKn extends AppLocalizations {
   }
 
   @override
-  String get customizationProfile => 'ಗ್ರಾಹಕೀಕರಣ ಪ್ರೊಫೈಲ್';
-
-  @override
-  String get customizationProfileDescription =>
-      'ಲೋಡ್ ಮಾಡಲು, ಎಡಿಟ್ ಮಾಡಲು ಮತ್ತು ಸಿಂಕ್ ಮಾಡಲು ಪ್ರೊಫೈಲ್ ಅನ್ನು ಆಯ್ಕೆಮಾಡಿ. ಸಾಧನದ ಪ್ರೊಫೈಲ್ ಅದನ್ನು ಅತಿಕ್ರಮಿಸದ ಹೊರತು ಗ್ಲೋಬಲ್ ಎಲ್ಲೆಡೆ ಅನ್ವಯಿಸುತ್ತದೆ. ಹಸಿರು ಚುಕ್ಕೆ ನಿಮ್ಮ ಪ್ರಸ್ತುತ ಸಾಧನದ ಪ್ರೊಫೈಲ್ ಅನ್ನು ಗುರುತಿಸುತ್ತದೆ.';
-
-  @override
-  String get loadProfile => 'ಪ್ರೊಫೈಲ್ ಅನ್ನು ಲೋಡ್ ಮಾಡಿ';
-
-  @override
   String get syncing => 'ಸಿಂಕ್ ಮಾಡಲಾಗುತ್ತಿದೆ...';
-
-  @override
-  String get syncToProfile => 'ಪ್ರೊಫೈಲ್‌ಗೆ ಸಿಂಕ್ ಮಾಡಿ';
-
-  @override
-  String get resetProfile => 'Reset Profile';
 
   @override
   String resetProfileTitle(String profile) {
@@ -5049,34 +5033,49 @@ class AppLocalizationsKn extends AppLocalizations {
   String get pluginNotDetected => 'ಪ್ಲಗಿನ್ ಪತ್ತೆಯಾಗಿಲ್ಲ';
 
   @override
-  String get pluginDetectedDescription =>
-      'ಸರ್ವರ್ ಪ್ಲಗಿನ್ ಪತ್ತೆಯಾಗಿದೆ. ಮೊದಲ ಬಾರಿಗೆ ಪ್ಲಗಿನ್ ಕಂಡುಬಂದಾಗ ಸಿಂಕ್ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಸಕ್ರಿಯಗೊಳಿಸಲಾಗುತ್ತದೆ.';
-
-  @override
   String get pluginNotDetectedDescription =>
       'ಸರ್ವರ್ ಪ್ಲಗಿನ್ ಪ್ರಸ್ತುತ ಪತ್ತೆಯಾಗಿಲ್ಲ. ಸ್ಥಳೀಯ ಸೆಟ್ಟಿಂಗ್‌ಗಳು ಇನ್ನೂ ತಮ್ಮ ಉಳಿಸಿದ ಮೌಲ್ಯಗಳನ್ನು ಅಥವಾ ಅಂತರ್ನಿರ್ಮಿತ ಡೀಫಾಲ್ಟ್‌ಗಳನ್ನು ಬಳಸುತ್ತವೆ.';
 
   @override
-  String pluginStatusVersion(String status, String version) {
-    return '$status\nಆವೃತ್ತಿ: $version';
+  String get pluginConnected => 'Connected';
+
+  @override
+  String pluginConnectedVersion(String version) {
+    return 'Connected, version $version';
   }
 
   @override
-  String get availableServices => 'ಲಭ್ಯವಿರುವ ಸೇವೆಗಳು';
+  String get pluginSyncOn => 'Sync on';
 
   @override
-  String get serverPluginSync => 'ಸರ್ವರ್ ಪ್ಲಗಿನ್ ಸಿಂಕ್';
+  String get pluginSyncOff => 'Sync off';
 
   @override
-  String get syncSettingsWithPlugin =>
-      'ಸರ್ವರ್ ಪ್ಲಗಿನ್‌ನೊಂದಿಗೆ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಸಿಂಕ್ ಮಾಡಿ';
+  String get syncProfileDescription =>
+      'This device syncs with the profile you pick until you pick another.';
 
   @override
-  String get whatSyncControls => 'ಯಾವ ಸಿಂಕ್ ನಿಯಂತ್ರಣಗಳು';
+  String get profileAppliesEverywhere => 'Applies everywhere';
 
   @override
-  String get syncControlsDescription =>
-      'ಪ್ಲಗಿನ್-ಬೆಂಬಲಿತ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಸರ್ವರ್‌ಗೆ ತಳ್ಳಲಾಗುತ್ತದೆ ಮತ್ತು ಎಳೆಯಲಾಗುತ್ತದೆಯೇ ಎಂಬುದನ್ನು ಮಾತ್ರ ಸಿಂಕ್ ನಿಯಂತ್ರಿಸುತ್ತದೆ. ಪ್ಲಗಿನ್ ಸಿಂಕ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿದಾಗ ಪ್ರೊಫೈಲ್ ಆಯ್ಕೆ ಮತ್ತು ಪ್ರೊಫೈಲ್ ಸಿಂಕ್ ಕ್ರಿಯೆಗಳು ಗ್ರಾಹಕೀಕರಣ ಸೆಟ್ಟಿಂಗ್‌ಗಳಲ್ಲಿವೆ.';
+  String get profileOverridesGlobal => 'Overrides Global';
+
+  @override
+  String get profileThisDevice => 'This device';
+
+  @override
+  String get profileLoad => 'Load';
+
+  @override
+  String get profileLoadSubtitle => 'Server to this device';
+
+  @override
+  String get profileSaveSubtitle => 'This device to server';
+
+  @override
+  String resetNamedProfile(String profile) {
+    return 'Reset $profile Profile';
+  }
 
   @override
   String get recentRequests => 'ಇತ್ತೀಚಿನ ವಿನಂತಿಗಳು';
@@ -10092,10 +10091,6 @@ class AppLocalizationsKn extends AppLocalizations {
 
   @override
   String get settingsSeasonalSurprise => 'ಕಾಲೋಚಿತ ಆಶ್ಚರ್ಯ';
-
-  @override
-  String get settingsPluginScreenDescription =>
-      'ಹೆಚ್ಚುವರಿ ರೇಟಿಂಗ್ ಮೂಲಗಳು, Seerr ವಿನಂತಿಗಳು ಮತ್ತು ಸಿಂಕ್ ಮಾಡಿದ ಆದ್ಯತೆಗಳು ಸೇರಿದಂತೆ ಸರ್ವರ್-ಸೈಡ್ ಸಂಯೋಜನೆಗಳಿಗೆ Moonbase ಶಕ್ತಿ ನೀಡುತ್ತದೆ.';
 
   @override
   String get useNativeEmulator => 'Native Emulation';

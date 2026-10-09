@@ -4241,23 +4241,7 @@ class AppLocalizationsTr extends AppLocalizations {
   }
 
   @override
-  String get customizationProfile => 'Özelleştirme Profili';
-
-  @override
-  String get customizationProfileDescription =>
-      'Yüklenecek, düzenlenecek ve senkronize edilecek profili seçin. Global, bir cihaz profili onu geçersiz kılmadığı sürece her yerde geçerlidir. Yeşil nokta mevcut cihaz profilinizi işaretler.';
-
-  @override
-  String get loadProfile => 'Profili Yükle';
-
-  @override
   String get syncing => 'Senkronize ediliyor…';
-
-  @override
-  String get syncToProfile => 'Profili Senkronize Et';
-
-  @override
-  String get resetProfile => 'Profili Sıfırla';
 
   @override
   String resetProfileTitle(String profile) {
@@ -5037,34 +5021,49 @@ class AppLocalizationsTr extends AppLocalizations {
   String get pluginNotDetected => 'Eklenti Algılanmadı';
 
   @override
-  String get pluginDetectedDescription =>
-      'Sunucu eklentisi algılandı. Eklenti ilk bulunduğunda senkronizasyon otomatik olarak etkinleştirilir.';
-
-  @override
   String get pluginNotDetectedDescription =>
       'Sunucu eklentisi şu anda algılanmıyor. Yerel ayarlar hâlâ kayıtlı değerlerini veya yerleşik varsayılanları kullanır.';
 
   @override
-  String pluginStatusVersion(String status, String version) {
-    return '$status\nSürüm: $version';
+  String get pluginConnected => 'Connected';
+
+  @override
+  String pluginConnectedVersion(String version) {
+    return 'Connected, version $version';
   }
 
   @override
-  String get availableServices => 'Mevcut Hizmetler';
+  String get pluginSyncOn => 'Sync on';
 
   @override
-  String get serverPluginSync => 'Sunucu Eklenti Senkronizasyonu';
+  String get pluginSyncOff => 'Sync off';
 
   @override
-  String get syncSettingsWithPlugin =>
-      'Ayarları sunucu eklentisiyle senkronize edin';
+  String get syncProfileDescription =>
+      'This device syncs with the profile you pick until you pick another.';
 
   @override
-  String get whatSyncControls => 'Hangi senkronizasyon kontrolleri';
+  String get profileAppliesEverywhere => 'Applies everywhere';
 
   @override
-  String get syncControlsDescription =>
-      'Senkronizasyon yalnızca eklenti destekli ayarların sunucuya aktarılıp aktarılmayacağını ve sunucudan çekilip çekilmeyeceğini kontrol eder. Profil seçimi ve profil senkronizasyon işlemleri, eklenti senkronizasyonu etkinleştirildiğinde Özelleştirme ayarlarında bulunur.';
+  String get profileOverridesGlobal => 'Overrides Global';
+
+  @override
+  String get profileThisDevice => 'This device';
+
+  @override
+  String get profileLoad => 'Load';
+
+  @override
+  String get profileLoadSubtitle => 'Server to this device';
+
+  @override
+  String get profileSaveSubtitle => 'This device to server';
+
+  @override
+  String resetNamedProfile(String profile) {
+    return 'Reset $profile Profile';
+  }
 
   @override
   String get recentRequests => 'Son İstekler';
@@ -10041,10 +10040,6 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get settingsSeasonalSurprise => 'Sezonluk Sürpriz';
-
-  @override
-  String get settingsPluginScreenDescription =>
-      'Moonbase, ek puan kaynakları, Seerr istekleri ve senkronize edilmiş tercihler dahil olmak üzere sunucu tarafı entegrasyonlarını destekler.';
 
   @override
   String get useNativeEmulator => 'Yerel Emülasyon';

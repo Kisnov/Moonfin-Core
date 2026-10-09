@@ -4214,23 +4214,7 @@ class AppLocalizationsHe extends AppLocalizations {
   }
 
   @override
-  String get customizationProfile => 'פרופיל התאמה אישית';
-
-  @override
-  String get customizationProfileDescription =>
-      'בחר את הפרופיל לטעינה, עריכה וסנכרון. גלובלי חל בכל מקום אלא אם פרופיל מכשיר עוקף אותו. הנקודה הירוקה מסמנת את פרופיל המכשיר הנוכחי שלך.';
-
-  @override
-  String get loadProfile => 'טען פרופיל';
-
-  @override
   String get syncing => 'מסנכרן...';
-
-  @override
-  String get syncToProfile => 'סנכרון לפרופיל';
-
-  @override
-  String get resetProfile => 'Reset Profile';
 
   @override
   String resetProfileTitle(String profile) {
@@ -4992,33 +4976,49 @@ class AppLocalizationsHe extends AppLocalizations {
   String get pluginNotDetected => 'תוסף לא זוהה';
 
   @override
-  String get pluginDetectedDescription =>
-      'זוהה תוסף שרת. סנכרון מופעל אוטומטית בפעם הראשונה שהתוסף נמצא.';
-
-  @override
   String get pluginNotDetectedDescription =>
       'תוסף שרת אינו מזוהה כעת. הגדרות מקומיות עדיין משתמשות בערכים השמורים או בברירות המחדל המובנות שלהן.';
 
   @override
-  String pluginStatusVersion(String status, String version) {
-    return '$status\nגרסה: $version';
+  String get pluginConnected => 'Connected';
+
+  @override
+  String pluginConnectedVersion(String version) {
+    return 'Connected, version $version';
   }
 
   @override
-  String get availableServices => 'שירותים זמינים';
+  String get pluginSyncOn => 'Sync on';
 
   @override
-  String get serverPluginSync => 'סנכרון תוסף שרת';
+  String get pluginSyncOff => 'Sync off';
 
   @override
-  String get syncSettingsWithPlugin => 'סנכרון הגדרות עם תוסף השרת';
+  String get syncProfileDescription =>
+      'This device syncs with the profile you pick until you pick another.';
 
   @override
-  String get whatSyncControls => 'אילו בקרות סנכרון';
+  String get profileAppliesEverywhere => 'Applies everywhere';
 
   @override
-  String get syncControlsDescription =>
-      'סנכרון שולט רק אם הגדרות מגובות פלאגין נדחפות לשרת ונשלפות ממנו. פעולות בחירת פרופיל וסנכרון פרופיל נמצאות בהגדרות התאמה אישית כאשר סינכרון הפלאגין מופעל.';
+  String get profileOverridesGlobal => 'Overrides Global';
+
+  @override
+  String get profileThisDevice => 'This device';
+
+  @override
+  String get profileLoad => 'Load';
+
+  @override
+  String get profileLoadSubtitle => 'Server to this device';
+
+  @override
+  String get profileSaveSubtitle => 'This device to server';
+
+  @override
+  String resetNamedProfile(String profile) {
+    return 'Reset $profile Profile';
+  }
 
   @override
   String get recentRequests => 'בקשות אחרונות';
@@ -9917,10 +9917,6 @@ class AppLocalizationsHe extends AppLocalizations {
 
   @override
   String get settingsSeasonalSurprise => 'הפתעה עונתית';
-
-  @override
-  String get settingsPluginScreenDescription =>
-      'Moonbase מפעיל שילובים בצד השרת, כולל מקורות דירוג נוספים, בקשות Seerr והעדפות מסונכרנות.';
 
   @override
   String get useNativeEmulator => 'Native Emulation';

@@ -4243,23 +4243,7 @@ class AppLocalizationsKk extends AppLocalizations {
   }
 
   @override
-  String get customizationProfile => 'Теңшеу профилі';
-
-  @override
-  String get customizationProfileDescription =>
-      'Жүктеу, өңдеу және синхрондау үшін профильді таңдаңыз. Құрылғы профилі оны қайта анықтамайынша, ғаламдық барлық жерде қолданылады. Жасыл нүкте ағымдағы құрылғы профилін белгілейді.';
-
-  @override
-  String get loadProfile => 'Профильді жүктеңіз';
-
-  @override
   String get syncing => 'Синхрондалуда...';
-
-  @override
-  String get syncToProfile => 'Профильге синхрондау';
-
-  @override
-  String get resetProfile => 'Reset Profile';
 
   @override
   String resetProfileTitle(String profile) {
@@ -5043,34 +5027,49 @@ class AppLocalizationsKk extends AppLocalizations {
   String get pluginNotDetected => 'Плагин анықталмады';
 
   @override
-  String get pluginDetectedDescription =>
-      'Сервер плагині анықталды. Синхрондау плагин бірінші рет табылған кезде автоматты түрде қосылады.';
-
-  @override
   String get pluginNotDetectedDescription =>
       'Сервер плагині қазір анықталмаған. Жергілікті параметрлер әлі де өздерінің сақталған мәндерін немесе кірістірілген әдепкі параметрлерді пайдаланады.';
 
   @override
-  String pluginStatusVersion(String status, String version) {
-    return '$status\nНұсқасы: $version';
+  String get pluginConnected => 'Connected';
+
+  @override
+  String pluginConnectedVersion(String version) {
+    return 'Connected, version $version';
   }
 
   @override
-  String get availableServices => 'Қолжетімді қызметтер';
+  String get pluginSyncOn => 'Sync on';
 
   @override
-  String get serverPluginSync => 'Сервер плагиндерін синхрондау';
+  String get pluginSyncOff => 'Sync off';
 
   @override
-  String get syncSettingsWithPlugin =>
-      'Параметрлерді сервер плагинімен синхрондаңыз';
+  String get syncProfileDescription =>
+      'This device syncs with the profile you pick until you pick another.';
 
   @override
-  String get whatSyncControls => 'Қандай синхрондауды басқарады';
+  String get profileAppliesEverywhere => 'Applies everywhere';
 
   @override
-  String get syncControlsDescription =>
-      'Синхрондау тек плагин қолдайтын параметрлердің серверге итерілуін және серверден алынуын басқарады. Профильді таңдау және профильді синхрондау әрекеттері плагинді синхрондау қосылған кезде Теңшеу параметрлерінде болады.';
+  String get profileOverridesGlobal => 'Overrides Global';
+
+  @override
+  String get profileThisDevice => 'This device';
+
+  @override
+  String get profileLoad => 'Load';
+
+  @override
+  String get profileLoadSubtitle => 'Server to this device';
+
+  @override
+  String get profileSaveSubtitle => 'This device to server';
+
+  @override
+  String resetNamedProfile(String profile) {
+    return 'Reset $profile Profile';
+  }
 
   @override
   String get recentRequests => 'Соңғы сұраулар';
@@ -10071,10 +10070,6 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get settingsSeasonalSurprise => 'Маусымдық тосынсый';
-
-  @override
-  String get settingsPluginScreenDescription =>
-      'Moonbase қосымша бағалау көздерін, Seerr сұрауларын және синхрондалған теңшелімдерді қоса, серверлік интеграцияларға қуат береді.';
 
   @override
   String get useNativeEmulator => 'Native Emulation';

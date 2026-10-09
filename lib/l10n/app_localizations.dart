@@ -7486,41 +7486,11 @@ abstract class AppLocalizations {
   /// **'Synced local settings to {profile} profile.'**
   String syncedSettingsToProfile(String profile);
 
-  /// Setting for customization profile
-  ///
-  /// In en, this message translates to:
-  /// **'Customization Profile'**
-  String get customizationProfile;
-
-  /// Description for customization profile
-  ///
-  /// In en, this message translates to:
-  /// **'Choose the profile to load, edit, and sync. Global applies everywhere unless a device profile overrides it. The green dot marks your current device profile.'**
-  String get customizationProfileDescription;
-
-  /// Button to load a profile
-  ///
-  /// In en, this message translates to:
-  /// **'Load Profile'**
-  String get loadProfile;
-
   /// Label while syncing
   ///
   /// In en, this message translates to:
   /// **'Syncing...'**
   String get syncing;
-
-  /// Button to sync to a profile
-  ///
-  /// In en, this message translates to:
-  /// **'Sync Profile'**
-  String get syncToProfile;
-
-  /// Button to reset a profile to defaults
-  ///
-  /// In en, this message translates to:
-  /// **'Reset Profile'**
-  String get resetProfile;
 
   /// Title of the dialog confirming a profile reset
   ///
@@ -8944,53 +8914,83 @@ abstract class AppLocalizations {
   /// **'Plugin Not Detected'**
   String get pluginNotDetected;
 
-  /// Description when plugin is detected
-  ///
-  /// In en, this message translates to:
-  /// **'Server plugin detected. Sync is enabled automatically the first time the plugin is found.'**
-  String get pluginDetectedDescription;
-
   /// Description when plugin is not detected
   ///
   /// In en, this message translates to:
   /// **'Server plugin is not currently detected. Local settings still use their saved values or built-in defaults.'**
   String get pluginNotDetectedDescription;
 
-  /// Plugin status with version
+  /// Status line on the Settings Sync screen when the server plugin answers
   ///
   /// In en, this message translates to:
-  /// **'{status}\nVersion: {version}'**
-  String pluginStatusVersion(String status, String version);
+  /// **'Connected'**
+  String get pluginConnected;
 
-  /// Section title for available services
+  /// Status line on the Settings Sync screen with the server plugin's version
   ///
   /// In en, this message translates to:
-  /// **'Available Services'**
-  String get availableServices;
+  /// **'Connected, version {version}'**
+  String pluginConnectedVersion(String version);
 
-  /// Setting for server plugin sync
+  /// Caption under the settings sync switch while sync is on
   ///
   /// In en, this message translates to:
-  /// **'Server Plugin Sync'**
-  String get serverPluginSync;
+  /// **'Sync on'**
+  String get pluginSyncOn;
 
-  /// Description for server plugin sync
+  /// Caption under the settings sync switch while sync is off
   ///
   /// In en, this message translates to:
-  /// **'Sync settings with the server plugin'**
-  String get syncSettingsWithPlugin;
+  /// **'Sync off'**
+  String get pluginSyncOff;
 
-  /// Info title for sync explanation
+  /// Caption above the settings profile cards on the Settings Sync screen
   ///
   /// In en, this message translates to:
-  /// **'What sync controls'**
-  String get whatSyncControls;
+  /// **'This device syncs with the profile you pick until you pick another.'**
+  String get syncProfileDescription;
 
-  /// Description of what sync controls
+  /// Subtitle of the Global settings profile card
   ///
   /// In en, this message translates to:
-  /// **'Sync only controls whether plugin-backed settings are pushed to and pulled from the server. Profile selection and profile sync actions are in Customization settings when plugin sync is enabled.'**
-  String get syncControlsDescription;
+  /// **'Applies everywhere'**
+  String get profileAppliesEverywhere;
+
+  /// Subtitle of the Desktop, Mobile and TV settings profile cards
+  ///
+  /// In en, this message translates to:
+  /// **'Overrides Global'**
+  String get profileOverridesGlobal;
+
+  /// Marks the settings profile card that matches the current device
+  ///
+  /// In en, this message translates to:
+  /// **'This device'**
+  String get profileThisDevice;
+
+  /// Button that replaces this device's settings with the chosen profile from the server
+  ///
+  /// In en, this message translates to:
+  /// **'Load'**
+  String get profileLoad;
+
+  /// Line under the Load button saying which way the settings go
+  ///
+  /// In en, this message translates to:
+  /// **'Server to this device'**
+  String get profileLoadSubtitle;
+
+  /// Line under the Save button saying which way the settings go
+  ///
+  /// In en, this message translates to:
+  /// **'This device to server'**
+  String get profileSaveSubtitle;
+
+  /// Button that resets the chosen settings profile, for example Reset TV Profile
+  ///
+  /// In en, this message translates to:
+  /// **'Reset {profile} Profile'**
+  String resetNamedProfile(String profile);
 
   /// Seerr row: recent requests
   ///
@@ -17769,12 +17769,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Seasonal Surprise'**
   String get settingsSeasonalSurprise;
-
-  /// No description provided for @settingsPluginScreenDescription.
-  ///
-  /// In en, this message translates to:
-  /// **'Moonbase powers server-side integrations including additional rating sources, Seerr requests, and synced preferences.'**
-  String get settingsPluginScreenDescription;
 
   /// Settings toggle title. When on, retro games run through native libretro emulator cores instead of the EmulatorJS browser-based emulator.
   ///

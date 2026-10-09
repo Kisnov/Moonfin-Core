@@ -5613,29 +5613,9 @@
       }
     }
   },
-  "customizationProfile": "Customization Profile",
-  "@customizationProfile": {
-    "description": "Setting for customization profile"
-  },
-  "customizationProfileDescription": "Choose the profile to load, edit, and sync. Global applies everywhere unless a device profile overrides it. The green dot marks your current device profile.",
-  "@customizationProfileDescription": {
-    "description": "Description for customization profile"
-  },
-  "loadProfile": "Load Profile",
-  "@loadProfile": {
-    "description": "Button to load a profile"
-  },
   "syncing": "Syncing...",
   "@syncing": {
     "description": "Label while syncing"
-  },
-  "syncToProfile": "Sync Profile",
-  "@syncToProfile": {
-    "description": "Button to sync to a profile"
-  },
-  "resetProfile": "Reset Profile",
-  "@resetProfile": {
-    "description": "Button to reset a profile to defaults"
   },
   "resetProfileTitle": "Reset {profile}?",
   "@resetProfileTitle": {
@@ -6617,45 +6597,67 @@
   "@pluginNotDetected": {
     "description": "Status when plugin is not detected"
   },
-  "pluginDetectedDescription": "Server plugin detected. Sync is enabled automatically the first time the plugin is found.",
-  "@pluginDetectedDescription": {
-    "description": "Description when plugin is detected"
-  },
   "pluginNotDetectedDescription": "Server plugin is not currently detected. Local settings still use their saved values or built-in defaults.",
   "@pluginNotDetectedDescription": {
     "description": "Description when plugin is not detected"
   },
-  "pluginStatusVersion": "{status}\nVersion: {version}",
-  "@pluginStatusVersion": {
-    "description": "Plugin status with version",
+  "pluginConnected": "Connected",
+  "@pluginConnected": {
+    "description": "Status line on the Settings Sync screen when the server plugin answers"
+  },
+  "pluginConnectedVersion": "Connected, version {version}",
+  "@pluginConnectedVersion": {
+    "description": "Status line on the Settings Sync screen with the server plugin's version",
     "placeholders": {
-      "status": {
-        "type": "String"
-      },
       "version": {
         "type": "String"
       }
     }
   },
-  "availableServices": "Available Services",
-  "@availableServices": {
-    "description": "Section title for available services"
+  "pluginSyncOn": "Sync on",
+  "@pluginSyncOn": {
+    "description": "Caption under the settings sync switch while sync is on"
   },
-  "serverPluginSync": "Server Plugin Sync",
-  "@serverPluginSync": {
-    "description": "Setting for server plugin sync"
+  "pluginSyncOff": "Sync off",
+  "@pluginSyncOff": {
+    "description": "Caption under the settings sync switch while sync is off"
   },
-  "syncSettingsWithPlugin": "Sync settings with the server plugin",
-  "@syncSettingsWithPlugin": {
-    "description": "Description for server plugin sync"
+  "syncProfileDescription": "This device syncs with the profile you pick until you pick another.",
+  "@syncProfileDescription": {
+    "description": "Caption above the settings profile cards on the Settings Sync screen"
   },
-  "whatSyncControls": "What sync controls",
-  "@whatSyncControls": {
-    "description": "Info title for sync explanation"
+  "profileAppliesEverywhere": "Applies everywhere",
+  "@profileAppliesEverywhere": {
+    "description": "Subtitle of the Global settings profile card"
   },
-  "syncControlsDescription": "Sync only controls whether plugin-backed settings are pushed to and pulled from the server. Profile selection and profile sync actions are in Customization settings when plugin sync is enabled.",
-  "@syncControlsDescription": {
-    "description": "Description of what sync controls"
+  "profileOverridesGlobal": "Overrides Global",
+  "@profileOverridesGlobal": {
+    "description": "Subtitle of the Desktop, Mobile and TV settings profile cards"
+  },
+  "profileThisDevice": "This device",
+  "@profileThisDevice": {
+    "description": "Marks the settings profile card that matches the current device"
+  },
+  "profileLoad": "Load",
+  "@profileLoad": {
+    "description": "Button that replaces this device's settings with the chosen profile from the server"
+  },
+  "profileLoadSubtitle": "Server to this device",
+  "@profileLoadSubtitle": {
+    "description": "Line under the Load button saying which way the settings go"
+  },
+  "profileSaveSubtitle": "This device to server",
+  "@profileSaveSubtitle": {
+    "description": "Line under the Save button saying which way the settings go"
+  },
+  "resetNamedProfile": "Reset {profile} Profile",
+  "@resetNamedProfile": {
+    "description": "Button that resets the chosen settings profile, for example Reset TV Profile",
+    "placeholders": {
+      "profile": {
+        "type": "String"
+      }
+    }
   },
   "recentRequests": "Recent Requests",
   "@recentRequests": {
@@ -9841,7 +9843,6 @@
   "settingsMediaBarAndLocalPreviews": "Media Bar & Local Previews",
   "settingsVisualOverlays": "Visual Overlays",
   "settingsSeasonalSurprise": "Seasonal Surprise",
-  "settingsPluginScreenDescription": "Moonbase powers server-side integrations including additional rating sources, Seerr requests, and synced preferences.",
   "useNativeEmulator": "Native Emulation",
   "@useNativeEmulator": {
     "description": "Settings toggle title. When on, retro games run through native libretro emulator cores instead of the EmulatorJS browser-based emulator."

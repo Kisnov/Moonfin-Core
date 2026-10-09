@@ -4252,23 +4252,7 @@ class AppLocalizationsLv extends AppLocalizations {
   }
 
   @override
-  String get customizationProfile => 'Pielāgošanas profils';
-
-  @override
-  String get customizationProfileDescription =>
-      'Izvēlieties profilu, ko ielādēt, rediģēt un sinhronizēt. Globālais ir spēkā visur, ja vien ierīces profils to neaizstāda. Zaļais punkts apzīmē jūsu pašreizējo ierīces profilu.';
-
-  @override
-  String get loadProfile => 'Ielādēt profilu';
-
-  @override
   String get syncing => 'Sinhronizē...';
-
-  @override
-  String get syncToProfile => 'Sinhronizēt ar profilu';
-
-  @override
-  String get resetProfile => 'Reset Profile';
 
   @override
   String resetProfileTitle(String profile) {
@@ -5043,34 +5027,49 @@ class AppLocalizationsLv extends AppLocalizations {
   String get pluginNotDetected => 'Spraudnis nav noteikts';
 
   @override
-  String get pluginDetectedDescription =>
-      'Konstatēts servera spraudnis. Sinhronizācija tiek iespējota automātiski, kad spraudnis tiek atrasts pirmo reizi.';
-
-  @override
   String get pluginNotDetectedDescription =>
       'Servera spraudnis pašlaik nav atklāts. Vietējie iestatījumi joprojām izmanto to saglabātās vērtības vai iebūvētos noklusējuma iestatījumus.';
 
   @override
-  String pluginStatusVersion(String status, String version) {
-    return '$status\nVersija: $version';
+  String get pluginConnected => 'Connected';
+
+  @override
+  String pluginConnectedVersion(String version) {
+    return 'Connected, version $version';
   }
 
   @override
-  String get availableServices => 'Pieejamie pakalpojumi';
+  String get pluginSyncOn => 'Sync on';
 
   @override
-  String get serverPluginSync => 'Servera spraudņa sinhronizācija';
+  String get pluginSyncOff => 'Sync off';
 
   @override
-  String get syncSettingsWithPlugin =>
-      'Sinhronizējiet iestatījumus ar servera spraudni';
+  String get syncProfileDescription =>
+      'This device syncs with the profile you pick until you pick another.';
 
   @override
-  String get whatSyncControls => 'Kādas sinhronizācijas vadīklas';
+  String get profileAppliesEverywhere => 'Applies everywhere';
 
   @override
-  String get syncControlsDescription =>
-      'Sinhronizācija kontrolē tikai to, vai spraudņu atbalstītie iestatījumi tiek nosūtīti uz serveri un izņemti no tā. Profila atlase un profila sinhronizācijas darbības atrodas pielāgošanas iestatījumos, kad ir iespējota spraudņa sinhronizācija.';
+  String get profileOverridesGlobal => 'Overrides Global';
+
+  @override
+  String get profileThisDevice => 'This device';
+
+  @override
+  String get profileLoad => 'Load';
+
+  @override
+  String get profileLoadSubtitle => 'Server to this device';
+
+  @override
+  String get profileSaveSubtitle => 'This device to server';
+
+  @override
+  String resetNamedProfile(String profile) {
+    return 'Reset $profile Profile';
+  }
 
   @override
   String get recentRequests => 'Jaunākie pieprasījumi';
@@ -10080,10 +10079,6 @@ class AppLocalizationsLv extends AppLocalizations {
 
   @override
   String get settingsSeasonalSurprise => 'Sezonas pārsteigums';
-
-  @override
-  String get settingsPluginScreenDescription =>
-      'Moonbase nodrošina servera puses integrāciju, tostarp papildu reitingu avotus, Seerr pieprasījumus un sinhronizētās preferences.';
 
   @override
   String get useNativeEmulator => 'Native Emulation';

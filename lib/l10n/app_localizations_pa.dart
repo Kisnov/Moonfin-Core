@@ -4228,23 +4228,7 @@ class AppLocalizationsPa extends AppLocalizations {
   }
 
   @override
-  String get customizationProfile => 'ਕਸਟਮਾਈਜ਼ੇਸ਼ਨ ਪ੍ਰੋਫਾਈਲ';
-
-  @override
-  String get customizationProfileDescription =>
-      'ਲੋਡ ਕਰਨ, ਸੰਪਾਦਿਤ ਕਰਨ ਅਤੇ ਸਿੰਕ ਕਰਨ ਲਈ ਪ੍ਰੋਫਾਈਲ ਚੁਣੋ। ਗਲੋਬਲ ਹਰ ਜਗ੍ਹਾ ਲਾਗੂ ਹੁੰਦਾ ਹੈ ਜਦੋਂ ਤੱਕ ਕੋਈ ਡਿਵਾਈਸ ਪ੍ਰੋਫਾਈਲ ਇਸ ਨੂੰ ਓਵਰਰਾਈਡ ਨਹੀਂ ਕਰਦੀ। ਹਰਾ ਬਿੰਦੂ ਤੁਹਾਡੇ ਮੌਜੂਦਾ ਡਿਵਾਈਸ ਪ੍ਰੋਫਾਈਲ ਨੂੰ ਚਿੰਨ੍ਹਿਤ ਕਰਦਾ ਹੈ।';
-
-  @override
-  String get loadProfile => 'ਪ੍ਰੋਫਾਈਲ ਲੋਡ ਕਰੋ';
-
-  @override
   String get syncing => 'ਸਿੰਕ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...';
-
-  @override
-  String get syncToProfile => 'ਪ੍ਰੋਫਾਈਲ ਨਾਲ ਸਿੰਕ ਕਰੋ';
-
-  @override
-  String get resetProfile => 'Reset Profile';
 
   @override
   String resetProfileTitle(String profile) {
@@ -5017,33 +5001,49 @@ class AppLocalizationsPa extends AppLocalizations {
   String get pluginNotDetected => 'ਪਲੱਗਇਨ ਖੋਜਿਆ ਨਹੀਂ ਗਿਆ';
 
   @override
-  String get pluginDetectedDescription =>
-      'ਸਰਵਰ ਪਲੱਗਇਨ ਖੋਜਿਆ ਗਿਆ। ਪਹਿਲੀ ਵਾਰ ਪਲੱਗਇਨ ਲੱਭੇ ਜਾਣ \'ਤੇ ਸਿੰਕ ਆਪਣੇ ਆਪ ਹੀ ਸਮਰੱਥ ਹੋ ਜਾਂਦਾ ਹੈ।';
-
-  @override
   String get pluginNotDetectedDescription =>
       'ਸਰਵਰ ਪਲੱਗਇਨ ਇਸ ਵੇਲੇ ਖੋਜਿਆ ਨਹੀਂ ਗਿਆ ਹੈ। ਸਥਾਨਕ ਸੈਟਿੰਗਾਂ ਅਜੇ ਵੀ ਉਹਨਾਂ ਦੇ ਸੁਰੱਖਿਅਤ ਕੀਤੇ ਮੁੱਲ ਜਾਂ ਬਿਲਟ-ਇਨ ਡਿਫੌਲਟ ਵਰਤਦੀਆਂ ਹਨ।';
 
   @override
-  String pluginStatusVersion(String status, String version) {
-    return '$status\nਸੰਸਕਰਣ: $version';
+  String get pluginConnected => 'Connected';
+
+  @override
+  String pluginConnectedVersion(String version) {
+    return 'Connected, version $version';
   }
 
   @override
-  String get availableServices => 'ਉਪਲਬਧ ਸੇਵਾਵਾਂ';
+  String get pluginSyncOn => 'Sync on';
 
   @override
-  String get serverPluginSync => 'ਸਰਵਰ ਪਲੱਗਇਨ ਸਿੰਕ';
+  String get pluginSyncOff => 'Sync off';
 
   @override
-  String get syncSettingsWithPlugin => 'ਸਰਵਰ ਪਲੱਗਇਨ ਨਾਲ ਸੈਟਿੰਗਾਂ ਸਿੰਕ ਕਰੋ';
+  String get syncProfileDescription =>
+      'This device syncs with the profile you pick until you pick another.';
 
   @override
-  String get whatSyncControls => 'ਕੀ ਸਿੰਕ ਕੰਟਰੋਲ ਕਰਦਾ ਹੈ';
+  String get profileAppliesEverywhere => 'Applies everywhere';
 
   @override
-  String get syncControlsDescription =>
-      'ਸਿੰਕ ਸਿਰਫ਼ ਇਹ ਨਿਯੰਤਰਿਤ ਕਰਦਾ ਹੈ ਕਿ ਕੀ ਪਲੱਗਇਨ-ਬੈਕਡ ਸੈਟਿੰਗਾਂ ਨੂੰ ਸਰਵਰ \'ਤੇ ਧੱਕਿਆ ਜਾਂ ਖਿੱਚਿਆ ਗਿਆ ਹੈ ਜਾਂ ਨਹੀਂ। ਪ੍ਰੋਫਾਈਲ ਚੋਣ ਅਤੇ ਪ੍ਰੋਫਾਈਲ ਸਮਕਾਲੀਕਰਨ ਕਿਰਿਆਵਾਂ ਕਸਟਮਾਈਜ਼ੇਸ਼ਨ ਸੈਟਿੰਗਾਂ ਵਿੱਚ ਹੁੰਦੀਆਂ ਹਨ ਜਦੋਂ ਪਲੱਗਇਨ ਸਮਕਾਲੀਕਰਨ ਯੋਗ ਹੁੰਦਾ ਹੈ।';
+  String get profileOverridesGlobal => 'Overrides Global';
+
+  @override
+  String get profileThisDevice => 'This device';
+
+  @override
+  String get profileLoad => 'Load';
+
+  @override
+  String get profileLoadSubtitle => 'Server to this device';
+
+  @override
+  String get profileSaveSubtitle => 'This device to server';
+
+  @override
+  String resetNamedProfile(String profile) {
+    return 'Reset $profile Profile';
+  }
 
   @override
   String get recentRequests => 'ਹਾਲੀਆ ਬੇਨਤੀਆਂ';
@@ -9999,10 +9999,6 @@ class AppLocalizationsPa extends AppLocalizations {
 
   @override
   String get settingsSeasonalSurprise => 'ਮੌਸਮੀ ਹੈਰਾਨੀ';
-
-  @override
-  String get settingsPluginScreenDescription =>
-      'Moonbase ਵਾਧੂ ਰੇਟਿੰਗ ਸਰੋਤਾਂ, Seerr ਬੇਨਤੀਆਂ ਅਤੇ ਸਿੰਕ ਕੀਤੀਆਂ ਤਰਜੀਹਾਂ ਸਮੇਤ ਸਰਵਰ-ਸਾਈਡ ਏਕੀਕਰਨ ਨੂੰ ਸ਼ਕਤੀ ਦਿੰਦਾ ਹੈ।';
 
   @override
   String get useNativeEmulator => 'Native Emulation';

@@ -4233,23 +4233,7 @@ class AppLocalizationsSi extends AppLocalizations {
   }
 
   @override
-  String get customizationProfile => 'අභිරුචිකරණ පැතිකඩ';
-
-  @override
-  String get customizationProfileDescription =>
-      'පූරණය කිරීමට, සංස්කරණය කිරීමට සහ සමමුහුර්ත කිරීමට පැතිකඩ තෝරන්න. උපාංග පැතිකඩක් එය අභිබවා යන්නේ නම් මිස Global සෑම තැනකම අදාළ වේ. හරිත තිත ඔබගේ වත්මන් උපාංග පැතිකඩ සලකුණු කරයි.';
-
-  @override
-  String get loadProfile => 'පැතිකඩ පූරණය කරන්න';
-
-  @override
   String get syncing => 'සමමුහුර්ත කරමින්...';
-
-  @override
-  String get syncToProfile => 'පැතිකඩ වෙත සමමුහුර්ත කරන්න';
-
-  @override
-  String get resetProfile => 'Reset Profile';
 
   @override
   String resetProfileTitle(String profile) {
@@ -5026,34 +5010,49 @@ class AppLocalizationsSi extends AppLocalizations {
   String get pluginNotDetected => 'ප්ලගිනය අනාවරණය කර නොමැත';
 
   @override
-  String get pluginDetectedDescription =>
-      'සේවාදායක ප්ලගිනය අනාවරණය විය. පළමු වරට ප්ලගිනය සොයාගත් විට සමමුහුර්ත කිරීම ස්වයංක්‍රීයව සක්‍රීය වේ.';
-
-  @override
   String get pluginNotDetectedDescription =>
       'සේවාදායක ප්ලගිනය දැනට අනාවරණය කර නොමැත. ස්ථානීය සැකසීම් තවමත් ඒවායේ සුරැකි අගයන් හෝ බිල්ට් පෙරනිමි භාවිතා කරයි.';
 
   @override
-  String pluginStatusVersion(String status, String version) {
-    return '$status\nඅනුවාදය: $version';
+  String get pluginConnected => 'Connected';
+
+  @override
+  String pluginConnectedVersion(String version) {
+    return 'Connected, version $version';
   }
 
   @override
-  String get availableServices => 'ලබා ගත හැකි සේවා';
+  String get pluginSyncOn => 'Sync on';
 
   @override
-  String get serverPluginSync => 'සේවාදායක ප්ලගින සමමුහුර්තකරණය';
+  String get pluginSyncOff => 'Sync off';
 
   @override
-  String get syncSettingsWithPlugin =>
-      'සේවාදායක ප්ලගිනය සමඟ සැකසුම් සමමුහුර්ත කරන්න';
+  String get syncProfileDescription =>
+      'This device syncs with the profile you pick until you pick another.';
 
   @override
-  String get whatSyncControls => 'සමමුහුර්ත පාලන මොනවාද';
+  String get profileAppliesEverywhere => 'Applies everywhere';
 
   @override
-  String get syncControlsDescription =>
-      'සමමුහුර්තකරණය පාලනය කරන්නේ ප්ලගින පිටුබලය සහිත සැකසුම් සේවාදායකය වෙත තල්ලු කර ඇදගෙන යාම පමණි. ප්ලගින සමමුහුර්තකරණය සබල කර ඇති විට පැතිකඩ තේරීම සහ පැතිකඩ සමමුහුර්ත කිරීමේ ක්‍රියා අභිරුචිකරණ සැකසීම් තුළ ඇත.';
+  String get profileOverridesGlobal => 'Overrides Global';
+
+  @override
+  String get profileThisDevice => 'This device';
+
+  @override
+  String get profileLoad => 'Load';
+
+  @override
+  String get profileLoadSubtitle => 'Server to this device';
+
+  @override
+  String get profileSaveSubtitle => 'This device to server';
+
+  @override
+  String resetNamedProfile(String profile) {
+    return 'Reset $profile Profile';
+  }
 
   @override
   String get recentRequests => 'මෑත ඉල්ලීම්';
@@ -10021,10 +10020,6 @@ class AppLocalizationsSi extends AppLocalizations {
 
   @override
   String get settingsSeasonalSurprise => 'සෘතුමය පුදුමය';
-
-  @override
-  String get settingsPluginScreenDescription =>
-      'Moonbase අමතර ශ්‍රේණිගත කිරීමේ මූලාශ්‍ර, Seerr ඉල්ලීම්, සහ සමමුහුර්ත මනාප ඇතුළුව සේවාදායක පාර්ශවීය ඒකාබද්ධ කිරීම් බලගන්වයි.';
 
   @override
   String get useNativeEmulator => 'Native Emulation';

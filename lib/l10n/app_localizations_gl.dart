@@ -4268,23 +4268,7 @@ class AppLocalizationsGl extends AppLocalizations {
   }
 
   @override
-  String get customizationProfile => 'Perfil de personalización';
-
-  @override
-  String get customizationProfileDescription =>
-      'Escolla o perfil para cargar, editar e sincronizar. O global aplícase en todas partes a menos que un perfil de dispositivo o anule. O punto verde marca o teu perfil actual do dispositivo.';
-
-  @override
-  String get loadProfile => 'Cargar perfil';
-
-  @override
   String get syncing => 'Sincronizando...';
-
-  @override
-  String get syncToProfile => 'Sincronizar co perfil';
-
-  @override
-  String get resetProfile => 'Reset Profile';
 
   @override
   String resetProfileTitle(String profile) {
@@ -5069,34 +5053,49 @@ class AppLocalizationsGl extends AppLocalizations {
   String get pluginNotDetected => 'Plugin non detectado';
 
   @override
-  String get pluginDetectedDescription =>
-      'Detectouse o complemento do servidor. A sincronización actívase automaticamente a primeira vez que se atopa o complemento.';
-
-  @override
   String get pluginNotDetectedDescription =>
       'Actualmente non se detecta o complemento do servidor. A configuración local aínda usa os seus valores gardados ou os valores predeterminados integrados.';
 
   @override
-  String pluginStatusVersion(String status, String version) {
-    return '$status\nVersión: $version';
+  String get pluginConnected => 'Connected';
+
+  @override
+  String pluginConnectedVersion(String version) {
+    return 'Connected, version $version';
   }
 
   @override
-  String get availableServices => 'Servizos Dispoñibles';
+  String get pluginSyncOn => 'Sync on';
 
   @override
-  String get serverPluginSync => 'Sincronización do complemento do servidor';
+  String get pluginSyncOff => 'Sync off';
 
   @override
-  String get syncSettingsWithPlugin =>
-      'Sincronizar a configuración co complemento do servidor';
+  String get syncProfileDescription =>
+      'This device syncs with the profile you pick until you pick another.';
 
   @override
-  String get whatSyncControls => 'Que controla a sincronización';
+  String get profileAppliesEverywhere => 'Applies everywhere';
 
   @override
-  String get syncControlsDescription =>
-      'A sincronización só controla se as configuracións respaldadas por complementos son enviadas ao servidor e extraídas do servidor. A selección de perfil e as accións de sincronización de perfil están na configuración de personalización cando a sincronización de complementos está activada.';
+  String get profileOverridesGlobal => 'Overrides Global';
+
+  @override
+  String get profileThisDevice => 'This device';
+
+  @override
+  String get profileLoad => 'Load';
+
+  @override
+  String get profileLoadSubtitle => 'Server to this device';
+
+  @override
+  String get profileSaveSubtitle => 'This device to server';
+
+  @override
+  String resetNamedProfile(String profile) {
+    return 'Reset $profile Profile';
+  }
 
   @override
   String get recentRequests => 'Solicitudes recentes';
@@ -10151,10 +10150,6 @@ class AppLocalizationsGl extends AppLocalizations {
 
   @override
   String get settingsSeasonalSurprise => 'Sorpresa estacional';
-
-  @override
-  String get settingsPluginScreenDescription =>
-      'Moonbase potencia as integracións no servidor, incluíndo fontes de clasificación adicionais, solicitudes de Seerr e preferencias sincronizadas.';
 
   @override
   String get useNativeEmulator => 'Native Emulation';

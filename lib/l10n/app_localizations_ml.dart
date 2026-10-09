@@ -4255,23 +4255,7 @@ class AppLocalizationsMl extends AppLocalizations {
   }
 
   @override
-  String get customizationProfile => 'ഇഷ്‌ടാനുസൃതമാക്കൽ പ്രൊഫൈൽ';
-
-  @override
-  String get customizationProfileDescription =>
-      'ലോഡ് ചെയ്യാനും എഡിറ്റ് ചെയ്യാനും സമന്വയിപ്പിക്കാനും പ്രൊഫൈൽ തിരഞ്ഞെടുക്കുക. ഒരു ഉപകരണ പ്രൊഫൈൽ അതിനെ അസാധുവാക്കുന്നില്ലെങ്കിൽ ഗ്ലോബൽ എല്ലായിടത്തും ബാധകമാണ്. പച്ച ഡോട്ട് നിങ്ങളുടെ നിലവിലെ ഉപകരണ പ്രൊഫൈൽ അടയാളപ്പെടുത്തുന്നു.';
-
-  @override
-  String get loadProfile => 'പ്രൊഫൈൽ ലോഡ് ചെയ്യുക';
-
-  @override
   String get syncing => 'സമന്വയിപ്പിക്കുന്നു...';
-
-  @override
-  String get syncToProfile => 'പ്രൊഫൈലിലേക്ക് സമന്വയിപ്പിക്കുക';
-
-  @override
-  String get resetProfile => 'Reset Profile';
 
   @override
   String resetProfileTitle(String profile) {
@@ -5053,34 +5037,49 @@ class AppLocalizationsMl extends AppLocalizations {
   String get pluginNotDetected => 'പ്ലഗിൻ കണ്ടെത്തിയില്ല';
 
   @override
-  String get pluginDetectedDescription =>
-      'സെർവർ പ്ലഗിൻ കണ്ടെത്തി. ആദ്യമായി പ്ലഗിൻ കണ്ടെത്തുമ്പോൾ സമന്വയം സ്വയമേവ പ്രവർത്തനക്ഷമമാകും.';
-
-  @override
   String get pluginNotDetectedDescription =>
       'സെർവർ പ്ലഗിൻ നിലവിൽ കണ്ടെത്തിയിട്ടില്ല. പ്രാദേശിക ക്രമീകരണങ്ങൾ ഇപ്പോഴും അവയുടെ സംരക്ഷിച്ച മൂല്യങ്ങളോ ബിൽറ്റ്-ഇൻ ഡിഫോൾട്ടുകളോ ഉപയോഗിക്കുന്നു.';
 
   @override
-  String pluginStatusVersion(String status, String version) {
-    return '$status\nപതിപ്പ്: $version';
+  String get pluginConnected => 'Connected';
+
+  @override
+  String pluginConnectedVersion(String version) {
+    return 'Connected, version $version';
   }
 
   @override
-  String get availableServices => 'ലഭ്യമായ സേവനങ്ങൾ';
+  String get pluginSyncOn => 'Sync on';
 
   @override
-  String get serverPluginSync => 'സെർവർ പ്ലഗിൻ സമന്വയം';
+  String get pluginSyncOff => 'Sync off';
 
   @override
-  String get syncSettingsWithPlugin =>
-      'സെർവർ പ്ലഗിൻ ഉപയോഗിച്ച് ക്രമീകരണങ്ങൾ സമന്വയിപ്പിക്കുക';
+  String get syncProfileDescription =>
+      'This device syncs with the profile you pick until you pick another.';
 
   @override
-  String get whatSyncControls => 'എന്ത് സമന്വയ നിയന്ത്രണങ്ങൾ';
+  String get profileAppliesEverywhere => 'Applies everywhere';
 
   @override
-  String get syncControlsDescription =>
-      'പ്ലഗിൻ പിന്തുണയുള്ള ക്രമീകരണങ്ങൾ സെർവറിലേക്ക് തള്ളുകയും അതിൽ നിന്ന് വലിക്കുകയും ചെയ്യുന്നുണ്ടോ എന്ന് മാത്രമേ സമന്വയം നിയന്ത്രിക്കൂ. പ്ലഗിൻ സമന്വയം പ്രവർത്തനക്ഷമമാക്കുമ്പോൾ, പ്രൊഫൈൽ തിരഞ്ഞെടുക്കലും പ്രൊഫൈൽ സമന്വയ പ്രവർത്തനങ്ങളും ഇഷ്‌ടാനുസൃതമാക്കൽ ക്രമീകരണത്തിലാണ്.';
+  String get profileOverridesGlobal => 'Overrides Global';
+
+  @override
+  String get profileThisDevice => 'This device';
+
+  @override
+  String get profileLoad => 'Load';
+
+  @override
+  String get profileLoadSubtitle => 'Server to this device';
+
+  @override
+  String get profileSaveSubtitle => 'This device to server';
+
+  @override
+  String resetNamedProfile(String profile) {
+    return 'Reset $profile Profile';
+  }
 
   @override
   String get recentRequests => 'സമീപകാല അഭ്യർത്ഥനകൾ';
@@ -10138,10 +10137,6 @@ class AppLocalizationsMl extends AppLocalizations {
 
   @override
   String get settingsSeasonalSurprise => 'സീസണൽ സർപ്രൈസ്';
-
-  @override
-  String get settingsPluginScreenDescription =>
-      'അധിക റേറ്റിംഗ് ഉറവിടങ്ങൾ, Seerr അഭ്യർത്ഥനകൾ, സിങ്ക് ചെയ്ത മുൻഗണനകൾ എന്നിവയുൾപ്പെടെയുള്ള സെർവർ-സൈഡ് സംയോജനങ്ങൾക്ക് Moonbase ശക്തി പകരുന്നു.';
 
   @override
   String get useNativeEmulator => 'Native Emulation';

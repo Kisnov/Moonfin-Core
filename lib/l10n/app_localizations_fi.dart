@@ -4258,23 +4258,7 @@ class AppLocalizationsFi extends AppLocalizations {
   }
 
   @override
-  String get customizationProfile => 'Räätälöintiprofiili';
-
-  @override
-  String get customizationProfileDescription =>
-      'Valitse ladattava, muokattava ja synkronoitava profiili. Yleinen koskee kaikkialla, ellei laiteprofiili ohita sitä. Vihreä piste merkitsee nykyistä laiteprofiiliasi.';
-
-  @override
-  String get loadProfile => 'Lataa profiili';
-
-  @override
   String get syncing => 'Synkronoidaan...';
-
-  @override
-  String get syncToProfile => 'Synkronoi profiiliin';
-
-  @override
-  String get resetProfile => 'Nollaa profiili';
 
   @override
   String resetProfileTitle(String profile) {
@@ -5054,34 +5038,49 @@ class AppLocalizationsFi extends AppLocalizations {
   String get pluginNotDetected => 'Laajennusta ei havaittu';
 
   @override
-  String get pluginDetectedDescription =>
-      'Palvelinlaajennus havaittu. Synkronointi otetaan käyttöön automaattisesti, kun laajennus löydetään ensimmäisen kerran.';
-
-  @override
   String get pluginNotDetectedDescription =>
       'Palvelinlaajennusta ei tällä hetkellä havaita. Paikalliset asetukset käyttävät edelleen tallennettuja arvojaan tai sisäänrakennettuja oletusasetuksia.';
 
   @override
-  String pluginStatusVersion(String status, String version) {
-    return '$status\nVersio: $version';
+  String get pluginConnected => 'Connected';
+
+  @override
+  String pluginConnectedVersion(String version) {
+    return 'Connected, version $version';
   }
 
   @override
-  String get availableServices => 'Käytettävissä olevat palvelut';
+  String get pluginSyncOn => 'Sync on';
 
   @override
-  String get serverPluginSync => 'Palvelinlaajennuksen synkronointi';
+  String get pluginSyncOff => 'Sync off';
 
   @override
-  String get syncSettingsWithPlugin =>
-      'Synkronoi asetukset palvelinlaajennuksen kanssa';
+  String get syncProfileDescription =>
+      'This device syncs with the profile you pick until you pick another.';
 
   @override
-  String get whatSyncControls => 'Mitä synkronointia ohjataan';
+  String get profileAppliesEverywhere => 'Applies everywhere';
 
   @override
-  String get syncControlsDescription =>
-      'Synkronointi hallitsee vain sitä, lähetetäänkö laajennusten tukemat asetukset palvelimelle ja vedetäänkö ne sieltä. Profiilin valinta ja profiilin synkronointitoiminnot ovat mukautusasetuksissa, kun laajennuksen synkronointi on käytössä.';
+  String get profileOverridesGlobal => 'Overrides Global';
+
+  @override
+  String get profileThisDevice => 'This device';
+
+  @override
+  String get profileLoad => 'Load';
+
+  @override
+  String get profileLoadSubtitle => 'Server to this device';
+
+  @override
+  String get profileSaveSubtitle => 'This device to server';
+
+  @override
+  String resetNamedProfile(String profile) {
+    return 'Reset $profile Profile';
+  }
 
   @override
   String get recentRequests => 'Viimeaikaiset pyynnöt';
@@ -10076,10 +10075,6 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get settingsSeasonalSurprise => 'Kauden yllätys';
-
-  @override
-  String get settingsPluginScreenDescription =>
-      'Moonbase tukee palvelinpuolen integraatioita, mukaan lukien lisäluokituslähteet, Seerr-pyynnöt ja synkronoidut asetukset.';
 
   @override
   String get useNativeEmulator => 'Alkuperäinen emulointi';

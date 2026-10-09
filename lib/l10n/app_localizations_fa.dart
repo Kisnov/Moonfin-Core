@@ -4217,23 +4217,7 @@ class AppLocalizationsFa extends AppLocalizations {
   }
 
   @override
-  String get customizationProfile => 'نمایه سفارشی سازی';
-
-  @override
-  String get customizationProfileDescription =>
-      'نمایه را برای بارگیری، ویرایش و همگام سازی انتخاب کنید. جهانی در همه جا اعمال می شود مگر اینکه نمایه دستگاهی آن را لغو کند. نقطه سبز نمایه دستگاه فعلی شما را مشخص می کند.';
-
-  @override
-  String get loadProfile => 'بارگذاری نمایه';
-
-  @override
   String get syncing => 'در حال همگام سازی...';
-
-  @override
-  String get syncToProfile => 'همگام سازی با نمایه';
-
-  @override
-  String get resetProfile => 'Reset Profile';
 
   @override
   String resetProfileTitle(String profile) {
@@ -5006,33 +4990,49 @@ class AppLocalizationsFa extends AppLocalizations {
   String get pluginNotDetected => 'افزونه شناسایی نشد';
 
   @override
-  String get pluginDetectedDescription =>
-      'افزونه سرور شناسایی شد. اولین باری که افزونه پیدا می شود، همگام سازی به طور خودکار فعال می شود.';
-
-  @override
   String get pluginNotDetectedDescription =>
       'افزونه سرور در حال حاضر شناسایی نشده است. تنظیمات محلی همچنان از مقادیر ذخیره شده یا پیش فرض های داخلی خود استفاده می کنند.';
 
   @override
-  String pluginStatusVersion(String status, String version) {
-    return '$status\nنسخه: $version';
+  String get pluginConnected => 'Connected';
+
+  @override
+  String pluginConnectedVersion(String version) {
+    return 'Connected, version $version';
   }
 
   @override
-  String get availableServices => 'خدمات موجود';
+  String get pluginSyncOn => 'Sync on';
 
   @override
-  String get serverPluginSync => 'همگام سازی پلاگین سرور';
+  String get pluginSyncOff => 'Sync off';
 
   @override
-  String get syncSettingsWithPlugin => 'تنظیمات را با افزونه سرور همگام کنید';
+  String get syncProfileDescription =>
+      'This device syncs with the profile you pick until you pick another.';
 
   @override
-  String get whatSyncControls => 'چه کنترل های همگام سازی';
+  String get profileAppliesEverywhere => 'Applies everywhere';
 
   @override
-  String get syncControlsDescription =>
-      'همگام‌سازی فقط کنترل می‌کند که آیا تنظیمات پشتیبانی شده از افزونه به سرور فشار داده می‌شوند یا از آن خارج می‌شوند. وقتی همگام‌سازی افزونه فعال است، عملکردهای انتخاب نمایه و همگام‌سازی نمایه در تنظیمات سفارشی‌سازی هستند.';
+  String get profileOverridesGlobal => 'Overrides Global';
+
+  @override
+  String get profileThisDevice => 'This device';
+
+  @override
+  String get profileLoad => 'Load';
+
+  @override
+  String get profileLoadSubtitle => 'Server to this device';
+
+  @override
+  String get profileSaveSubtitle => 'This device to server';
+
+  @override
+  String resetNamedProfile(String profile) {
+    return 'Reset $profile Profile';
+  }
 
   @override
   String get recentRequests => 'درخواست های اخیر';
@@ -9976,10 +9976,6 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get settingsSeasonalSurprise => 'سورپرایز فصلی';
-
-  @override
-  String get settingsPluginScreenDescription =>
-      'Moonbase ادغام‌های سمت سرور از جمله منابع رتبه‌بندی اضافی، درخواست‌های Seerr و اولویت‌های همگام‌سازی شده را تقویت می‌کند.';
 
   @override
   String get useNativeEmulator => 'Native Emulation';

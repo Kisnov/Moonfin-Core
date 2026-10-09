@@ -4258,23 +4258,7 @@ class AppLocalizationsTl extends AppLocalizations {
   }
 
   @override
-  String get customizationProfile => 'Profile sa Pag-customize';
-
-  @override
-  String get customizationProfileDescription =>
-      'Piliin ang profile na ilo-load, ie-edit, at isi-sync. Nalalapat ang pandaigdigan kahit saan maliban kung na-override ito ng profile ng device. Ang berdeng tuldok ay nagmamarka ng iyong kasalukuyang profile ng device.';
-
-  @override
-  String get loadProfile => 'I-load ang Profile';
-
-  @override
   String get syncing => 'Sini-sync...';
-
-  @override
-  String get syncToProfile => 'I-sync Sa Profile';
-
-  @override
-  String get resetProfile => 'Reset Profile';
 
   @override
   String resetProfileTitle(String profile) {
@@ -5059,34 +5043,49 @@ class AppLocalizationsTl extends AppLocalizations {
   String get pluginNotDetected => 'Hindi Natukoy ang Plugin';
 
   @override
-  String get pluginDetectedDescription =>
-      'Natukoy ang plugin ng server. Awtomatikong pinapagana ang pag-sync sa unang pagkakataon na matagpuan ang plugin.';
-
-  @override
   String get pluginNotDetectedDescription =>
       'Kasalukuyang hindi natukoy ang plugin ng server. Ginagamit pa rin ng mga lokal na setting ang kanilang mga naka-save na halaga o mga built-in na default.';
 
   @override
-  String pluginStatusVersion(String status, String version) {
-    return '$status\nBersyon: $version';
+  String get pluginConnected => 'Connected';
+
+  @override
+  String pluginConnectedVersion(String version) {
+    return 'Connected, version $version';
   }
 
   @override
-  String get availableServices => 'Mga Magagamit na Serbisyo';
+  String get pluginSyncOn => 'Sync on';
 
   @override
-  String get serverPluginSync => 'Pag-sync ng Plugin ng Server';
+  String get pluginSyncOff => 'Sync off';
 
   @override
-  String get syncSettingsWithPlugin =>
-      'I-sync ang mga setting gamit ang server plugin';
+  String get syncProfileDescription =>
+      'This device syncs with the profile you pick until you pick another.';
 
   @override
-  String get whatSyncControls => 'Ano ang kinokontrol ng pag-sync';
+  String get profileAppliesEverywhere => 'Applies everywhere';
 
   @override
-  String get syncControlsDescription =>
-      'Kinokontrol lang ng pag-sync kung ang mga setting na naka-backup sa plugin ay itutulak at kukunin mula sa server. Ang pagpili ng profile at mga pagkilos sa pag-sync ng profile ay nasa mga setting ng Pag-customize kapag pinagana ang pag-sync ng plugin.';
+  String get profileOverridesGlobal => 'Overrides Global';
+
+  @override
+  String get profileThisDevice => 'This device';
+
+  @override
+  String get profileLoad => 'Load';
+
+  @override
+  String get profileLoadSubtitle => 'Server to this device';
+
+  @override
+  String get profileSaveSubtitle => 'This device to server';
+
+  @override
+  String resetNamedProfile(String profile) {
+    return 'Reset $profile Profile';
+  }
 
   @override
   String get recentRequests => 'Mga Kamakailang Kahilingan';
@@ -10122,10 +10121,6 @@ class AppLocalizationsTl extends AppLocalizations {
 
   @override
   String get settingsSeasonalSurprise => 'Pana-panahong Sorpresa';
-
-  @override
-  String get settingsPluginScreenDescription =>
-      'Pinapalakas ng Moonbase ang mga pagsasama sa panig ng server kabilang ang mga karagdagang mapagkukunan ng rating, mga kahilingan sa Seerr, at mga naka-sync na kagustuhan.';
 
   @override
   String get useNativeEmulator => 'Native Emulation';
