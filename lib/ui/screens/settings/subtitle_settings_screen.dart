@@ -32,7 +32,7 @@ class SubtitleSettingsScreen extends StatelessWidget {
     return withCleanSettingsTypography(
       context,
       Scaffold(
-        appBar: buildSettingsAppBar(context, Text(l10n.subtitlePreferences)),
+        appBar: buildSettingsAppBar(context, Text(l10n.subtitles)),
         body: ListenableBuilder(
           listenable: prefs,
           builder: (context, _) {

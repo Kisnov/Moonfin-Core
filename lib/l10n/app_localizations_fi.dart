@@ -40,9 +40,6 @@ class AppLocalizationsFi extends AppLocalizations {
   String get animeMarkerRecap => 'Yhteenveto';
 
   @override
-  String get accountPreferences => 'TILIN ASETUKSET';
-
-  @override
   String get interfaceLanguage => 'Käyttöliittymän Kieli';
 
   @override
@@ -2922,10 +2919,6 @@ class AppLocalizationsFi extends AppLocalizations {
   String get qualityStorage => 'Laatu, tallennus';
 
   @override
-  String get serverSyncAndPluginStatus =>
-      'Palvelimen synkronointi ja laajennuksen tila';
-
-  @override
   String get mediaRequestIntegration => 'Mediapyyntöjen integrointi';
 
   @override
@@ -2958,9 +2951,6 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get videoAndSubtitles => 'Video ja tekstitykset';
-
-  @override
-  String get integrations => 'Integraatiot';
 
   @override
   String get pluginAndRequests => 'Plugin ja pyynnöt';
@@ -3248,10 +3238,6 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get themeMusicVolume => 'Teema Musiikki Volume';
-
-  @override
-  String get themeMusicSettingsSubtitle =>
-      'Tietosivut, aloitusnäytön rivit ja äänenvoimakkuus';
 
   @override
   String percentValue(int value) {
@@ -4627,13 +4613,6 @@ class AppLocalizationsFi extends AppLocalizations {
   String get seconds => 'sekuntia';
 
   @override
-  String get localPreviews => 'Paikalliset Esikatselut';
-
-  @override
-  String get localPreviewsDescription =>
-      'Määritä trailerin, median ja äänen esikatselut.';
-
-  @override
   String get mediaBarMode => 'Mediapalkin tyyli';
 
   @override
@@ -4786,16 +4765,10 @@ class AppLocalizationsFi extends AppLocalizations {
   String get favoriteChannels => 'Suosikkikanavat';
 
   @override
-  String get homeSections => 'Kotiosiot';
-
-  @override
   String get resetToDefaults => 'Palauta oletusasetukset';
 
   @override
   String get homeRowPosterSize => 'Etusivu Rivin julisteen koko';
-
-  @override
-  String get perRowImageTypeSelection => 'Rivikohtainen kuvatyypin valinta';
 
   @override
   String get configureImageTypeForEachRow =>
@@ -4833,9 +4806,6 @@ class AppLocalizationsFi extends AppLocalizations {
   @override
   String get homeRowsPaddingDescription =>
       'Mukauta etusivu rivien täytön välistä etäisyyttä';
-
-  @override
-  String get perRowImageType => 'Rivikuvatyypin mukaan';
 
   @override
   String get perRowSettings => 'Rivikohtaiset asetukset';
@@ -4946,9 +4916,6 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get onlyShowRatedContent => 'Näytä vain arvioitu sisältö';
-
-  @override
-  String get showClock => 'Näytä kello';
 
   @override
   String get displayClockDuringScreensaver =>
@@ -5076,9 +5043,6 @@ class AppLocalizationsFi extends AppLocalizations {
   @override
   String get ratingSourcesDescription =>
       'Ota käyttöön ja järjestele uudelleen sovelluksessa näkyvät luokituslähteet';
-
-  @override
-  String get pluginLabel => 'Moonbase-laajennus';
 
   @override
   String get pluginDetected => 'Plugin havaittu';
@@ -5349,18 +5313,11 @@ class AppLocalizationsFi extends AppLocalizations {
       'Navigointipalkin tyyli, työkalupalkin painikkeet, ulkonäkö';
 
   @override
-  String get reorderToggleHomeRows =>
-      'Järjestä uudelleen ja vaihda sekä kirjastopohjaisten että ulkoisten sivurivien järjestystä';
-
-  @override
   String get featuredContentAppearance => 'Suositeltu sisältö, ulkonäkö';
 
   @override
   String get posterSizeImageTypeFolderView =>
       'Julisteen koko, kuvatyyppi, kansionäkymä';
-
-  @override
-  String get mdbListTmdbRatingSources => 'MDBList, TMDB ja luokituslähteet';
 
   @override
   String gbValue(String value) {
@@ -10024,20 +9981,6 @@ class AppLocalizationsFi extends AppLocalizations {
       'Siirry palvelimen hallintapaneeliin';
 
   @override
-  String get settingsAccountSecurity => 'Tili ja suojaus';
-
-  @override
-  String get settingsAccountSecuritySubtitle =>
-      'Todennus, PIN-koodi ja lapsilukko';
-
-  @override
-  String get settingsPersonalization => 'Personointi';
-
-  @override
-  String get settingsPersonalizationSubtitle =>
-      'Teema, navigointi, etusivun rivit, ja kirjaston näkyvyys';
-
-  @override
   String get settingsDynamicContent => 'Dynaaminen sisältö';
 
   @override
@@ -10045,22 +9988,8 @@ class AppLocalizationsFi extends AppLocalizations {
       'Mediapalkki ja visuaaliset peittokuvat';
 
   @override
-  String get settingsPlaybackSyncplay => 'Toisto ja SyncPlay';
-
-  @override
-  String get settingsPlaybackSyncplaySubtitle =>
-      'Ääni-/videoasetukset, tekstitykset, lataukset ja SyncPlay-ohjaimet';
-
-  @override
-  String get settingsIntegrationsSubtitle =>
-      'Plugin sync, Seerr, luokitukset ja paljon muuta';
-
-  @override
   String get settingsAboutSubtitle =>
       'Sovelluksen versio, lakitiedot ja krediitit';
-
-  @override
-  String get settingsAuthenticationSection => 'TODENNUS';
 
   @override
   String get settingsSortServersBy => 'Lajittele palvelimet';
@@ -10070,9 +9999,6 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get settingsAlphabetical => 'Aakkosellinen';
-
-  @override
-  String get settingsConnectionSection => 'YHTEYS';
 
   @override
   String get settingsAllowSelfSignedCerts =>
@@ -10087,10 +10013,6 @@ class AppLocalizationsFi extends AppLocalizations {
       'Tämän palvelimen varmennetta ei pidetä luotettavana. Jos kyseessä on oma palvelimesi ja se käyttää itse allekirjoitettua tai yksityistä varmennetta, voit sallia sen tässä.';
 
   @override
-  String get settingsPrivacyAndSafetySection =>
-      'YKSITYISYYDEN SUOJA JA TURVALLISUUS';
-
-  @override
   String get itemBlockedByParentalControls => 'Tätä ei ole saatavilla';
 
   @override
@@ -10101,32 +10023,7 @@ class AppLocalizationsFi extends AppLocalizations {
   String get blockedRatingsUnrankedSection => 'Estää vain sen';
 
   @override
-  String get settingsBlockedRatings => 'Estetyt luokitukset';
-
-  @override
-  String get settingsGeneralStyle => 'Yleinen tyyli';
-
-  @override
-  String get settingsGeneralStyleSubtitle =>
-      'Teemakorostukset, taustakuvat ja seurattavat indikaattorit';
-
-  @override
-  String get settingsDetailsScreen => 'Tietonäkymä';
-
-  @override
-  String get settingsDetailsScreenSubtitle =>
-      'Tyyli, taustan sumennus ja välilehtien toiminta';
-
-  @override
   String get settingsHomePage => 'Kotisivu';
-
-  @override
-  String get settingsHomePageSubtitle =>
-      'Osat, kuvatyypit, peittokuvat ja median esikatselut';
-
-  @override
-  String get settingsLibrariesSubtitle =>
-      'Kirjaston näkyvyys, kansionäkymä ja usean palvelimen toiminta';
 
   @override
   String get settingsTwentyFourHourClock => '24 tunnin kello';
@@ -10178,14 +10075,8 @@ class AppLocalizationsFi extends AppLocalizations {
   String get settingsSeasonalSurprise => 'Kauden yllätys';
 
   @override
-  String get settingsMetadataAndRatings => 'Metatiedot ja luokitukset';
-
-  @override
   String get settingsPluginScreenDescription =>
       'Moonbase tukee palvelinpuolen integraatioita, mukaan lukien lisäluokituslähteet, Seerr-pyynnöt ja synkronoidut asetukset.';
-
-  @override
-  String get settingsOfflineDownloads => 'Offline-lataukset';
 
   @override
   String get useNativeEmulator => 'Alkuperäinen emulointi';
@@ -10328,20 +10219,6 @@ class AppLocalizationsFi extends AppLocalizations {
       'Tarkista viimeisin Moonfin-julkaisu';
 
   @override
-  String get settingsPoweredByFlutter => 'Toteutettu Flutter-alustalla';
-
-  @override
-  String settingsLicenseNoticesCount(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '# lisenssi-ilmoitusta',
-      one: '# lisenssi-ilmoitus',
-    );
-    return '$_temp0';
-  }
-
-  @override
   String get settingsBoth => 'Molemmat';
 
   @override
@@ -10349,37 +10226,16 @@ class AppLocalizationsFi extends AppLocalizations {
       'Sekoita sisältötyyppisuodatin';
 
   @override
-  String get settingsVideoPlaybackPreferences => 'Videon toistoasetukset';
-
-  @override
-  String get settingsVideoPlaybackPreferencesSubtitle =>
-      'Ydinvideomoottori ja suoratoiston laatuasetukset';
-
-  @override
-  String get settingsAudioPreferences => 'Ääniasetukset';
-
-  @override
   String get settingsAudioPreferencesSubtitle =>
       'Ääniraidat, käsittely ja läpivientivaihtoehdot';
-
-  @override
-  String get settingsAutomationAndQueue => 'Automaatio ja jono';
 
   @override
   String get settingsAutomationAndQueueSubtitle =>
       'Automaattinen toisto ja sekvenssi';
 
   @override
-  String get settingsOfflineDownloadsSubtitle =>
-      'Latausten laatu, tallennusrajat ja jonon koko';
-
-  @override
   String get settingsSyncplaySubtitle =>
       'Synkronointilogiikka ryhmäistunnoille';
-
-  @override
-  String get settingsAdvancedOptionsSubtitle =>
-      'Erikoistuneet soittimen ominaisuudet. Käytä varoen, sillä jotkin vaihtoehdot voivat aiheuttaa toistoongelmia';
 
   @override
   String get settingsSkipIntrosAndOutros => 'Ohitetaanko introt ja loppupalat?';
@@ -10836,23 +10692,6 @@ class AppLocalizationsFi extends AppLocalizations {
   String get homeRowsSection => 'Kotirivit';
 
   @override
-  String get homeRowDisplay => 'Kotirivien Näyttö';
-
-  @override
-  String get homeRowSections => 'Kotirivien Osiot';
-
-  @override
-  String get homeRowToggles => 'Kotirivien Säätimet';
-
-  @override
-  String get homeRowTogglesSubtitle =>
-      'Ota käyttöön tai poista käytöstä kirjastopohjaiset kotirivi kategoriat';
-
-  @override
-  String get homeRowTogglesDescription =>
-      'Ota alla olevat valinnat käyttöön, niin rivit näkyvät aloitusnäytön osioissa.';
-
-  @override
   String get rowsType => 'Rivien tyyppi';
 
   @override
@@ -11138,14 +10977,14 @@ class AppLocalizationsFi extends AppLocalizations {
       'Priorisoi SDH/CC-tekstitysraidat, kun valitset automaattisen valinnan.';
 
   @override
-  String get preferTextSubtitles => 'Prefer text subtitles';
+  String get preferTextSubtitles => 'Prefer Text Subtitles';
 
   @override
   String get preferTextSubtitlesSubtitle =>
       'Prioritize text-based subtitles (SRT, VTT) over image-based formats (PGS, VobSub).';
 
   @override
-  String get preferExternalSubtitles => 'Prefer external subtitles';
+  String get preferExternalSubtitles => 'Prefer External Subtitles';
 
   @override
   String get preferExternalSubtitlesSubtitle =>
@@ -12384,9 +12223,6 @@ class AppLocalizationsFi extends AppLocalizations {
   String get missing => 'Puuttuu';
 
   @override
-  String get transcodingLimits => 'Transkoodausrajat';
-
-  @override
   String get clearAllArtworkButton => 'Tyhjennetäänkö kaikki kuvitus?';
 
   @override
@@ -12669,9 +12505,6 @@ class AppLocalizationsFi extends AppLocalizations {
   String get audiobookDelete => 'Poista';
 
   @override
-  String get subtitlePreferences => 'Tekstitysasetukset';
-
-  @override
   String get subtitlePreferencesDescription =>
       'Muuta tekstitystiloja, oletuskieliä, ulkoasua ja renderöintiasetuksia.';
 
@@ -12718,9 +12551,6 @@ class AppLocalizationsFi extends AppLocalizations {
   @override
   String get libraryWriteAccessReactiveBody =>
       'Jellyfin ei ilmeisesti onnistunut päivittämään kuvitusta. Kirjastosi on määritetty tallentamaan kuvitus suoraan mediakansioihin (\'Tallenna kuvitus mediakansioihin\' on käytössä). Tämä virhe johtuu yleensä siitä, ettei Jellyfin-palvelinprosessilla ole oikeutta kirjoittaa tiedostoja mediahakemistoihisi.';
-
-  @override
-  String get externalLists => 'Ulkoiset listat';
 
   @override
   String get replay => 'Toista uudelleen';
@@ -13742,9 +13572,6 @@ class AppLocalizationsFi extends AppLocalizations {
   }
 
   @override
-  String get settingsAnimationSpeed => 'Animaation nopeus';
-
-  @override
   String get pageTransitions => 'Sivun Siirtymät';
 
   @override
@@ -13880,4 +13707,133 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get navYou => 'You';
+
+  @override
+  String get detailsPage => 'Details Page';
+
+  @override
+  String get storageAndDownloads => 'Storage & Downloads';
+
+  @override
+  String get services => 'Services';
+
+  @override
+  String get settingsSync => 'Settings Sync';
+
+  @override
+  String get settingsSyncSubtitle =>
+      'Moonbase plugin sync and customization profiles';
+
+  @override
+  String get navigationBar => 'Navigation Bar';
+
+  @override
+  String get homeRows => 'Rows';
+
+  @override
+  String get homeRowsSubtitle => 'Turn rows on or off and change their order';
+
+  @override
+  String get rowOptions => 'Row Options';
+
+  @override
+  String get rowOptionsSubtitle => 'Sorting and content for each row';
+
+  @override
+  String get imageTypePerRow => 'Image Type per Row';
+
+  @override
+  String get externalSources => 'External Sources';
+
+  @override
+  String get qualityAndDecoding => 'Quality & Decoding';
+
+  @override
+  String get qualityAndDecodingSubtitle =>
+      'Bitrate, resolution, decoding, HDR, and Dolby Vision';
+
+  @override
+  String get skippingAndAutoplay => 'Skipping & Autoplay';
+
+  @override
+  String get advancedPlayback => 'Advanced Playback';
+
+  @override
+  String get advancedPlaybackSubtitle =>
+      'Player routing, external players, and mpv';
+
+  @override
+  String get settingsAccountSubtitle =>
+      'Sign-in, PIN code, Kids Mode, parental controls, and settings sync';
+
+  @override
+  String get settingsGeneralSubtitle =>
+      'Language, clock, input, and performance';
+
+  @override
+  String get settingsAppearanceSubtitle =>
+      'Navigation, home screen, libraries, details page, and themes';
+
+  @override
+  String get settingsHomeScreenSubtitle =>
+      'Rows, media bar, looks, and external sources';
+
+  @override
+  String get settingsLibrariesEntrySubtitle =>
+      'Library visibility, order, and library pages';
+
+  @override
+  String get settingsDetailsPageSubtitle =>
+      'Layout, buttons, sections, ratings, and theme music';
+
+  @override
+  String get settingsPlaybackSubtitle =>
+      'Player, quality, audio, subtitles, skipping, and SyncPlay';
+
+  @override
+  String get settingsStorageSubtitle =>
+      'Downloads, storage location, and the image cache';
+
+  @override
+  String get settingsServicesSubtitle => 'Seerr and Achievement Badges';
+
+  @override
+  String get settingsSignInSection => 'Sign-in';
+
+  @override
+  String get settingsFamilySection => 'Family';
+
+  @override
+  String get settingsServersSection => 'Servers';
+
+  @override
+  String get settingsLanguageSection => 'Language';
+
+  @override
+  String get settingsInputSection => 'Input';
+
+  @override
+  String get settingsMotionSection => 'Motion';
+
+  @override
+  String get settingsContentsSection => 'Contents';
+
+  @override
+  String get settingsLooksSection => 'Looks';
+
+  @override
+  String get settingsAudioAndSubtitlesSection => 'Audio & Subtitles';
+
+  @override
+  String get settingsSkippingAndQueueSection => 'Skipping & Queue';
+
+  @override
+  String get settingsWatchTogetherSection => 'Watch Together';
+
+  @override
+  String get settingsAdvancedSection => 'Advanced';
+
+  @override
+  String get playerSettingsSubtitle =>
+      'Controls, seeking, player buttons, and trick play';
 }
