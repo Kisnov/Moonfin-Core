@@ -851,6 +851,15 @@ class Media3PlayerBackend extends PlayerBackend
         'pos=${_position.inMilliseconds}ms)',
         level: LogLevel.warning,
       );
+      // An MKV with Tracks at the end plays with no picture, so fall back.
+      if (!_sourceIsLive) {
+        _errorStream.add(<String, dynamic>{
+          'event': 'playerError',
+          'recoverable': true,
+          'kind': 'unsupported_container',
+          'message': 'No first frame after ${_watchdogStallMs ~/ 1000}s',
+        });
+      }
     }
 
     // Position-stall watchdog: playing and not buffering, but the position is
