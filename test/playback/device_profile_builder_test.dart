@@ -1055,6 +1055,18 @@ void main() {
       expect(videoProfiles.first['VideoCodec'], 'hevc,h264');
     });
 
+    test('without fMP4 support only the TS offer is left', () {
+      final profile = DeviceProfileBuilder.build(
+        supportsHevc: true,
+        transcodeHevcAllowed: true,
+        supportsFmp4Hls: false,
+      );
+
+      final videoProfiles = _hlsVideoTranscodingProfiles(profile);
+      expect(videoProfiles.map((p) => p['Container']), ['ts']);
+      expect(videoProfiles.single['VideoCodec'], 'hevc,h264');
+    });
+
     test('mp3 leaves the HLS offer entirely on AVFoundation', () {
       final profile = DeviceProfileBuilder.build(
         hevcRequiresFmp4Hls: true,

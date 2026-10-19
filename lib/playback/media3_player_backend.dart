@@ -1355,6 +1355,9 @@ class Media3PlayerBackend extends PlayerBackend
       supportsHevc: PlatformDetection.supportsHevc,
       supportsHevcMain10: PlatformDetection.supportsHevcMain10,
       transcodeHevcAllowed: serverAllowsHevcTranscode(),
+      // Media3 1.10.1 throws on the negative tfdt Jellyfin 10.11+ writes
+      // for re-encoded audio in fMP4 (androidx/media#3412).
+      supportsFmp4Hls: false,
       hevcMainLevel: PlatformDetection.hevcMainLevel,
       supportsHevcDolbyVision: PlatformDetection.supportsHevcDolbyVision,
       supportsHevcDolbyVisionEl: PlatformDetection.supportsHevcDolbyVisionEl,
