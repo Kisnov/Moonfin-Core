@@ -119,6 +119,8 @@ jobs:
           fi
 
       - name: Build
+        env:
+          MOONFIN_TEST_ID_SUFFIX: .hwtest
         run: |
           chmod +x build-android.sh
           ./build-android.sh ${{ matrix.target }}
