@@ -871,7 +871,7 @@ class _AccountCardState extends State<_AccountCard> {
                               headers: serverImageHeaders,
                               fit: BoxFit.cover,
                               cacheWidth: ArtworkDecode.widthFor(
-                                68,
+                                130,
                                 MediaQuery.devicePixelRatioOf(context),
                               ),
                               errorBuilder: (_, _, _) {
