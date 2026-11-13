@@ -16618,6 +16618,9 @@ class AppLocalizationsTr extends AppLocalizations {
   String get librarySortMyRating => 'Derecelendirmem';
 
   @override
+  String get librarySortItemCount => 'Item Count';
+
+  @override
   String get librarySortAlbumArtist => 'Albüm Sanatçısı';
 
   @override

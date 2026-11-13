@@ -811,6 +811,7 @@ class _HomeRowTogglesScreenState extends State<HomeRowTogglesScreen> {
                       values: const [
                         LibrarySortBy.name,
                         LibrarySortBy.dateAdded,
+                        LibrarySortBy.itemCount,
                         LibrarySortBy.random,
                       ],
                       labelOf: (v) => librarySortLabel(v, l10n),

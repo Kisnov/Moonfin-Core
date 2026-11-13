@@ -815,7 +815,10 @@ enum LibrarySortBy {
   artist('Artist,Album,SortName', 'Artist'),
   trackNumber('IndexNumber,SortName', 'Number'),
   genre('Genre,SortName', 'Genre'),
-  foldersFirst('IsFolder,SortName', 'Folders First');
+  foldersFirst('IsFolder,SortName', 'Folders First'),
+
+  /// Sorted in the app, since neither server sorts studios by their counts.
+  itemCount('SortName', 'Item Count', usesDedicatedEndpoint: true);
 
   const LibrarySortBy(
     this.apiValue,

@@ -28829,6 +28829,12 @@ abstract class AppLocalizations {
   /// **'My Rating'**
   String get librarySortMyRating;
 
+  /// Sort option for studios: by how many movies and shows each one has
+  ///
+  /// In en, this message translates to:
+  /// **'Item Count'**
+  String get librarySortItemCount;
+
   /// Sort option for music: by album artist
   ///
   /// In en, this message translates to:

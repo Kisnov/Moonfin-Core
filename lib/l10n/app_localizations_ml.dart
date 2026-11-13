@@ -16689,6 +16689,9 @@ class AppLocalizationsMl extends AppLocalizations {
   String get librarySortMyRating => 'My Rating';
 
   @override
+  String get librarySortItemCount => 'Item Count';
+
+  @override
   String get librarySortAlbumArtist => 'Album Artist';
 
   @override
