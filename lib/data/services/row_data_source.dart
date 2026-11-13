@@ -15,11 +15,13 @@ import '../models/home_row.dart';
 import '../utils/bounded_concurrency.dart';
 import '../utils/latest_media_row_normalizer.dart';
 import '../../util/parental_filter.dart';
+import '../utils/aggregated_item_sort.dart';
 import '../utils/blocked_ratings.dart';
 import '../utils/genre_browse_utils.dart';
 import '../utils/next_up_cutoff.dart';
 import '../utils/next_up_enrichment.dart';
 import '../utils/playlist_utils.dart';
+import '../utils/studio_row_page.dart';
 import 'package:flutter/foundation.dart';
 import '../repositories/seerr_repository.dart';
 import '../repositories/user_views_repository.dart';
@@ -806,12 +808,12 @@ class RowDataSource {
         return await _client.itemsApi.getStudios(
           parentId: parentId,
           userId: _client.userId,
-          sortBy: sortBy,
-          sortOrder: sortOrder,
+          sortBy: _defaultSortBy,
+          sortOrder: _defaultSortOrder,
           recursive: true,
           startIndex: startIndex,
           limit: limit,
-          fields: 'ItemCounts,PrimaryImageAspectRatio',
+          fields: 'ItemCounts,PrimaryImageAspectRatio,DateCreated',
         );
       } on DioException catch (e) {
         final statusCode = e.response?.statusCode ?? 0;
@@ -820,8 +822,8 @@ class RowDataSource {
         return _client.itemsApi.getStudios(
           parentId: parentId,
           userId: _client.userId,
-          sortBy: sortBy,
-          sortOrder: sortOrder,
+          sortBy: _defaultSortBy,
+          sortOrder: _defaultSortOrder,
           recursive: true,
           startIndex: startIndex,
           limit: limit,
@@ -831,19 +833,34 @@ class RowDataSource {
 
     final List<Map<String, dynamic>> items;
     if (selectedSet.isEmpty) {
-      final page = await fetchPage(0, _defaultLimit);
+      final page = await fetchStudioRowPage(
+        fetchPage,
+        sortBy: sortBy,
+        sortOrder: sortOrder,
+        limit: _defaultLimit,
+        pageSize: _studioPageSize,
+      );
       items = (page['Items'] as List? ?? []).cast<Map<String, dynamic>>();
     } else {
       items = await _collectStudios(selectedSet, fetchPage);
     }
 
-    return _buildRow(
+    final row = _buildRow(
       id: 'studios',
       title: rowTitle,
       response: {'Items': items},
       serverId: serverId,
       rowType: HomeRowType.studios,
     );
+    final sorted = sortAggregatedItems(
+      row.items,
+      sortBy: sortBy,
+      sortOrder: sortOrder,
+    );
+    final shown = selectedSet.isEmpty
+        ? sorted.take(_defaultLimit).toList()
+        : sorted;
+    return row.copyWith(items: shown, totalCount: shown.length);
   }
 
   /// Walks the studio list a page at a time until every id in [wanted] has
