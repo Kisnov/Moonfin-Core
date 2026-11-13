@@ -219,4 +219,56 @@ void main() {
     expect(backdropUrl, isNull);
     expect(usedId, isNull);
   });
+
+  group('ranking genres by item count', () {
+    final response = {
+      'Items': [
+        {'Name': 'Action', 'MovieCount': 4, 'SeriesCount': 1},
+        {'Name': 'Anime', 'MovieCount': 1, 'SeriesCount': 9},
+        {'Name': 'Drama', 'MovieCount': 7, 'SeriesCount': 0},
+        {'Name': 'Empty', 'MovieCount': 0, 'SeriesCount': 0},
+      ],
+    };
+    List<String?> names(List<Map<String, dynamic>> genres) =>
+        genres.map((g) => g['Name'] as String?).toList();
+
+    test('counts only the types the row shows', () {
+      expect(
+        names(
+          topGenresByCount(
+            response,
+            normalizedItemTypes: const ['Movie', 'Series'],
+            descending: true,
+            limit: 15,
+          ),
+        ),
+        ['Anime', 'Drama', 'Action'],
+      );
+      expect(
+        names(
+          topGenresByCount(
+            response,
+            normalizedItemTypes: const ['Movie'],
+            descending: true,
+            limit: 15,
+          ),
+        ),
+        ['Drama', 'Action', 'Anime'],
+      );
+    });
+
+    test('ascending keeps the smallest, and the limit holds', () {
+      expect(
+        names(
+          topGenresByCount(
+            response,
+            normalizedItemTypes: const ['Movie', 'Series'],
+            descending: false,
+            limit: 2,
+          ),
+        ),
+        ['Action', 'Drama'],
+      );
+    });
+  });
 }
