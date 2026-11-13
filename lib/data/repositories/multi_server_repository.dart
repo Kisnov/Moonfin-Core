@@ -597,11 +597,15 @@ class MultiServerRepository {
     final results = await Future.wait(
       sessions.map(
         (session) => _withTimeout(() async {
-          Future<Map<String, dynamic>> fetchPage(int startIndex, int limit) =>
-              session.client.itemsApi.getStudios(
+          Future<Map<String, dynamic>> fetchPage(
+            int startIndex,
+            int limit, [
+            String pageSortBy = _defaultSortBy,
+            String pageSortOrder = _defaultSortOrder,
+          ]) => session.client.itemsApi.getStudios(
                 userId: session.client.userId,
-                sortBy: _defaultSortBy,
-                sortOrder: _defaultSortOrder,
+                sortBy: pageSortBy,
+                sortOrder: pageSortOrder,
                 recursive: true,
                 startIndex: startIndex,
                 limit: limit,
@@ -615,6 +619,7 @@ class MultiServerRepository {
               sortOrder: sortOrder,
               limit: perServer,
               pageSize: _studioPageSize,
+              serverSorts: session.client.itemsApi.sortsStudios,
             );
             return _parseItems(response, session.server.id);
           }

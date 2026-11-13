@@ -652,6 +652,9 @@ class JellyfinItemsApi implements ItemsApi {
   }
 
   @override
+  bool get sortsStudios => false;
+
+  @override
   Future<Map<String, dynamic>> getStudios({
     String? parentId,
     String? userId,
