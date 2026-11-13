@@ -803,13 +803,18 @@ class RowDataSource {
         .where((s) => s.isNotEmpty)
         .toSet();
 
-    Future<Map<String, dynamic>> fetchPage(int startIndex, int limit) async {
+    Future<Map<String, dynamic>> fetchPage(
+      int startIndex,
+      int limit, [
+      String pageSortBy = _defaultSortBy,
+      String pageSortOrder = _defaultSortOrder,
+    ]) async {
       try {
         return await _client.itemsApi.getStudios(
           parentId: parentId,
           userId: _client.userId,
-          sortBy: _defaultSortBy,
-          sortOrder: _defaultSortOrder,
+          sortBy: pageSortBy,
+          sortOrder: pageSortOrder,
           recursive: true,
           startIndex: startIndex,
           limit: limit,
@@ -822,8 +827,8 @@ class RowDataSource {
         return _client.itemsApi.getStudios(
           parentId: parentId,
           userId: _client.userId,
-          sortBy: _defaultSortBy,
-          sortOrder: _defaultSortOrder,
+          sortBy: pageSortBy,
+          sortOrder: pageSortOrder,
           recursive: true,
           startIndex: startIndex,
           limit: limit,
@@ -839,6 +844,7 @@ class RowDataSource {
         sortOrder: sortOrder,
         limit: _defaultLimit,
         pageSize: _studioPageSize,
+        serverSorts: _client.itemsApi.sortsStudios,
       );
       items = (page['Items'] as List? ?? []).cast<Map<String, dynamic>>();
     } else {

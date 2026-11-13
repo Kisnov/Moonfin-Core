@@ -9,15 +9,23 @@ class _ItemsApi extends Mock implements ItemsApi {}
 
 void main() {
   // A server holding [total] studios that, like Jellyfin, lists them by name
-  // whatever sort it is asked for.
+  // whatever sort it is asked for. Each call records the page and the sort.
   ({
     List<(int, int)> calls,
-    Future<Map<String, dynamic>> Function(int, int) fetch,
+    List<String> sorts,
+    Future<Map<String, dynamic>> Function(int, int, String, String) fetch,
   })
   server(int total) {
     final calls = <(int, int)>[];
-    Future<Map<String, dynamic>> fetch(int startIndex, int limit) async {
+    final sorts = <String>[];
+    Future<Map<String, dynamic>> fetch(
+      int startIndex,
+      int limit,
+      String sortBy,
+      String sortOrder,
+    ) async {
       calls.add((startIndex, limit));
+      sorts.add('$sortBy $sortOrder');
       final end = (startIndex + limit).clamp(0, total);
       return {
         'Items': [
@@ -27,13 +35,15 @@ void main() {
       };
     }
 
-    return (calls: calls, fetch: fetch);
+    return (calls: calls, sorts: sorts, fetch: fetch);
   }
 
   Future<List<(int, int)>> pagesRead(
     int total, {
     required String sortBy,
     String sortOrder = 'Ascending',
+    bool serverSorts = false,
+    List<String>? sorts,
   }) async {
     final s = server(total);
     await fetchStudioRowPage(
@@ -42,7 +52,9 @@ void main() {
       sortOrder: sortOrder,
       limit: 15,
       pageSize: 200,
+      serverSorts: serverSorts,
     );
+    sorts?.addAll(s.sorts);
     return s.calls;
   }
 
@@ -133,5 +145,50 @@ void main() {
       sortOrder: 'Descending',
     );
     expect(sorted.map((s) => s.name), ['HBO', 'Pixar', 'A24']);
+  });
+
+  test('a server that sorts gets the sort and serves just the row', () async {
+    final sorts = <String>[];
+    expect(
+      await pagesRead(
+        1000,
+        sortBy: 'DateCreated,SortName',
+        sortOrder: 'Descending',
+        serverSorts: true,
+        sorts: sorts,
+      ),
+      [(0, 15)],
+    );
+    expect(sorts, ['DateCreated,SortName Descending']);
+  });
+
+  test('item count reads by name even from a server that sorts', () async {
+    final sorts = <String>[];
+    expect(
+      await pagesRead(
+        1000,
+        sortBy: 'ItemCount',
+        sortOrder: 'Descending',
+        serverSorts: true,
+        sorts: sorts,
+      ),
+      [(0, 200)],
+    );
+    expect(sorts, ['SortName Ascending']);
+  });
+
+  test('last played reads by name even from a server that sorts', () async {
+    final sorts = <String>[];
+    expect(
+      await pagesRead(
+        1000,
+        sortBy: 'DatePlayed,SortName',
+        sortOrder: 'Descending',
+        serverSorts: true,
+        sorts: sorts,
+      ),
+      [(0, 200)],
+    );
+    expect(sorts, ['SortName Ascending']);
   });
 }

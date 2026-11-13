@@ -817,14 +817,7 @@ class _HomeRowTogglesScreenState extends State<HomeRowTogglesScreen> {
                       title: l10n.studiosRowSorting,
                       description: l10n.studiosRowSortingDescription,
                       icon: Icons.sort_by_alpha,
-                      // Studios carry no runtime, ratings or play data.
-                      values: const [
-                        LibrarySortBy.name,
-                        LibrarySortBy.dateAdded,
-                        LibrarySortBy.datePlayed,
-                        LibrarySortBy.itemCount,
-                        LibrarySortBy.random,
-                      ],
+                      values: LibrarySortBy.studioValues,
                       labelOf: (v) => librarySortLabel(v, l10n),
                       onChanged: _onStudiosSortChanged,
                     ),

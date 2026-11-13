@@ -1668,8 +1668,12 @@ class HomeViewModel extends ChangeNotifier {
                 ),
         ];
       case HomeSectionType.studios:
-        final studiosSort =
+        final savedStudiosSort =
             sort?.$1 ?? _prefs.get<LibrarySortBy>(UserPreferences.studiosRowSortBy);
+        // A sort the row doesn't offer reads as Name, as its setting shows.
+        final studiosSort = LibrarySortBy.studioValues.contains(savedStudiosSort)
+            ? savedStudiosSort
+            : LibrarySortBy.name;
         final studiosSortBy = studiosSort == LibrarySortBy.itemCount
             ? 'ItemCount'
             : studiosSort.apiValue;
