@@ -16075,6 +16075,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get librarySortMyRating => '내 평가';
 
   @override
+  String get librarySortItemCount => 'Item Count';
+
+  @override
   String get librarySortAlbumArtist => '앨범 아티스트';
 
   @override

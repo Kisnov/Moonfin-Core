@@ -16696,6 +16696,9 @@ class AppLocalizationsFi extends AppLocalizations {
   String get librarySortMyRating => 'Arvosteluni';
 
   @override
+  String get librarySortItemCount => 'Item Count';
+
+  @override
   String get librarySortAlbumArtist => 'Albumin Artisti';
 
   @override

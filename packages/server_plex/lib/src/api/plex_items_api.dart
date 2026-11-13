@@ -699,6 +699,9 @@ class PlexItemsApi implements ItemsApi {
   /// commas, since the home row saves its picked studios as a comma list.
   /// Plex's encoded key is both.
   @override
+  bool get sortsStudios => true;
+
+  @override
   Future<Map<String, dynamic>> getStudios({
     String? parentId,
     String? userId,

@@ -15553,6 +15553,10 @@
   "@librarySortMyRating": {
     "description": "Sort option: by the viewer's own like or dislike"
   },
+  "librarySortItemCount": "Item Count",
+  "@librarySortItemCount": {
+    "description": "Sort option for studios: by how many movies and shows each one has"
+  },
   "librarySortAlbumArtist": "Album Artist",
   "@librarySortAlbumArtist": {
     "description": "Sort option for music: by album artist"

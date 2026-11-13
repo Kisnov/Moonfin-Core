@@ -16818,6 +16818,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get librarySortMyRating => 'Ma note';
 
   @override
+  String get librarySortItemCount => 'Item Count';
+
+  @override
   String get librarySortAlbumArtist => 'Artiste de l\'album';
 
   @override
