@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:jellyfin_preference/jellyfin_preference.dart';
@@ -47,7 +48,7 @@ void main() {
 
   tearDown(GetIt.instance.reset);
 
-  testWidgets('the search box narrows the studio list by name', (tester) async {
+  Future<void> pumpDialog(WidgetTester tester) async {
     tester.view.physicalSize = const Size(1600, 1000);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.reset);
@@ -59,6 +60,10 @@ void main() {
       ),
     );
     await tester.pumpAndSettle();
+  }
+
+  testWidgets('the search box narrows the studio list by name', (tester) async {
+    await pumpDialog(tester);
     expect(find.text('A24'), findsOneWidget);
 
     await tester.enterText(find.byType(TextField), 'para');
@@ -67,5 +72,20 @@ void main() {
     expect(find.text('A24'), findsNothing);
     expect(find.text('Paramount'), findsOneWidget);
     expect(find.text('Paramount Animation'), findsOneWidget);
+  });
+
+  testWidgets('backspace in the search box deletes instead of closing', (
+    tester,
+  ) async {
+    await pumpDialog(tester);
+    await tester.enterText(find.byType(TextField), 'para');
+    await tester.sendKeyEvent(LogicalKeyboardKey.backspace);
+    await tester.pumpAndSettle();
+
+    expect(find.byType(StudioSelectionDialog), findsOneWidget);
+    expect(
+      tester.widget<TextField>(find.byType(TextField)).controller!.text,
+      'par',
+    );
   });
 }
