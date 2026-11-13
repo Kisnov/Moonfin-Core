@@ -821,6 +821,7 @@ class _HomeRowTogglesScreenState extends State<HomeRowTogglesScreen> {
                       values: const [
                         LibrarySortBy.name,
                         LibrarySortBy.dateAdded,
+                        LibrarySortBy.datePlayed,
                         LibrarySortBy.itemCount,
                         LibrarySortBy.random,
                       ],
