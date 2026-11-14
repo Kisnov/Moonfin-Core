@@ -853,7 +853,7 @@ class RowDataSource {
     if (sortBy.startsWith('DatePlayed')) {
       markStudiosLastPlayed(
         items,
-        await fetchStudioLastPlayed(_client.itemsApi),
+        await fetchStudioLastPlayed(_client.itemsApi, parentId: parentId),
       );
     }
 

@@ -41,13 +41,15 @@ Future<Map<String, dynamic>> fetchStudioRowPage(
 }
 
 /// When each studio was last watched, by lower-case name, from the [limit]
-/// most recently played movies and episodes. An episode counts for its series'
-/// studio.
+/// most recently played movies and episodes in [parentId], or in every library.
+/// An episode counts for its series' studio.
 Future<Map<String, String>> fetchStudioLastPlayed(
   ItemsApi api, {
+  String? parentId,
   int limit = 300,
 }) async {
   final response = await api.getItems(
+    parentId: parentId,
     recursive: true,
     includeItemTypes: const ['Movie', 'Episode'],
     sortBy: 'DatePlayed',

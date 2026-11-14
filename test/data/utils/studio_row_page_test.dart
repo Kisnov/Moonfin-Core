@@ -91,6 +91,7 @@ void main() {
     final api = _ItemsApi();
     when(
       () => api.getItems(
+        parentId: any(named: 'parentId'),
         recursive: any(named: 'recursive'),
         includeItemTypes: any(named: 'includeItemTypes'),
         sortBy: any(named: 'sortBy'),
@@ -125,7 +126,21 @@ void main() {
       },
     );
 
-    final lastPlayed = await fetchStudioLastPlayed(api);
+    final lastPlayed = await fetchStudioLastPlayed(api, parentId: 'movies');
+    expect(
+      verify(
+        () => api.getItems(
+          parentId: captureAny(named: 'parentId'),
+          recursive: any(named: 'recursive'),
+          includeItemTypes: any(named: 'includeItemTypes'),
+          sortBy: any(named: 'sortBy'),
+          sortOrder: any(named: 'sortOrder'),
+          limit: any(named: 'limit'),
+          fields: any(named: 'fields'),
+        ),
+      ).captured,
+      ['movies'],
+    );
     expect(lastPlayed, {
       'hbo': '2026-11-10T20:00:00Z',
       'pixar': '2026-11-01T20:00:00Z',
