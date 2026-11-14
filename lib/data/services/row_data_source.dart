@@ -736,14 +736,19 @@ class RowDataSource {
         rowType: HomeRowType.genres,
       );
     }
+    // Ranking by count needs every genre, and is a full row with no next page.
+    final byCount = sortBy == 'ItemCount';
+    final serverSortBy = byCount ? _defaultSortBy : sortBy;
+    final serverSortOrder = byCount ? _defaultSortOrder : sortOrder;
+    final limit = byCount ? null : _defaultLimit;
     Map<String, dynamic> response;
     try {
       response = await _client.itemsApi.getGenres(
         parentId: parentId,
-        sortBy: sortBy,
-        sortOrder: sortOrder,
+        sortBy: serverSortBy,
+        sortOrder: serverSortOrder,
         recursive: true,
-        limit: _defaultLimit,
+        limit: limit,
         fields: 'ItemCounts,PrimaryImageAspectRatio',
         includeItemTypes: browseItemTypes,
       );
@@ -753,18 +758,40 @@ class RowDataSource {
       if (!_shouldRetryWithoutFields(statusCode)) rethrow;
       response = await _client.itemsApi.getGenres(
         parentId: parentId,
-        sortBy: sortBy,
-        sortOrder: sortOrder,
+        sortBy: serverSortBy,
+        sortOrder: serverSortOrder,
         recursive: true,
-        limit: _defaultLimit,
+        limit: limit,
         includeItemTypes: browseItemTypes,
       );
     }
 
-    final enrichedResponse = await _enrichGenreResponseForBrowse(
-      response,
-      includeItemTypes: browseItemTypes,
-    );
+    // Emby sends genres without counts, so each one is counted before ranking.
+    final countFirst = byCount && genresLackCounts(response);
+    if (countFirst) {
+      response = await _enrichGenreResponseForBrowse(
+        response,
+        includeItemTypes: browseItemTypes,
+      );
+    }
+    if (byCount) {
+      response = {
+        ...response,
+        'Items': topGenresByCount(
+          response,
+          normalizedItemTypes: browseItemTypes,
+          descending: sortOrder.toLowerCase() == 'descending',
+          limit: _defaultLimit,
+        ),
+      };
+    }
+
+    final enrichedResponse = countFirst
+        ? response
+        : await _enrichGenreResponseForBrowse(
+            response,
+            includeItemTypes: browseItemTypes,
+          );
 
     final row = _buildRow(
       id: 'genres',
@@ -773,7 +800,7 @@ class RowDataSource {
       serverId: serverId,
       rowType: HomeRowType.genres,
     );
-    final totalCount = row.items.length < _defaultLimit
+    final totalCount = byCount || row.items.length < _defaultLimit
         ? row.items.length
         : _maxItems;
     return row.copyWith(totalCount: totalCount);

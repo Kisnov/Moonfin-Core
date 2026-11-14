@@ -595,7 +595,13 @@ class _HomeRowTogglesScreenState extends State<HomeRowTogglesScreen> {
                       title: l10n.genresRowSorting,
                       description: l10n.genresRowSortingDescription,
                       icon: Icons.sort,
-                      values: LibrarySortBy.itemsApiValues,
+                      // Genres carry no runtime, ratings or play data.
+                      values: const [
+                        LibrarySortBy.name,
+                        LibrarySortBy.dateAdded,
+                        LibrarySortBy.itemCount,
+                        LibrarySortBy.random,
+                      ],
                       labelOf: (v) => librarySortLabel(v, l10n),
                       onChanged: _onGenresSortChanged,
                     ),

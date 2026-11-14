@@ -67,6 +67,13 @@ bool genreReportsCounts(Map<String, dynamic> genreData) => const [
   'MusicVideoCount',
 ].any((field) => genreData[field] != null);
 
+/// Whether any genre in [response] came without counts, so ranking by count
+/// has to wait for each genre's own item query.
+bool genresLackCounts(Map<String, dynamic> response) =>
+    (response['Items'] as List? ?? const [])
+        .whereType<Map<String, dynamic>>()
+        .any((genre) => !genreReportsCounts(genre));
+
 /// Whether a genre can still be listed. A count of zero rules it out, and a
 /// genre with no counts at all stays until its own item query answers.
 bool mayHaveBrowsableItems(
@@ -112,6 +119,49 @@ int browsableGenreCount(
   }
 
   return _asInt(genreData['ChildCount']);
+}
+
+/// Orders genres by how many items of [normalizedItemTypes] each holds, then
+/// by name, since neither server sorts genres by count.
+int compareGenreCounts(
+  Map<String, dynamic> a,
+  Map<String, dynamic> b, {
+  required List<String> normalizedItemTypes,
+  required bool descending,
+}) {
+  final byCount = browsableGenreCount(
+    a,
+    normalizedItemTypes: normalizedItemTypes,
+  ).compareTo(browsableGenreCount(b, normalizedItemTypes: normalizedItemTypes));
+  if (byCount != 0) return descending ? -byCount : byCount;
+  return (a['Name'] as String? ?? '').toLowerCase().compareTo(
+    (b['Name'] as String? ?? '').toLowerCase(),
+  );
+}
+
+/// The [limit] genres in [response] with the most items of
+/// [normalizedItemTypes], or the fewest unless [descending].
+List<Map<String, dynamic>> topGenresByCount(
+  Map<String, dynamic> response, {
+  required List<String> normalizedItemTypes,
+  required bool descending,
+  required int limit,
+}) {
+  final genres = (response['Items'] as List? ?? const [])
+      .cast<Map<String, dynamic>>()
+      .where(
+        (g) => mayHaveBrowsableItems(g, normalizedItemTypes: normalizedItemTypes),
+      )
+      .toList()
+    ..sort(
+      (a, b) => compareGenreCounts(
+        a,
+        b,
+        normalizedItemTypes: normalizedItemTypes,
+        descending: descending,
+      ),
+    );
+  return genres.take(limit).toList();
 }
 
 Map<String, dynamic> mergeGenreWithRepresentativeItem({

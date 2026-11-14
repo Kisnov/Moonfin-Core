@@ -1482,8 +1482,16 @@ class HomeViewModel extends ChangeNotifier {
     bool forceRefresh = false,
     (LibrarySortBy, SortDirection)? sort,
   }) async {
-    String sortBy(Preference<LibrarySortBy> saved) =>
-        (sort?.$1 ?? _prefs.get<LibrarySortBy>(saved)).apiValue;
+    String sortBy(
+      Preference<LibrarySortBy> saved, [
+      List<LibrarySortBy>? offered,
+    ]) {
+      var value = sort?.$1 ?? _prefs.get<LibrarySortBy>(saved);
+      // A sort the row doesn't offer reads as Name, as its setting shows.
+      if (offered != null && !offered.contains(value)) value = LibrarySortBy.name;
+      // Counted in the app, since no server sorts on it.
+      return value == LibrarySortBy.itemCount ? 'ItemCount' : value.apiValue;
+    }
     String sortOrder(Preference<SortDirection> saved) =>
         (sort?.$2 ?? _prefs.get<SortDirection>(saved)).apiValue;
     final l10n = currentAppLocalizations();
@@ -1668,15 +1676,10 @@ class HomeViewModel extends ChangeNotifier {
                 ),
         ];
       case HomeSectionType.studios:
-        final savedStudiosSort =
-            sort?.$1 ?? _prefs.get<LibrarySortBy>(UserPreferences.studiosRowSortBy);
-        // A sort the row doesn't offer reads as Name, as its setting shows.
-        final studiosSort = LibrarySortBy.studioValues.contains(savedStudiosSort)
-            ? savedStudiosSort
-            : LibrarySortBy.name;
-        final studiosSortBy = studiosSort == LibrarySortBy.itemCount
-            ? 'ItemCount'
-            : studiosSort.apiValue;
+        final studiosSortBy = sortBy(
+          UserPreferences.studiosRowSortBy,
+          LibrarySortBy.studioValues,
+        );
         final studiosSortOrder = sortOrder(UserPreferences.studiosRowSortOrder);
         final selectedIds = _prefs.get(UserPreferences.studiosRowSelectedIds);
         final logoUrls = GetIt.instance<TmdbRepository>().getStudioLogoUrls();
