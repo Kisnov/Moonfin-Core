@@ -589,18 +589,30 @@ class MultiServerRepository {
                 fields: 'ItemCounts,PrimaryImageAspectRatio,DateCreated',
               );
 
-          if (selectedSet.isEmpty) {
-            final response = await fetchStudioRowPage(
-              fetchPage,
-              sortBy: sortBy,
-              sortOrder: sortOrder,
-              limit: perServer,
-              pageSize: _studioPageSize,
-              serverSorts: session.client.itemsApi.sortsStudios,
+          final studios = selectedSet.isEmpty
+              ? _parseItems(
+                  await fetchStudioRowPage(
+                    fetchPage,
+                    sortBy: sortBy,
+                    sortOrder: sortOrder,
+                    limit: perServer,
+                    pageSize: _studioPageSize,
+                    serverSorts: session.client.itemsApi.sortsStudios,
+                  ),
+                  session.server.id,
+                )
+              : await _collectStudios(
+                  selectedSet,
+                  session.server.id,
+                  fetchPage,
+                );
+          if (sortBy.startsWith('DatePlayed')) {
+            markStudiosLastPlayed(
+              studios.map((s) => s.rawData),
+              await fetchStudioLastPlayed(session.client.itemsApi),
             );
-            return _parseItems(response, session.server.id);
           }
-          return _collectStudios(selectedSet, session.server.id, fetchPage);
+          return studios;
         }, label: '$cacheKeyPrefix from ${session.server.name}'),
       ),
     );

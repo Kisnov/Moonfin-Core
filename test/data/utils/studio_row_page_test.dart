@@ -1,5 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:moonfin/data/models/aggregated_item.dart';
+import 'package:moonfin/data/utils/aggregated_item_sort.dart';
 import 'package:moonfin/data/utils/studio_row_page.dart';
+import 'package:server_core/server_core.dart';
+
+class _ItemsApi extends Mock implements ItemsApi {}
 
 void main() {
   // A server holding [total] studios that, like Jellyfin, lists them by name
@@ -81,6 +87,81 @@ void main() {
     ]);
   });
 
+  test('last watched dates each studio by its newest play', () async {
+    final api = _ItemsApi();
+    when(
+      () => api.getItems(
+        parentId: any(named: 'parentId'),
+        recursive: any(named: 'recursive'),
+        includeItemTypes: any(named: 'includeItemTypes'),
+        sortBy: any(named: 'sortBy'),
+        sortOrder: any(named: 'sortOrder'),
+        limit: any(named: 'limit'),
+        fields: any(named: 'fields'),
+      ),
+    ).thenAnswer(
+      (_) async => {
+        'Items': [
+          {
+            'Type': 'Episode',
+            'SeriesStudio': 'HBO',
+            'UserData': {'LastPlayedDate': '2026-11-10T20:00:00Z'},
+          },
+          {
+            'Type': 'Movie',
+            'Studios': [
+              {'Name': 'Pixar'},
+              {'Name': 'HBO'},
+            ],
+            'UserData': {'LastPlayedDate': '2026-11-01T20:00:00Z'},
+          },
+          {
+            'Type': 'Movie',
+            'Studios': [
+              {'Name': 'A24'},
+            ],
+            'UserData': {},
+          },
+        ],
+      },
+    );
+
+    final lastPlayed = await fetchStudioLastPlayed(api, parentId: 'movies');
+    expect(
+      verify(
+        () => api.getItems(
+          parentId: captureAny(named: 'parentId'),
+          recursive: any(named: 'recursive'),
+          includeItemTypes: any(named: 'includeItemTypes'),
+          sortBy: any(named: 'sortBy'),
+          sortOrder: any(named: 'sortOrder'),
+          limit: any(named: 'limit'),
+          fields: any(named: 'fields'),
+        ),
+      ).captured,
+      ['movies'],
+    );
+    expect(lastPlayed, {
+      'hbo': '2026-11-10T20:00:00Z',
+      'pixar': '2026-11-01T20:00:00Z',
+    });
+
+    final studios = [
+      for (final name in ['A24', 'HBO', 'Pixar'])
+        <String, dynamic>{'Name': name},
+    ];
+    markStudiosLastPlayed(studios, lastPlayed);
+    final sorted = sortAggregatedItems(
+      [
+        for (final s in studios)
+          AggregatedItem(id: s['Name'] as String, serverId: 'srv', rawData: s),
+      ],
+      sortBy: 'DatePlayed,SortName',
+      sortOrder: 'Descending',
+    );
+    expect(sorted.map((s) => s.name), ['HBO', 'Pixar', 'A24']);
+  });
+
   test('a server that sorts gets the sort and serves just the row', () async {
     final sorts = <String>[];
     expect(
@@ -102,6 +183,21 @@ void main() {
       await pagesRead(
         1000,
         sortBy: 'ItemCount',
+        sortOrder: 'Descending',
+        serverSorts: true,
+        sorts: sorts,
+      ),
+      [(0, 200)],
+    );
+    expect(sorts, ['SortName Ascending']);
+  });
+
+  test('last played reads by name even from a server that sorts', () async {
+    final sorts = <String>[];
+    expect(
+      await pagesRead(
+        1000,
+        sortBy: 'DatePlayed,SortName',
         sortOrder: 'Descending',
         serverSorts: true,
         sorts: sorts,

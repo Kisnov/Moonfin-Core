@@ -835,9 +835,9 @@ enum LibrarySortBy {
   /// on this, and everything else falls back to [apiValue].
   final bool usesDedicatedEndpoint;
 
-  /// What a studio row can sort by, since a studio carries no runtime, ratings
-  /// or play data.
-  static const studioValues = [name, dateAdded, itemCount, random];
+  /// What a studio row can sort by. A studio carries no runtime or ratings,
+  /// and its Last Played comes from the watch history.
+  static const studioValues = [name, dateAdded, datePlayed, itemCount, random];
 
   /// The options a row can offer when it only ever sorts through the Items API.
   static List<LibrarySortBy> get itemsApiValues =>

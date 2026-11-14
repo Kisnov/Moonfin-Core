@@ -850,6 +850,12 @@ class RowDataSource {
     } else {
       items = await _collectStudios(selectedSet, fetchPage);
     }
+    if (sortBy.startsWith('DatePlayed')) {
+      markStudiosLastPlayed(
+        items,
+        await fetchStudioLastPlayed(_client.itemsApi, parentId: parentId),
+      );
+    }
 
     final row = _buildRow(
       id: 'studios',
