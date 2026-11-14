@@ -67,6 +67,13 @@ bool genreReportsCounts(Map<String, dynamic> genreData) => const [
   'MusicVideoCount',
 ].any((field) => genreData[field] != null);
 
+/// Whether any genre in [response] came without counts, so ranking by count
+/// has to wait for each genre's own item query.
+bool genresLackCounts(Map<String, dynamic> response) =>
+    (response['Items'] as List? ?? const [])
+        .whereType<Map<String, dynamic>>()
+        .any((genre) => !genreReportsCounts(genre));
+
 /// Whether a genre can still be listed. A count of zero rules it out, and a
 /// genre with no counts at all stays until its own item query answers.
 bool mayHaveBrowsableItems(

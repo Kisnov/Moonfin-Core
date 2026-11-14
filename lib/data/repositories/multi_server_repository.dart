@@ -521,7 +521,10 @@ class MultiServerRepository {
         fields: 'ItemCounts,PrimaryImageAspectRatio',
         includeItemTypes: browseItemTypes,
       );
-      if (byCount) {
+      // Emby sends genres without counts, so each one is counted and the
+      // combined sort below does the ranking.
+      final countFirst = byCount && genresLackCounts(response);
+      if (byCount && !countFirst) {
         response = {
           ...response,
           'Items': topGenresByCount(
@@ -539,7 +542,7 @@ class MultiServerRepository {
         session,
         response,
         includeItemTypes: browseItemTypes,
-        maxGenres: limit,
+        maxGenres: countFirst ? null : limit,
       );
       _rowTotals['${cacheKeyPrefix}_${session.server.id}'] =
           response['TotalRecordCount'] as int? ?? items.length;

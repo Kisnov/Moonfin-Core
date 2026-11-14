@@ -270,5 +270,36 @@ void main() {
         ['Action', 'Drama'],
       );
     });
+
+    // Emby's genres carry no counts, so the loaders count each one first.
+    test('a genre without counts is ranked once its item query counts it', () {
+      final emby = {
+        'Items': [
+          {'Name': 'Action'},
+          {'Name': 'Zombies'},
+        ],
+      };
+      expect(genresLackCounts(emby), isTrue);
+      expect(genresLackCounts(response), isFalse);
+
+      final counted = {
+        'Items': [
+          {'Name': 'Action', 'ChildCount': 2},
+          {'Name': 'Zombies', 'ChildCount': 30},
+        ],
+      };
+      expect(genresLackCounts(counted), isFalse);
+      expect(
+        names(
+          topGenresByCount(
+            counted,
+            normalizedItemTypes: const ['Movie', 'Series'],
+            descending: true,
+            limit: 1,
+          ),
+        ),
+        ['Zombies'],
+      );
+    });
   });
 }
