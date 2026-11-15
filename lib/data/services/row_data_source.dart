@@ -15,11 +15,13 @@ import '../models/home_row.dart';
 import '../utils/bounded_concurrency.dart';
 import '../utils/latest_media_row_normalizer.dart';
 import '../../util/parental_filter.dart';
+import '../utils/aggregated_item_sort.dart';
 import '../utils/blocked_ratings.dart';
 import '../utils/genre_browse_utils.dart';
 import '../utils/next_up_cutoff.dart';
 import '../utils/next_up_enrichment.dart';
 import '../utils/playlist_utils.dart';
+import '../utils/studio_row_page.dart';
 import 'package:flutter/foundation.dart';
 import '../repositories/seerr_repository.dart';
 import '../repositories/user_views_repository.dart';
@@ -734,14 +736,19 @@ class RowDataSource {
         rowType: HomeRowType.genres,
       );
     }
+    // Ranking by count needs every genre, and is a full row with no next page.
+    final byCount = sortBy == 'ItemCount';
+    final serverSortBy = byCount ? _defaultSortBy : sortBy;
+    final serverSortOrder = byCount ? _defaultSortOrder : sortOrder;
+    final limit = byCount ? null : _defaultLimit;
     Map<String, dynamic> response;
     try {
       response = await _client.itemsApi.getGenres(
         parentId: parentId,
-        sortBy: sortBy,
-        sortOrder: sortOrder,
+        sortBy: serverSortBy,
+        sortOrder: serverSortOrder,
         recursive: true,
-        limit: _defaultLimit,
+        limit: limit,
         fields: 'ItemCounts,PrimaryImageAspectRatio',
         includeItemTypes: browseItemTypes,
       );
@@ -751,12 +758,33 @@ class RowDataSource {
       if (!_shouldRetryWithoutFields(statusCode)) rethrow;
       response = await _client.itemsApi.getGenres(
         parentId: parentId,
-        sortBy: sortBy,
-        sortOrder: sortOrder,
+        sortBy: serverSortBy,
+        sortOrder: serverSortOrder,
         recursive: true,
-        limit: _defaultLimit,
+        limit: limit,
         includeItemTypes: browseItemTypes,
       );
+    }
+
+    // Emby sends genres without counts, so each one is counted before ranking.
+    if (byCount && genresLackCounts(response)) {
+      response = await countGenres(
+        _client.itemsApi,
+        response,
+        includeItemTypes: browseItemTypes,
+        concurrency: _genreArtworkConcurrency,
+      );
+    }
+    if (byCount) {
+      response = {
+        ...response,
+        'Items': topGenresByCount(
+          response,
+          normalizedItemTypes: browseItemTypes,
+          descending: sortOrder.toLowerCase() == 'descending',
+          limit: _defaultLimit,
+        ),
+      };
     }
 
     final enrichedResponse = await _enrichGenreResponseForBrowse(
@@ -771,7 +799,7 @@ class RowDataSource {
       serverId: serverId,
       rowType: HomeRowType.genres,
     );
-    final totalCount = row.items.length < _defaultLimit
+    final totalCount = byCount || row.items.length < _defaultLimit
         ? row.items.length
         : _maxItems;
     return row.copyWith(totalCount: totalCount);
@@ -800,18 +828,23 @@ class RowDataSource {
         .map((s) => s.trim())
         .where((s) => s.isNotEmpty)
         .toSet();
+    if (selectedSet.isEmpty) {
+      (sortBy, sortOrder) = unpickedStudioSort(sortBy, sortOrder);
+    }
 
+    // Pages are read by name, since Jellyfin's /Studios ignores any sort and
+    // the row is sorted here.
     Future<Map<String, dynamic>> fetchPage(int startIndex, int limit) async {
       try {
         return await _client.itemsApi.getStudios(
           parentId: parentId,
           userId: _client.userId,
-          sortBy: sortBy,
-          sortOrder: sortOrder,
+          sortBy: _defaultSortBy,
+          sortOrder: _defaultSortOrder,
           recursive: true,
           startIndex: startIndex,
           limit: limit,
-          fields: 'ItemCounts,PrimaryImageAspectRatio',
+          fields: 'ItemCounts,PrimaryImageAspectRatio,DateCreated,SortName',
         );
       } on DioException catch (e) {
         final statusCode = e.response?.statusCode ?? 0;
@@ -820,8 +853,8 @@ class RowDataSource {
         return _client.itemsApi.getStudios(
           parentId: parentId,
           userId: _client.userId,
-          sortBy: sortBy,
-          sortOrder: sortOrder,
+          sortBy: _defaultSortBy,
+          sortOrder: _defaultSortOrder,
           recursive: true,
           startIndex: startIndex,
           limit: limit,
@@ -831,19 +864,35 @@ class RowDataSource {
 
     final List<Map<String, dynamic>> items;
     if (selectedSet.isEmpty) {
-      final page = await fetchPage(0, _defaultLimit);
+      final page = await fetchStudioRowPage(
+        fetchPage,
+        sortBy: sortBy,
+        sortOrder: sortOrder,
+        limit: _defaultLimit,
+        pageSize: _studioPageSize,
+      );
       items = (page['Items'] as List? ?? []).cast<Map<String, dynamic>>();
     } else {
       items = await _collectStudios(selectedSet, fetchPage);
+      if (sortBy == 'ItemCount') await countStudios(_client.itemsApi, items);
     }
 
-    return _buildRow(
+    final row = _buildRow(
       id: 'studios',
       title: rowTitle,
       response: {'Items': items},
       serverId: serverId,
       rowType: HomeRowType.studios,
     );
+    final sorted = sortAggregatedItems(
+      row.items,
+      sortBy: sortBy,
+      sortOrder: sortOrder,
+    );
+    final shown = selectedSet.isEmpty
+        ? sorted.take(_defaultLimit).toList()
+        : sorted;
+    return row.copyWith(items: shown, totalCount: shown.length);
   }
 
   /// Walks the studio list a page at a time until every id in [wanted] has

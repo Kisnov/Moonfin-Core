@@ -17,6 +17,7 @@ import '../models/aggregated_item.dart';
 import '../models/aggregated_library.dart';
 import '../models/home_row.dart';
 import '../services/media_server_client_factory.dart';
+import '../utils/aggregated_item_sort.dart';
 import '../utils/blocked_ratings.dart';
 import '../utils/bounded_concurrency.dart';
 import '../utils/genre_browse_utils.dart';
@@ -24,6 +25,7 @@ import '../utils/latest_media_row_normalizer.dart';
 import '../utils/next_up_cutoff.dart';
 import '../utils/next_up_enrichment.dart';
 import '../utils/playlist_utils.dart';
+import '../utils/studio_row_page.dart';
 import 'search_repository.dart';
 import 'user_views_repository.dart';
 import '../../l10n/app_localizations.dart';
@@ -371,7 +373,7 @@ class MultiServerRepository {
         all.sort((a, b) => b.name.compareTo(a.name));
       }
     } else {
-      all = _sortAggregatedItems(all, sortBy: sortBy, sortOrder: sortOrder);
+      all = sortAggregatedItems(all, sortBy: sortBy, sortOrder: sortOrder);
     }
 
     final takenItems = all.take(limit).toList();
@@ -506,16 +508,39 @@ class MultiServerRepository {
     final browseItemTypes = normalizeBrowsableGenreItemTypes(includeItemTypes);
     final sessions = await getLoggedInServers();
     final perServer = (limit * 3).clamp(1, 100);
+    // Ranking by count needs every genre, and is a full row with no next page.
+    final byCount = sortBy == 'ItemCount';
+    final descending = sortOrder.toLowerCase() == 'descending';
 
     final results = await _gatherPerServer(sessions, (session) async {
-      final response = await session.client.itemsApi.getGenres(
-        sortBy: sortBy,
-        sortOrder: sortOrder,
+      var response = await session.client.itemsApi.getGenres(
+        sortBy: byCount ? _defaultSortBy : sortBy,
+        sortOrder: byCount ? _defaultSortOrder : sortOrder,
         recursive: true,
-        limit: perServer,
+        limit: byCount ? null : perServer,
         fields: 'ItemCounts,PrimaryImageAspectRatio',
         includeItemTypes: browseItemTypes,
       );
+      // Emby sends genres without counts, so each one is counted before ranking.
+      if (byCount && genresLackCounts(response)) {
+        response = await countGenres(
+          session.client.itemsApi,
+          response,
+          includeItemTypes: browseItemTypes,
+          concurrency: _genreArtworkConcurrency,
+        );
+      }
+      if (byCount) {
+        response = {
+          ...response,
+          'Items': topGenresByCount(
+            response,
+            normalizedItemTypes: browseItemTypes,
+            descending: descending,
+            limit: limit,
+          ),
+        };
+      }
       // No server can put more than [limit] genres into the row, and each one
       // costs a request for its artwork, so a big library would otherwise run
       // past the per-server timeout.
@@ -530,16 +555,25 @@ class MultiServerRepository {
       return items;
     }, label: cacheKeyPrefix);
 
-    final all = _sortAggregatedItems(
-      results.expand((e) => e).toList(growable: false),
-      sortBy: sortBy,
-      sortOrder: sortOrder,
-    );
+    final combined = results.expand((e) => e).toList();
+    final all = byCount
+        ? (combined..sort(
+            (a, b) => compareGenreCounts(
+              a.rawData,
+              b.rawData,
+              normalizedItemTypes: browseItemTypes,
+              descending: descending,
+            ),
+          ))
+        : sortAggregatedItems(combined, sortBy: sortBy, sortOrder: sortOrder);
 
     final takenItems = all.take(limit).toList();
-    final totalCount = sessions.fold<int>(0, (sum, session) {
-      return sum + (_rowTotals['${cacheKeyPrefix}_${session.server.id}'] ?? 0);
-    });
+    final totalCount = byCount
+        ? takenItems.length
+        : sessions.fold<int>(0, (sum, session) {
+            return sum +
+                (_rowTotals['${cacheKeyPrefix}_${session.server.id}'] ?? 0);
+          });
 
     return HomeRow(
       id: cacheKeyPrefix,
@@ -568,31 +602,52 @@ class MultiServerRepository {
         .map((s) => s.trim())
         .where((s) => s.isNotEmpty)
         .toSet();
+    if (selectedSet.isEmpty) {
+      (sortBy, sortOrder) = unpickedStudioSort(sortBy, sortOrder);
+    }
 
     final results = await Future.wait(
       sessions.map(
         (session) => _withTimeout(() async {
+          // Pages are read by name and the row is sorted below.
           Future<Map<String, dynamic>> fetchPage(int startIndex, int limit) =>
               session.client.itemsApi.getStudios(
                 userId: session.client.userId,
-                sortBy: sortBy,
-                sortOrder: sortOrder,
+                sortBy: _defaultSortBy,
+                sortOrder: _defaultSortOrder,
                 recursive: true,
                 startIndex: startIndex,
                 limit: limit,
-                fields: 'ItemCounts,PrimaryImageAspectRatio',
+                fields: 'ItemCounts,PrimaryImageAspectRatio,DateCreated,SortName',
               );
 
           if (selectedSet.isEmpty) {
-            final response = await fetchPage(0, perServer);
+            final response = await fetchStudioRowPage(
+              fetchPage,
+              sortBy: sortBy,
+              sortOrder: sortOrder,
+              limit: perServer,
+              pageSize: _studioPageSize,
+            );
             return _parseItems(response, session.server.id);
           }
-          return _collectStudios(selectedSet, session.server.id, fetchPage);
+          final studios = await _collectStudios(
+            selectedSet,
+            session.server.id,
+            fetchPage,
+          );
+          if (sortBy == 'ItemCount') {
+            await countStudios(
+              session.client.itemsApi,
+              studios.map((s) => s.rawData),
+            );
+          }
+          return studios;
         }, label: '$cacheKeyPrefix from ${session.server.name}'),
       ),
     );
 
-    final all = _sortAggregatedItems(
+    final all = sortAggregatedItems(
       results.expand((e) => e).toList(growable: false),
       sortBy: sortBy,
       sortOrder: sortOrder,
@@ -1003,7 +1058,7 @@ class MultiServerRepository {
                 : b.name.compareTo(a.name),
           );
         } else {
-          uniqueCombined = _sortAggregatedItems(
+          uniqueCombined = sortAggregatedItems(
             uniqueCombined,
             sortBy: sortBy,
             sortOrder: sortOrder,
@@ -1056,7 +1111,7 @@ class MultiServerRepository {
           _ => _defaultSortOrder,
         };
 
-        sortedCombined = _sortAggregatedItems(
+        sortedCombined = sortAggregatedItems(
           uniqueCombined,
           sortBy: sortBy,
           sortOrder: sortOrder,
@@ -1107,7 +1162,7 @@ class MultiServerRepository {
       ),
     );
 
-    final all = _sortAggregatedItems(
+    final all = sortAggregatedItems(
       results.expand((e) => e).toList(growable: false),
       sortBy: sortBy,
       sortOrder: sortOrder,
@@ -1517,102 +1572,7 @@ class MultiServerRepository {
     return withoutBlockedItems(items);
   }
 
-  List<AggregatedItem> _sortAggregatedItems(
-    List<AggregatedItem> items, {
-    required String sortBy,
-    required String sortOrder,
-  }) {
-    final sorted = List<AggregatedItem>.of(items);
-    // Rows pass the full sort value, like 'DateCreated,SortName'.
-    final primarySortBy = sortBy.split(',').first;
-    if (primarySortBy == 'Random') {
-      sorted.shuffle();
-      return sorted;
-    }
-
-    // Items without a value count as the lowest, the way the server sorts
-    // them: first when the oldest or lowest come first, last when the newest
-    // or highest do. Ties fall back to the name, like the server's SortName
-    // tie-break.
-    final descending = sortOrder.toLowerCase() == 'descending';
-
-    int compareByName(AggregatedItem a, AggregatedItem b) {
-      final byName = a.name.toLowerCase().compareTo(b.name.toLowerCase());
-      return descending ? -byName : byName;
-    }
-
-    int compareByKey(AggregatedItem a, AggregatedItem b) {
-      switch (primarySortBy) {
-        case 'DateCreated':
-          return _compareNullableDate(
-            _parseDateCreated(a.rawData['DateCreated']),
-            _parseDateCreated(b.rawData['DateCreated']),
-            descending: descending,
-          );
-        case 'PremiereDate':
-          return _compareNullableDate(
-            a.premiereDate,
-            b.premiereDate,
-            descending: descending,
-          );
-        case 'CommunityRating':
-          return _compareNullableNum(
-            a.communityRating,
-            b.communityRating,
-            descending: descending,
-          );
-        case 'CriticRating':
-          return _compareNullableNum(
-            a.criticRating?.toDouble(),
-            b.criticRating?.toDouble(),
-            descending: descending,
-          );
-        case 'Runtime':
-        case 'RunTimeTicks':
-          return _compareNullableNum(
-            a.runTimeTicks?.toDouble(),
-            b.runTimeTicks?.toDouble(),
-            descending: descending,
-          );
-        case 'ProductionYear':
-          return _compareNullableNum(
-            a.productionYear?.toDouble(),
-            b.productionYear?.toDouble(),
-            descending: descending,
-          );
-        default:
-          return 0;
-      }
-    }
-
-    sorted.sort((a, b) {
-      final byKey = compareByKey(a, b);
-      return byKey != 0 ? byKey : compareByName(a, b);
-    });
-    return sorted;
-  }
-
   static DateTime? _parseDateCreated(dynamic value) => parseServerDate(value);
-
-  static int _compareNullableDate(
-    DateTime? a,
-    DateTime? b, {
-    bool descending = false,
-  }) {
-    if (a == null && b == null) return 0;
-    final ascending = a == null ? -1 : (b == null ? 1 : a.compareTo(b));
-    return descending ? -ascending : ascending;
-  }
-
-  static int _compareNullableNum(
-    double? a,
-    double? b, {
-    bool descending = false,
-  }) {
-    if (a == null && b == null) return 0;
-    final ascending = a == null ? -1 : (b == null ? 1 : a.compareTo(b));
-    return descending ? -ascending : ascending;
-  }
 
   static int _compareByLastPlayed(AggregatedItem a, AggregatedItem b) {
     final aDate = a.rawData['UserData']?['LastPlayedDate'] as String? ?? '';
