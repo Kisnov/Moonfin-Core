@@ -238,7 +238,7 @@ jobs:
   ios:
     needs: plan
     if: needs.plan.outputs.ios == 'true'
-    runs-on: xcode-27
+    runs-on: macos-26
     steps:
       - uses: actions/checkout@v5
 
@@ -246,8 +246,8 @@ jobs:
         with:
           flutter-version: ${{ env.FLUTTER_VERSION }}
 
-      - name: Select Xcode 27.2
-        run: sudo xcode-select -s /Applications/Xcode_27.2.app/Contents/Developer
+      - name: Select Xcode 26.3
+        run: sudo xcode-select -s /Applications/Xcode_26.3.app/Contents/Developer
 
       - name: Resolve dependencies
         run: |
