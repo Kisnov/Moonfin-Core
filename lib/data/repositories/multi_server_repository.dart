@@ -642,6 +642,12 @@ class MultiServerRepository {
               studios.map((s) => s.rawData),
             );
           }
+          if (sortBy.startsWith('DatePlayed')) {
+            markStudiosLastPlayed(
+              studios.map((s) => s.rawData),
+              await fetchStudioLastPlayed(session.client.itemsApi),
+            );
+          }
           return studios;
         }, label: '$cacheKeyPrefix from ${session.server.name}'),
       ),

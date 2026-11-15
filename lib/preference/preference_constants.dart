@@ -866,7 +866,7 @@ enum LibrarySortBy {
 
   /// What a studio row can sort by, since a studio carries no runtime, ratings
   /// or play data.
-  static const studioValues = [name, dateAdded, itemCount, random];
+  static const studioValues = [name, dateAdded, itemCount, datePlayed, random];
 
   /// What the Genres setting offers. It also orders the titles in picked genre
   /// rows, so it keeps every Items API sort and adds item count for the list of
