@@ -14,6 +14,7 @@ import 'detail_admin_actions.dart';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart' show RenderWrap;
 import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
@@ -13335,10 +13336,28 @@ class _DetailActionButtonState extends State<_DetailActionButton>
   bool _longPressFired = false;
   bool _selectDownSeen = false;
 
+  /// Whether the pointer entered with room on its line to grow. Growing a
+  /// button that has no room wraps it to the next line, out from under the
+  /// pointer, and it shrinks and wraps back, over and over.
+  bool _hoverFits = true;
+
   @override
   void dispose() {
     _longPressTimer?.cancel();
     super.dispose();
+  }
+
+  bool _roomToGrow() {
+    final box = context.findRenderObject() as RenderBox?;
+    final wrap = context.findAncestorRenderObjectOfType<RenderWrap>();
+    if (box == null || !box.hasSize || wrap == null) return true;
+    final room = wrap.constraints.maxWidth;
+    if (!room.isFinite) return true;
+    final start = box.localToGlobal(Offset.zero, ancestor: wrap).dx;
+    final growth = 200.0 * _modernButtonScale(context) - box.size.width;
+    return Directionality.of(context) == TextDirection.rtl
+        ? start + box.size.width - growth >= 0
+        : start + box.size.width + growth <= room;
   }
 
   /// Modern detail style. Phones show every button as a circle with its label
@@ -13369,7 +13388,13 @@ class _DetailActionButtonState extends State<_DetailActionButton>
     final labelUnder = host?.labelsUnderCircles ?? false;
     // With the circles' labels under them, Play keeps its own in the pill.
     final labeledPlay = widget.isPrimary && labelUnder;
-    final isExpanded = labeledPlay || (showHighlight && !labelUnder);
+    final focusGrows = InputModeTracker.showFocusVisuals(
+      context,
+      focused || (widget.focusNode?.hasFocus ?? false),
+    );
+    final isExpanded =
+        labeledPlay ||
+        ((focusGrows || (hovered && _hoverFits)) && !labelUnder);
     final scale = _modernButtonScale(context);
     final double height = widget.isPrimary
         ? (isMobile ? 50.0 : 54.0 * scale)
@@ -13590,7 +13615,15 @@ class _DetailActionButtonState extends State<_DetailActionButton>
         ),
       ),
     );
-    if (!labelUnder) return circle;
+    if (!labelUnder) {
+      return isExpanded || widget.label.isEmpty
+          ? circle
+          : Tooltip(
+              message: widget.label,
+              triggerMode: TooltipTriggerMode.manual,
+              child: circle,
+            );
+    }
 
     // The label's space is kept even with nothing in it, so the row doesn't
     // shift as focus moves along it. A long label stays centered under its
@@ -13729,7 +13762,10 @@ class _DetailActionButtonState extends State<_DetailActionButton>
 
     return MouseRegion(
       cursor: SystemMouseCursors.click,
-      onEnter: (_) => setHovered(true),
+      onEnter: (_) {
+        _hoverFits = _roomToGrow();
+        setHovered(true);
+      },
       onExit: (_) => setHovered(false),
       child: Focus(
         focusNode: widget.focusNode,
